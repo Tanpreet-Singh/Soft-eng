@@ -1,5 +1,4 @@
-The project uses spectrometry to analyze different chemicals. The spectrum is obtained through NMR an deconvolution is used to filter the data to be able to identify specific chemical structures.
-The software needs to be updated to be able to analyze multi-charged molecules. These molecules have multiple charges on different sides depending on its structure.
+An organization has compiled data and needs a way for the data to be usable. This organization needs a way for its staff to be able to identify important points in the data. The data needs to be formatted in a way that is efficient in readability. Our software needs to be able to do that.
 
 Languages & Libraries Used: Python, Kiwi, LMFit
 
@@ -7,5 +6,9 @@ Meeting with Sponsors:
 	Ask questions (probe them).
 	Ask to record them.
 	Batch questions, Product Owners will typically be the bridge of communication between the sponsors and the team.
-	What deconvolution algorithms do they use? How is it implemented in their existing project?
-	What kind of calculations are involved with analyzing multiple-charged ions?
+	How is the compiled data formatted (is in plaintext, are there delimiters, etc.)?
+	What are points of interest in the data?
+	Are there any specific requirements in language used or on systems (do you want us to use a particular language, what OS do you use on the systems that you want to view this data on, etc.)?
+	Do you want the data to be categorized? Are there any categories to the data?
+	How do you want the report to be formatted?
+	Does any data need to be used in calculations to form new data?
