@@ -1,6 +1,5 @@
 An organization has compiled data and needs a way for the data to be usable. This organization needs a way for its staff to be able to identify important points in the data. The data needs to be formatted in a way that is efficient in readability. Our software needs to be able to do that.
 
-Languages & Libraries Used: Python, Kiwi, LMFit
 
 Meeting with Sponsors:
 	Ask questions (probe them).
@@ -8,7 +7,8 @@ Meeting with Sponsors:
 	Batch questions, Product Owners will typically be the bridge of communication between the sponsors and the team.
 	How is the compiled data formatted (is in plaintext, are there delimiters, etc.)?
 	What are points of interest in the data?
-	Are there any specific requirements in language used or on systems (do you want us to use a particular language, what OS do you use on the systems that you want to view this data on, etc.)?
+	Are there any specific requirements in language used or systems (what OS do you use on the systems that you want to view this data on, any concern for computer resources (is there concern for minimum specifications), do you want us to use a particular language, gui library, etc.)?
+	Is Java going to be used (requires a JRE present)?
 	Do you want the data to be categorized? Are there any categories to the data?
 	How do you want the report to be formatted?
 	Does any data need to be used in calculations to form new data?
