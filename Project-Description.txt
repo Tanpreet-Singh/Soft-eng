@@ -1,5 +1,10 @@
 An organization has compiled data and needs a way for the data to be usable. This organization needs a way for its staff to be able to identify important points in the data. The data needs to be formatted in a way that is efficient in readability. Our software needs to be able to do that.
 
+Project Description ->
+The field of Cybersecurity relies on data. However, an enormous amount of data may be compiled that is too vast for a human to identify malicious activity. Organizations are becoming increasingly open about cyber incidents and are sharing more data externally. This allows organizations to leverage detected threats in other environments and quickly remediate them. In order for this to happen, the data is sent in machine readable format so that software applications can process the data and direct cyber architects to make the appropriate design decisions.
+A software tool could import threat data in a standardized format and display it using a graphical interface to allow a cyber architect to quickly and easily understand the new threats that are applicable to their system.  The cyber architecture would be able to search, sort, and filer threats by specific data points. The tool would also allow for the automatic generation of a report based on this information.  
+
+Sponsors name -> Jonathan Munilla, Janet Muscavage 
 
 Meeting with Sponsors:
 	Ask questions (probe them).
