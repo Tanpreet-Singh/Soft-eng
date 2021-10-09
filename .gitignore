@@ -1,0 +1,7 @@
+HelloFX/bin/
+ThreatAnalysisTool/bin/
+**/makefile
+**/run
+/.metadata/
+**/.classpath
+**/.project
