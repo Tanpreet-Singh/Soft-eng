@@ -1,22 +1,39 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.List;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-/**
- * Parse the JSON file into it's individual components. This class will be
- * used to return a collection of Threats.
- */
-class ParseFunction
-{
-	private File dataset;
-	private List allThreats;
-	private Scanner scan;
-	
-	ParseFunction(String filePath)
-	{
-		dataset = new File(filePath);
-		allThreats = new ArrayList();
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.*;
+
+
+public class ParseFunction {
+
+	public static void main(String[] args) throws IOException {
+		
+		//read json file data to String
+		byte[] jsonData = Files.readAllBytes(Paths.get("test.txt"));
+		
+		//create ObjectMapper instance
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		
+		//convert json string to object
+		Threat emp = objectMapper.readValue(jsonData, Threat.class);
+		
+		System.out.println("Id:\n"+emp.getID());
+		System.out.println("Name:\n"+emp.getName());
+
 	}
+
 }
