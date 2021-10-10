@@ -1,5 +1,9 @@
 import java.util.List;
 
+import javax.print.DocFlavor.STRING;
+
+import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
+
 /**
  * The Threat objects which can be of type: Threat-Actor, Campaigns, Intrusion Sets.
  */
@@ -12,12 +16,13 @@ class Threat
 	private String modified;
 	private String name;
 	private String description;
-	private String external_reference;
+	private ExternalRef external_references;
 	private List<String> x_mitre_permissions_required;
 	private String spec_version;
-	private List<KillChain> kill_chain_phases;
+	private KillChainPhase kill_chain_phases;
 
-	Threat() {}
+	Threat() {
+	}
 
 	String getType()
 	{
@@ -54,9 +59,9 @@ class Threat
 		return description;
 	}
 
-	String getExernalRef()
+	ExternalRef getExernalRef()
 	{
-		return external_reference;
+		return external_references;
 	}
 
 	List<String> getx_mitre_permissions_required()
@@ -69,7 +74,7 @@ class Threat
 		return spec_version;
 	}
 
-	List<KillChain> getKillChains()
+	KillChainPhase getKillChains()
 	{
 		return kill_chain_phases;
 	}
@@ -84,6 +89,11 @@ class Threat
 		this.id = id;
 	}
 
+	void setCreatedBy(String created_by_ref)
+	{
+		this.created_by_ref = created_by_ref;
+	}
+
 	void setCreated(String created)
 	{
 		this.created = created;
@@ -92,6 +102,11 @@ class Threat
 	void setDateModified(String modified)
 	{
 		this.modified = modified;
+	}
+
+	void setKillChainPhase(KillChainPhase kill_chain_phases)
+	{
+		this.kill_chain_phases = kill_chain_phases;
 	}
 
 	void setName(String name)
@@ -104,9 +119,9 @@ class Threat
 		this.description = description;
 	}
 
-	void setExernalRef(String external_reference)
+	void setExernalRef(ExternalRef external_references)
 	{
-		this.external_reference = external_reference;
+		this.external_references = external_references;
 	}
 
 	void setx_mitre_permissions_required(List<String> x_mitre_permissions_required )

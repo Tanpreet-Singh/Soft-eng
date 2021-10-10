@@ -1,25 +1,25 @@
 
 public class ExternalRef
 {
-	String sourceName;
-	String externalId;
+	String source_name;
+	String external_id;
 	String url;
 	
-	public ExternalRef()
+	public ExternalRef(String source_name, String external_id, String url)
 	{
-		sourceName = "";
-		externalId = "";
-		url = "";
+		this.source_name = source_name;
+		this.external_id = external_id;
+		this.url = url;
 	}
 	
 	String getSourceName()
 	{
-		return sourceName;
+		return source_name;
 	}
 	
 	String getExternalId()
 	{
-		return externalId;
+		return external_id;
 	}
 	
 	String getURL()
@@ -29,12 +29,12 @@ public class ExternalRef
 	
 	void setSourceName(String sourceName)
 	{
-		this.sourceName = sourceName;
+		this.source_name = sourceName;
 	}
 	
 	void setExternalId(String externalId)
 	{
-		this.externalId = externalId;
+		this.external_id = externalId;
 	}
 	
 	void setURL(String url)
