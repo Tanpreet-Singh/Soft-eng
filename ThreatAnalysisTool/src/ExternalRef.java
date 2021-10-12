@@ -1,9 +1,18 @@
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ExternalRef
 {
+	@JsonProperty("source_name")
 	String source_name;
+	@JsonProperty("external_id")
 	String external_id;
+	@JsonProperty("url")
 	String url;
+	
+	public ExternalRef()
+	{
+		
+	}
 	
 	public ExternalRef(String source_name, String external_id, String url)
 	{

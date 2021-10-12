@@ -1,24 +1,32 @@
 import java.util.List;
-
-import javax.print.DocFlavor.STRING;
-
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Threat objects which can be of type: Threat-Actor, Campaigns, Intrusion Sets.
  */
 class Threat
 {
+	@JsonProperty("type")
 	private String type;
+	@JsonProperty("id")
 	private String id;
+	@JsonProperty("created_by_ref")
 	private String created_by_ref;
+	@JsonProperty("created")
 	private String created;
+	@JsonProperty("modified")
 	private String modified;
+	@JsonProperty("name")
 	private String name;
+	@JsonProperty("description")
 	private String description;
-	private ExternalRef external_references;
+	
+	ExternalRef external_references;
+	@JsonProperty("x_mitre_permissions_required")
 	private List<String> x_mitre_permissions_required;
+	@JsonProperty("spec_version")
 	private String spec_version;
+	
 	private KillChainPhase kill_chain_phases;
 
 	Threat() {

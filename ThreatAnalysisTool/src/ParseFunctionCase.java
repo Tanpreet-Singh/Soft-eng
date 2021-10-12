@@ -2,6 +2,7 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.core.JsonParseException;
 
 import java.io.File;
@@ -14,10 +15,10 @@ public class ParseFunctionCase
 	public static void main(String[] args) throws IOException
 	{
 		// Place file into parser
-		JsonParser parser = new JsonFactory().createParser(new File("testJSON.txt"));
+		JsonParser parser = new JsonFactory().createParser(new File("test.txt"));
 		Threat testThreat = new Threat();
 		parse(parser, testThreat);
-		// System.out.println(testThreat);
+		//aSystem.out.println(testThreat);
 	}
 
 	public static void parse(JsonParser parser, Threat threat) throws JsonParseException, IOException
@@ -28,7 +29,9 @@ public class ParseFunctionCase
 			String entry = parser.getText();
 		}
 		*/
-		String entry = parser.nextToken().getText();
-		System.out.println(entry);
+		JsonToken entry = parser.nextToken();
+
+		//JsonStringEncoder entry1 = parser.nextToken();
+		//System.out.println(entry1);
 	}
 }
