@@ -21,13 +21,13 @@ class Threat
 	@JsonProperty("description")
 	private String description;
 	
-	ExternalRef external_references;
+	ExternalRef[] external_references;
 	@JsonProperty("x_mitre_permissions_required")
 	private List<String> x_mitre_permissions_required;
 	@JsonProperty("spec_version")
 	private String spec_version;
 	
-	private KillChainPhase kill_chain_phases;
+	private KillChainPhase[] kill_chain_phases;
 
 	Threat() {
 	}
@@ -67,7 +67,7 @@ class Threat
 		return description;
 	}
 
-	ExternalRef getExernalRef()
+	ExternalRef[] getExernalRef()
 	{
 		return external_references;
 	}
@@ -82,7 +82,7 @@ class Threat
 		return spec_version;
 	}
 
-	KillChainPhase getKillChains()
+	KillChainPhase[] getKillChains()
 	{
 		return kill_chain_phases;
 	}
@@ -112,7 +112,7 @@ class Threat
 		this.modified = modified;
 	}
 
-	void setKillChainPhase(KillChainPhase kill_chain_phases)
+	void setKillChainPhase(KillChainPhase[] kill_chain_phases)
 	{
 		this.kill_chain_phases = kill_chain_phases;
 	}
@@ -127,7 +127,7 @@ class Threat
 		this.description = description;
 	}
 
-	void setExernalRef(ExternalRef external_references)
+	void setExernalRef(ExternalRef[] external_references)
 	{
 		this.external_references = external_references;
 	}
@@ -140,6 +140,24 @@ class Threat
 	void setSpecVersion(String spec_version)
 	{
 		this.spec_version =  spec_version;
+	}
+
+	void printExternalReferences()
+	{
+		for (ExternalRef externalRef : external_references) {
+			System.out.println("\nSource Name: "+externalRef.getSourceName());
+			System.out.println("External Id: "+externalRef.getExternalId());
+			System.out.println("URL: "+externalRef.getURL()+"\n");
+		
+		}
+	}
+
+	void printKillChainPhases()
+	{
+		for (KillChainPhase kill : kill_chain_phases) {
+			System.out.println("\nKill Chain Phase: "+kill.getKillChainPhase());
+			System.out.println("Phase Name: "+kill.getPhaseName()+"\n");
+		}
 	}
 
 }

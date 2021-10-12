@@ -25,13 +25,13 @@ public class ParseFunction {
 		Threat emp = objectMapper.convertValue(jsonNodeRoot, Threat.class);
 
 		ExternalRef[] externalref = objectMapper.convertValue(jsonNodeRoot.path("external_references"), ExternalRef[].class);
-		ExternalRef ref = new ExternalRef(externalref[0].getSourceName(),externalref[0].getExternalId(), externalref[0].getURL());
-		emp.setExernalRef(ref);
+		//ExternalRef ref = new ExternalRef(externalref[0].getSourceName(),externalref[0].getExternalId(), externalref[0].getURL());
+		emp.setExernalRef(externalref);
 
 		KillChainPhase[] killchain = objectMapper.convertValue(jsonNodeRoot.path("kill_chain_phases"), KillChainPhase[].class);
 		
-		KillChainPhase kill = new KillChainPhase(killchain[0].getKillChainPhase(), killchain[0].getPhaseName());
-		emp.setKillChainPhase(kill);;
+		//KillChainPhase kill = new KillChainPhase(killchain[0].getKillChainPhase(), killchain[0].getPhaseName());
+		emp.setKillChainPhase(killchain);
 	
 		System.out.println("Type:\n"+emp.getType());
 		System.out.println("Id:\n"+emp.getID());
@@ -40,12 +40,11 @@ public class ParseFunction {
 		System.out.println("Modified:\n"+emp.getDateModified());
 		System.out.println("Name:\n"+emp.getName());
 		System.out.println("Description:\n"+emp.getDescription());
-		System.out.println("Source Name:\n"+emp.getExernalRef().getSourceName());
-		System.out.println("Url:\n"+emp.getExernalRef().getURL());
-		System.out.println("External Id:\n"+emp.getExernalRef().getExternalId());
+		System.out.println("\nExternal Refernces: ");
+		emp.printExternalReferences();
 		System.out.println("Permssions:\n"+emp.getx_mitre_permissions_required());
-		System.out.println("Kill Chain Name:"+emp.getKillChains().getKillChainPhase());
-		System.out.println("Phase name:"+emp.getKillChains().getPhaseName());
+		System.out.println("\nKill Chain Phases: ");
+		emp.printKillChainPhases();
 		
 	}
 
