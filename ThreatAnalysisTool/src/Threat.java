@@ -20,14 +20,13 @@ class Threat
 	private String name;
 	@JsonProperty("description")
 	private String description;
-	
 	ExternalRef[] external_references;
+	private KillChainPhase[] kill_chain_phases;
 	@JsonProperty("x_mitre_permissions_required")
 	private List<String> x_mitre_permissions_required;
 	@JsonProperty("spec_version")
 	private String spec_version;
 	
-	private KillChainPhase[] kill_chain_phases;
 
 	Threat() {
 	}
