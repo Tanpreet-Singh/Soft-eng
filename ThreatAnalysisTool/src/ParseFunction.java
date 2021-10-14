@@ -5,7 +5,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.*;
 
-
+/**
+ * This class will pull data from a text/JSON file, and will parse the information and map it onto Threat objects.
+ * These objects will later be used to populate the database and manipulate GUI components. 
+ * 
+ * @author 
+ * @version 10/13/2021
+ */
 public class ParseFunction {
 	
 	public static void main(String[] args) throws IOException {
@@ -38,7 +44,7 @@ public class ParseFunction {
 			threat.printExternalReferences();
 			System.out.println("   ------Kill Chain Phases------   ");
 			threat.printKillChainPhases();
-			System.out.println("---------------------");
+			System.out.println("---------------------\n\n");
 		}
 	}
 
