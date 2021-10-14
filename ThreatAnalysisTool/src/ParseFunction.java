@@ -7,49 +7,56 @@ import com.fasterxml.jackson.databind.*;
 
 
 public class ParseFunction {
-
+	
 	public static void main(String[] args) throws IOException {
+//		ThreatCollection collection = new ThreatCollection();
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-		byte[] jsonData = Files.readAllBytes(Paths.get("test.txt"));
+		byte[] jsonData = Files.readAllBytes(Paths.get("bigTest.json"));
 		JsonNode jsonNodeRoot = objectMapper.readTree(jsonData);
+		
+		JSONBundle bundle = objectMapper.convertValue(jsonNodeRoot, JSONBundle.class);
+		System.out.println(bundle.getObjects().get(1).getID());
 
-		for (JsonNode jsonNode : jsonNodeRoot) {
-			Threat emp = objectMapper.convertValue(jsonNode, Threat.class);
-			if(jsonNode.path("external_references")!= null)
-			{
-				ExternalRef[] externalref = objectMapper.convertValue(jsonNode.path("external_references"), ExternalRef[].class);
-				emp.setExernalRef(externalref);
-			}
-			if(jsonNode.path("kill_chain_phases")!= null)
-			{
-				KillChainPhase[] killchain = objectMapper.convertValue(jsonNode.path("kill_chain_phases"), KillChainPhase[].class);
-				emp.setKillChainPhase(killchain);
-			}
+//		for (JsonNode jsonNode : jsonNodeRoot) {
+//			if(jsonNode.path("external_references")!= null)
+//			{
+//				ExternalRef[] externalref = objectMapper.convertValue(jsonNode.path("external_references"), ExternalRef[].class);
+//				emp.setExernalRef(externalref);
+//			}
+//			if(jsonNode.path("kill_chain_phases")!= null)
+//			{
+//				KillChainPhase[] killchain = objectMapper.convertValue(jsonNode.path("kill_chain_phases"), KillChainPhase[].class);
+//				emp.setKillChainPhase(killchain);
+//			}
+			
+//			collection.addViewerThreat(emp);
 			
 	
-			System.out.println("Type:\n"+emp.getType());
-			System.out.println("Id:\n"+emp.getID());
-			System.out.println("Created By:\n"+emp.getCreated_by_ref());
-			System.out.println("Created:\n"+emp.getDateCreated());
-			System.out.println("Modified:\n"+emp.getDateModified());
-			System.out.println("Name:\n"+emp.getName());
-			System.out.println("Description:\n"+emp.getDescription());
-		
-			if(emp.getExernalRef()!=null)
-			{
-				System.out.println("\nExternal Refernces: ");
-				emp.printExternalReferences();
-			}
-			System.out.println("Permssions:\n"+emp.getx_mitre_permissions_required());
+//			System.out.println("Type:\n"+emp.getType());
+//			System.out.println("Id:\n"+emp.getID());
+//			System.out.println("Created By:\n"+emp.getCreated_by_ref());
+//			System.out.println("Created:\n"+emp.getDateCreated());
+//			System.out.println("Modified:\n"+emp.getDateModified());
+//			System.out.println("Name:\n"+emp.getName());
+//			System.out.println("Description:\n"+emp.getDescription());
+//		
+//			if(emp.getExernalRef()!=null)
+//			{
+//				System.out.println("\nExternal Refernces: ");
+//				emp.printExternalReferences();
+//			}
+//			System.out.println("Permssions:\n"+emp.getx_mitre_permissions_required());
+//			
+//			if(emp.getKillChains()!=null)
+//			{
+//				System.out.println("\nKill Chain Phases: ");
+//				emp.printKillChainPhases();
+//			}
 			
-			if(emp.getKillChains()!=null)
-			{
-				System.out.println("\nKill Chain Phases: ");
-				emp.printKillChainPhases();
-			}
-		}
+//		}
+//		System.out.println(collection.getUserThreats(1));
 	}
 
 }
