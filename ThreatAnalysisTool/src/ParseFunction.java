@@ -18,9 +18,11 @@ public class ParseFunction {
 		
 		JSONBundle bundle = objectMapper.convertValue(jsonNodeRoot, JSONBundle.class);
 
-		bundle.getObjects().get(2).printExternalReferences();
-			
-			
+		for (Threat threat : bundle.getObjects()) {
+			System.out.println(threat.getID());
+		}
+		
+		System.out.println(bundle.getObjects().size());
 	}
 
 }
