@@ -17,46 +17,10 @@ public class ParseFunction {
 		JsonNode jsonNodeRoot = objectMapper.readTree(jsonData);
 		
 		JSONBundle bundle = objectMapper.convertValue(jsonNodeRoot, JSONBundle.class);
-		System.out.println(bundle.getObjects().get(1).getID());
 
-//		for (JsonNode jsonNode : jsonNodeRoot) {
-//			if(jsonNode.path("external_references")!= null)
-//			{
-//				ExternalRef[] externalref = objectMapper.convertValue(jsonNode.path("external_references"), ExternalRef[].class);
-//				emp.setExernalRef(externalref);
-//			}
-//			if(jsonNode.path("kill_chain_phases")!= null)
-//			{
-//				KillChainPhase[] killchain = objectMapper.convertValue(jsonNode.path("kill_chain_phases"), KillChainPhase[].class);
-//				emp.setKillChainPhase(killchain);
-//			}
+		bundle.getObjects().get(2).printExternalReferences();
 			
-//			collection.addViewerThreat(emp);
 			
-	
-//			System.out.println("Type:\n"+emp.getType());
-//			System.out.println("Id:\n"+emp.getID());
-//			System.out.println("Created By:\n"+emp.getCreated_by_ref());
-//			System.out.println("Created:\n"+emp.getDateCreated());
-//			System.out.println("Modified:\n"+emp.getDateModified());
-//			System.out.println("Name:\n"+emp.getName());
-//			System.out.println("Description:\n"+emp.getDescription());
-//		
-//			if(emp.getExernalRef()!=null)
-//			{
-//				System.out.println("\nExternal Refernces: ");
-//				emp.printExternalReferences();
-//			}
-//			System.out.println("Permssions:\n"+emp.getx_mitre_permissions_required());
-//			
-//			if(emp.getKillChains()!=null)
-//			{
-//				System.out.println("\nKill Chain Phases: ");
-//				emp.printKillChainPhases();
-//			}
-			
-//		}
-//		System.out.println(collection.getUserThreats(1));
 	}
 
 }
