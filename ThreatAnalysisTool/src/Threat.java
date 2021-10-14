@@ -149,9 +149,9 @@ class Threat
 		if(external_references!= null)
 		{
 			for (ExternalRef externalRef : external_references) {
-				System.out.println("\nSource Name: "+externalRef.getSourceName());
-				System.out.println("External Id: "+externalRef.getExternalId());
-				System.out.println("URL: "+externalRef.getURL()+"\n");
+				System.out.println("\nSource Name:   "+externalRef.getSourceName());
+				System.out.println("External Id:   "+externalRef.getExternalId());
+				System.out.println("URL:           "+externalRef.getURL()+"\n");
 			
 			}
 		}
@@ -162,8 +162,8 @@ class Threat
 		if(kill_chain_phases!=null)
 		{
 			for (KillChainPhase kill : kill_chain_phases) {
-				System.out.println("\nKill Chain Phase: "+kill.getKillChainPhase());
-				System.out.println("Phase Name: "+kill.getPhaseName()+"\n");
+				System.out.println("\nKill Chain Phase:   "+kill.getKillChainPhase());
+				System.out.println("Phase Name:         "+kill.getPhaseName()+"\n");
 			}
 		}
 	}
