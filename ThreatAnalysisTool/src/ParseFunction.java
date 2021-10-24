@@ -42,30 +42,29 @@ public class ParseFunction {
 			System.out.println("connected");
 			
 			//Querires for known procedures
-			String query = "{CALL getThreat(?)}";
-			String query2 = "{CALL addThreat(?,?,?,?,?,?,?,?,?)}";
+			String query = "CALL getThreat(?)";
+			String query2 = "CALL addThreat(?,?,?,?,?,?,?,?,?)";
+			String query3 = "CALL addExternalRef(?,?,?,?,?)";
+			String query4 = "CALL addKillChainPhase(?,?,?)";
 			CallableStatement stmt = connection.prepareCall(query);
+			CallableStatement stmt2 = connection.prepareCall(query2);
+			CallableStatement stmt3 = connection.prepareCall(query3);
+			CallableStatement stmt4 = connection.prepareCall(query4);
 			
-
+			
 			//Loop through every Threat objects in JSON file
-			for (Threat threat : bundle.getObjects()) {
+			for (Threat threat : bundle.getObjects().subList(1, 10)) {
 				System.out.println("---Threat Instance---");
 				System.out.println(threat);
 				
-				//Check if threat ID exists
 				stmt.setString(1, threat.getID());
 				stmt.execute();
 				ResultSet rs = stmt.executeQuery();
-				rs.next();
-				
-				//Check if threat object exists. if not, new entry
+				//System.out.println(rs.getString("ID"));
 				if(rs.next() == false) {
-					System.out.println("new entry");
+
+					System.out.println("new Threat entry");
 					
-					//New call function for addThreat procedure
-					CallableStatement stmt2 = connection.prepareCall(query2);
-					
-					//Set values/parameters before executing call
 					stmt2.setString(1, threat.getID());
 					stmt2.setString(2, "VIEWER");
 					stmt2.setString(3, threat.getName());
@@ -78,11 +77,41 @@ public class ParseFunction {
 					stmt2.setString(8, threat.getCreated_by_ref());
 					stmt2.setString(9, "1");
 					
-					//execute call
 					stmt2.execute();
 					
+					if(threat.getExernalRef()!= null)
+					{
+						for (ExternalRef externalRef : threat.getExernalRef()) {
+							System.out.println("new ExternalRef entry");
+							stmt3.setString(1,threat.getID());
+							stmt3.setString(2,externalRef.getSourceName());
+							stmt3.setString(3,"description");
+							stmt3.setString(4,externalRef.getURL());
+							stmt3.setString(5,externalRef.getExternalId());
+							stmt3.execute();
+							
+//							System.out.println("\nSource Name:   "+externalRef.getSourceName());
+//							System.out.println("External Id:   "+externalRef.getExternalId());
+//							System.out.println("URL:           "+externalRef.getURL()+"\n");
+						
+						}
+					}
 					
+					if(threat.getKillChains()!=null)
+					{
+						for (KillChainPhase kill : threat.getKillChains()) {
+							System.out.println("new KillChain entry");
+							stmt4.setString(1,threat.getID());
+							stmt4.setString(2,kill.getKillChainPhase());
+							stmt4.setString(3,kill.getPhaseName());
+							stmt4.execute();
+							
+//							System.out.println("\nKill Chain Phase:   "+kill.getKillChainPhase());
+//							System.out.println("Phase Name:         "+kill.getPhaseName()+"\n");
+						}
+					}
 				}
+				
 //				System.out.println("\n-----Threat Info-----");
 //				System.out.println("Threat Type:    " + threat.getType());
 //				System.out.println("Threat ID:      " + threat.getID());
@@ -103,13 +132,6 @@ public class ParseFunction {
 			System.out.println("MySQL Error");
 			e.printStackTrace();
 		}
-		
-		
-		
-//		for (Threat threat : bundle.getObjects()) {
-//			System.out.println(threat.getID());
-//		}
-		
 		
 	}
 
