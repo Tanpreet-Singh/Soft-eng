@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
-
+import java.util.prefs.Preferences;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.cj.xdevapi.Type;
@@ -23,6 +23,8 @@ import com.fasterxml.jackson.databind.*;
  */
 public class ParseFunction {
 	
+	private static Preferences preferences = Preferences.userNodeForPackage(ParseFunction.class);
+	
 	public static void main(String[] args) throws IOException {
 //		ThreatCollection collection = new ThreatCollection();
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -32,13 +34,19 @@ public class ParseFunction {
 		JsonNode jsonNodeRoot = objectMapper.readTree(jsonData);
 		
 		JSONBundle bundle = objectMapper.convertValue(jsonNodeRoot, JSONBundle.class);
+		
+		
+		
 		//Connect to MySQL Database
 		String url = "jdbc:mysql://13.82.146.37:3306/THREAT_TOOL_ANALYSIS";
-		String pass = "USusus1!";
-		String user = "us2";
+		//String pass = "USusus1!";
+		//String user = "us2";
+		
+		//setCred(user,pass);
+		
 		try {
 			//Attempt connection
-			Connection connection = DriverManager.getConnection(url, user, pass);
+			Connection connection = DriverManager.getConnection(url, getUsername(), getPassword());
 			System.out.println("connected");
 			
 			//Querires for known procedures
@@ -134,5 +142,20 @@ public class ParseFunction {
 		}
 		
 	}
+	
+//	public static void setCred(String u, String p) {
+//		preferences.put("db_username", u);
+//		preferences.put("db_password", p);
+//		
+//	}
+	
+	public static String getUsername() {
+	    return preferences.get("db_username", null);
+	  }
+
+	  public static String getPassword() {
+	    return preferences.get("db_password", null);
+	  }
+
 
 }
