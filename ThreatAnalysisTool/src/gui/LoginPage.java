@@ -16,27 +16,31 @@ import javafx.stage.Stage;
 public class LoginPage {
 
 	StackPane createLayout() {
-
+		
 		// Title that says "Login"
 		Text title = new Text("Login");
 
 		// Username and Password Fields
 		GridPane credentialFields = new GridPane();
 		credentialFields.setAlignment(Pos.CENTER);
+		
 		Text username = new Text("Username: ");
 		Text password = new Text("Password: ");
 		TextField typeUsername = new TextField();
 		TextField typePassword = new TextField();
+		Button btn = new Button("Sign in");
+		
 
 		// Add the Text to the Grid
 		credentialFields.addColumn(1, username, password);
 		credentialFields.addColumn(2, typeUsername, typePassword);
-
+		
 		// Align these elements vertically
 		VBox mainElements = new VBox(
 				2.0,
 				title,
-				credentialFields);
+				credentialFields,
+				btn);
 		mainElements.setAlignment(Pos.CENTER);
 		return new StackPane(mainElements);
 	}

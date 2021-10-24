@@ -25,6 +25,8 @@ public class DriverWindow extends Application {
 		LoginPage login = new LoginPage();
 		Scene scene = new Scene(login.createLayout(), windowWidth, windowHeight);
 		primaryStage.setScene(scene);
+		scene.getStylesheets().add
+ 		(LoginPage.class.getResource("Login.css").toExternalForm());
 		primaryStage.show();
 	}
 }
