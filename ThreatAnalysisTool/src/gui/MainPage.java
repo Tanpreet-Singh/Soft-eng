@@ -25,12 +25,13 @@ public class MainPage {
 		Button saveBtn = new Button("Save");
 		Button delBtn = new Button("Delete");
 		VBox leftColumn = new VBox(
-				2.0,
+				5.0,
 				loginAs,
 				role,
 				importBtn,
 				saveBtn,
 				delBtn);
+		leftColumn.setAlignment(Pos.TOP_LEFT);
 
 		// Right Column	
 		Button usersBtn = new Button("Users");
@@ -44,13 +45,12 @@ public class MainPage {
 				2.0,
 				userSection,
 				genPdfBtn);
+		rightColumn.setAlignment(Pos.TOP_RIGHT);
 
 		// Main Arrangment
-		HBox mainElements = new HBox(
-				2.0,
-				leftColumn,
-				rightColumn);
-		mainElements.setAlignment(Pos.CENTER);
+		GridPane mainElements = new GridPane();
+		mainElements.addColumn(1, leftColumn);
+		mainElements.addColumn(3, rightColumn);
 
 		return new StackPane(mainElements);
 	}
