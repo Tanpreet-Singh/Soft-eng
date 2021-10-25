@@ -23,6 +23,9 @@ import com.fasterxml.jackson.databind.*;
  */
 public class ParseFunction {
 	
+	public ParseFunction() {
+		
+	}
 	private static Preferences preferences = Preferences.userNodeForPackage(ParseFunction.class);
 	
 	public static void main(String[] args) throws IOException {
@@ -157,4 +160,15 @@ public class ParseFunction {
 	  }
 
 
+	  public JSONBundle parseJSON() throws IOException {
+		  ObjectMapper objectMapper = new ObjectMapper();
+			objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+			byte[] jsonData = Files.readAllBytes(Paths.get("bigTest.json"));
+			JsonNode jsonNodeRoot = objectMapper.readTree(jsonData);
+			
+			JSONBundle bundle = objectMapper.convertValue(jsonNodeRoot, JSONBundle.class);
+			
+			return bundle;
+	  }
 }
