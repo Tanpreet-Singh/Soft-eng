@@ -292,4 +292,12 @@ class Threat
 			}
 		}
 	}
+	
+	@Override
+	public String toString() {
+		String outputString = "Threat Name:    " + getName() + "\n";
+		outputString += "Threat ID:      " + getID() + "\n";
+		return outputString;
+		
+	}
 }
