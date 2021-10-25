@@ -14,8 +14,7 @@ public class DriverWindow extends Application {
 	StackPane layout;
 	final int windowWidth = 600, windowHeight = 400;
 	
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		launch(args);
 	}
 
@@ -23,7 +22,7 @@ public class DriverWindow extends Application {
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Threat Analyzer Tool");
 		LoginPage login = new LoginPage();
-		Scene scene = new Scene(login.createLayout(), windowWidth, windowHeight);
+		Scene scene = new Scene(login.createLayout(primaryStage, windowWidth, windowHeight), windowWidth, windowHeight);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
