@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -13,34 +14,24 @@ import javafx.scene.layout.StackPane;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 
-public class LoginPage {
+public class ThreatListView {
 
 	StackPane createLayout() {
 		
-		// Title that says "Login"
-		Text title = new Text("Login");
+		// Title that says "Listview Example"
+		Text title = new Text("Listview Example");
 
-		// Username and Password Fields
-		GridPane credentialFields = new GridPane();
-		credentialFields.setAlignment(Pos.CENTER);
-		
-		Text username = new Text("Username: ");
-		Text password = new Text("Password: ");
-		TextField typeUsername = new TextField();
-		TextField typePassword = new TextField();
-		Button btn = new Button("Sign in");
-		
-
-		// Add the Text to the Grid
-		credentialFields.addColumn(1, username, password);
-		credentialFields.addColumn(2, typeUsername, typePassword);
+		ListView<String> listView = new ListView<String>();
+		listView.getItems().add("Threat 1\nThreat Name\nThreat ID");
+		listView.getItems().add("Threat 2\nThreat Name\nThreat ID");
+		listView.getItems().add("Threat 3\nThreat Name\nThreat ID");
+		listView.getItems().add("Threat 4\nThreat Name\nThreat ID");
 		
 		// Align these elements vertically
 		VBox mainElements = new VBox(
 				2.0,
 				title,
-				credentialFields,
-				btn);
+				listView);
 		mainElements.setAlignment(Pos.CENTER);
 		return new StackPane(mainElements);
 	}
