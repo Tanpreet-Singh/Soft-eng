@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
@@ -37,7 +39,16 @@ public class MainPage {
 
 		// Right Column	
 		Button usersBtn = new Button("Users");
-		Button settingsBtn = new Button("Settings");
+		
+		MenuItem menuItem1 = new MenuItem("Undetermined");
+        MenuItem menuItem2 = new MenuItem("Undetermined");
+        MenuItem menuItem3 = new MenuItem("Log Out");
+
+        MenuButton menuButton = new MenuButton("Settings", null, menuItem1, menuItem2, menuItem3);
+
+        HBox settingsbutton = new HBox(menuButton);
+		settingsbutton.setAlignment(Pos.TOP_RIGHT);
+		
 		// HBox userSection = new HBox(
 		// 		2.0,
 		// 		usersBtn,
@@ -46,7 +57,7 @@ public class MainPage {
 		VBox rightColumn = new VBox(
 				2.0,
 				usersBtn,
-				settingsBtn,
+				settingsbutton,
 				genPdfBtn);
 		rightColumn.setAlignment(Pos.TOP_RIGHT);
 		// Main Arrangment
