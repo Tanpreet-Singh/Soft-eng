@@ -67,6 +67,10 @@ public class MainPage {
 		ColumnConstraints alwaysGrow = new ColumnConstraints();
 		alwaysGrow.setHgrow(Priority.ALWAYS);
 
+		ThreatListView table = new ThreatListView();
+		VBox list = table.createLayout();
+		mainElements.add(list, 1, 1);
+
 		mainElements.getColumnConstraints().addAll(
 			alwaysGrow,
         	alwaysGrow,
