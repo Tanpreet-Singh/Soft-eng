@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -26,12 +27,15 @@ public class LoginPage {
 		Text username = new Text("Username: ");
 		Text password = new Text("Password: ");
 		TextField typeUsername = new TextField();
-		TextField typePassword = new TextField();
-
+		typeUsername.setPromptText("Your Username");
+		PasswordField passwordField = new PasswordField();
+		passwordField.setPromptText("Your Password");
+		
 		// Add the Text to the Grid
 		credentialFields.addColumn(1, username, password);
-		credentialFields.addColumn(2, typeUsername, typePassword);
-
+		credentialFields.addColumn(2, typeUsername, passwordField);
+		
+		
 		// Align these elements vertically
 		Button loginBtn = new Button("Login");
 		loginBtn.setOnAction(new EventHandler<ActionEvent>() {
