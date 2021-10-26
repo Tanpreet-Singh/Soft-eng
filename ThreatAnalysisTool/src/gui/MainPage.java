@@ -8,7 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.geometry.Pos;
@@ -36,22 +38,30 @@ public class MainPage {
 		// Right Column	
 		Button usersBtn = new Button("Users");
 		Button settingsBtn = new Button("Settings");
-		HBox userSection = new HBox(
-				2.0,
-				usersBtn,
-				settingsBtn);
+		// HBox userSection = new HBox(
+		// 		2.0,
+		// 		usersBtn,
+		// 		settingsBtn);
 		Button genPdfBtn = new Button("Gen PDF");
 		VBox rightColumn = new VBox(
 				2.0,
-				userSection,
+				usersBtn,
+				settingsBtn,
 				genPdfBtn);
 		rightColumn.setAlignment(Pos.TOP_RIGHT);
-
 		// Main Arrangment
 		GridPane mainElements = new GridPane();
-		mainElements.addColumn(1, leftColumn);
-		mainElements.addColumn(3, rightColumn);
+		mainElements.addColumn(0, leftColumn);
+		mainElements.addColumn(2, rightColumn);
+		ColumnConstraints alwaysGrow = new ColumnConstraints();
+		alwaysGrow.setHgrow(Priority.ALWAYS);
 
+		mainElements.getColumnConstraints().addAll(
+			alwaysGrow,
+        	alwaysGrow,
+        	alwaysGrow
+        	);
+		mainElements.setGridLinesVisible(true);
 		return new StackPane(mainElements);
 	}
 }

@@ -40,6 +40,9 @@ public class LoginPage {
 	            MainPage main = new MainPage();
 	            Scene scene = new Scene(main.createLayout(), windowWidth, windowHeight);
 	            primaryStage.setScene(scene);
+				primaryStage.setScene(scene);
+				scene.getStylesheets().add
+ 				(LoginPage.class.getResource("Login.css").toExternalForm());
 	        }
 		});
 		VBox mainElements = new VBox(
