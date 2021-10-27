@@ -1,5 +1,4 @@
 package gui;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -57,25 +57,33 @@ public class MainPage {
 		VBox rightColumn = new VBox(
 				2.0,
 				usersBtn,
-				settingsbutton,
-				genPdfBtn);
+				settingsbutton);
 		rightColumn.setAlignment(Pos.TOP_RIGHT);
 		// Main Arrangment
 		GridPane mainElements = new GridPane();
 		mainElements.addColumn(0, leftColumn);
 		mainElements.addColumn(2, rightColumn);
 		ColumnConstraints alwaysGrow = new ColumnConstraints();
+		ColumnConstraints neverGrow = new ColumnConstraints();
 		alwaysGrow.setHgrow(Priority.ALWAYS);
+		neverGrow.setHgrow(Priority.NEVER);
+
+		RowConstraints grow = new RowConstraints();
+		RowConstraints never = new RowConstraints();
+		grow.setVgrow(Priority.ALWAYS);
+		never.setVgrow(Priority.NEVER);
 
 		ThreatListView table = new ThreatListView();
 		VBox list = table.createLayout();
+		mainElements.add(genPdfBtn,2,2);
 		mainElements.add(list, 1, 1);
 
 		mainElements.getColumnConstraints().addAll(
-			alwaysGrow,
+			neverGrow,
         	alwaysGrow,
-        	alwaysGrow
+        	neverGrow
         	);
+		mainElements.getRowConstraints().addAll(never,grow);
 		mainElements.setGridLinesVisible(true);
 		return new StackPane(mainElements);
 	}

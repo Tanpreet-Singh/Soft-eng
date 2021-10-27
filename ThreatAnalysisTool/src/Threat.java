@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  * @author
  * @version 10/13/2021
+ * @param <KillChainPhase>
  */
 class Threat
 {
@@ -39,7 +41,7 @@ class Threat
 	Threat() {
 	}
 
-	/**
+    /**
 	 * Accessor method for field type
 	 * 
 	 * @return String value of field type
