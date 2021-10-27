@@ -84,7 +84,7 @@ public class MainPage {
         	neverGrow
         	);
 		mainElements.getRowConstraints().addAll(never,grow);
-		mainElements.setGridLinesVisible(true);
+		mainElements.setGridLinesVisible(false);
 		return new StackPane(mainElements);
 	}
 }

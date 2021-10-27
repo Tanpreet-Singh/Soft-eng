@@ -15,14 +15,30 @@ public class ThreatListView {
 		
 		// Title that says "Listview Example"
 		ObservableList<String> rawData= FXCollections.observableArrayList();
-		rawData.add("Threat 1\nAPT28\nThreat ID");
-		rawData.add("Threat 2\nThreat Name\nintrusion-set--bef4c620-0787-42a8-a96d-b7eb6e85917c");
-		rawData.add("Threat 3\nThreat Name\nThreat ID");
-		rawData.add("Threat 4\nThreat Name\nThreat ID");
-		rawData.add("Threat 5\nThreat Name\nThreat ID");
-		rawData.add("Threat 6\nThreat Name\nThreat ID");
-		rawData.add("Threat 7\nThreat Name\nThreat ID");
-		rawData.add("Threat 8\nThreat Name\nintrusion-set--899ce53f-13a0-479b-a0e4-67d46e241542");
+		rawData.add("identity\nidentity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5\nThe MITRE Corporation");
+		rawData.add("marking-definition\nmarking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168\nstatement");
+		rawData.add("course-of-action\ncourse-of-action--4f170666-7edb-4489-85c2-9affa28a72e0\n.bash_profile and .bashrc Mitigation");
+		rawData.add("attack-pattern\nattack-pattern--01df3350-ce05-4bdf-bdf8-0a919a66d4a8\n.bash_profile and .bashrc");
+		rawData.add("course-of-action\ncourse-of-action--c61fee9f-16fb-4f8c-bbf0-869093fcd4a6\nAccess Token Manipulation Mitigation");
+		rawData.add("attack-pattern\nattack-pattern--dcaa092b-7de9-4a21-977f-7fcb77e89c48\nAccess Token Manipulation");
+		rawData.add("attack-pattern\nattack-pattern--9b99b83a-1aac-4e29-b975-b374950551a3\nAccessibility Features");
+		rawData.add("course-of-action\ncourse-of-action--5c49bc54-9929-48ca-b581-7018219b5a97\nAccount Discovery Mitigation");
+		rawData.add("identity\nidentity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5\nThe MITRE Corporation");
+		rawData.add("marking-definition\nmarking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168\nstatement");
+		rawData.add("course-of-action\ncourse-of-action--4f170666-7edb-4489-85c2-9affa28a72e0\n.bash_profile and .bashrc Mitigation");
+		rawData.add("attack-pattern\nattack-pattern--01df3350-ce05-4bdf-bdf8-0a919a66d4a8\n.bash_profile and .bashrc");
+		rawData.add("course-of-action\ncourse-of-action--c61fee9f-16fb-4f8c-bbf0-869093fcd4a6\nAccess Token Manipulation Mitigation");
+		rawData.add("attack-pattern\nattack-pattern--dcaa092b-7de9-4a21-977f-7fcb77e89c48\nAccess Token Manipulation");
+		rawData.add("attack-pattern\nattack-pattern--9b99b83a-1aac-4e29-b975-b374950551a3\nAccessibility Features");
+		rawData.add("course-of-action\ncourse-of-action--5c49bc54-9929-48ca-b581-7018219b5a97\nAccount Discovery Mitigation");
+		rawData.add("identity\nidentity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5\nThe MITRE Corporation");
+		rawData.add("marking-definition\nmarking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168\nstatement");
+		rawData.add("course-of-action\ncourse-of-action--4f170666-7edb-4489-85c2-9affa28a72e0\n.bash_profile and .bashrc Mitigation");
+		rawData.add("attack-pattern\nattack-pattern--01df3350-ce05-4bdf-bdf8-0a919a66d4a8\n.bash_profile and .bashrc");
+		rawData.add("course-of-action\ncourse-of-action--c61fee9f-16fb-4f8c-bbf0-869093fcd4a6\nAccess Token Manipulation Mitigation");
+		rawData.add("attack-pattern\nattack-pattern--dcaa092b-7de9-4a21-977f-7fcb77e89c48\nAccess Token Manipulation");
+		rawData.add("attack-pattern\nattack-pattern--9b99b83a-1aac-4e29-b975-b374950551a3\nAccessibility Features");
+		rawData.add("course-of-action\ncourse-of-action--5c49bc54-9929-48ca-b581-7018219b5a97\nAccount Discovery Mitigation");
 	
 		FilteredList<String> filteredList = new FilteredList<>(rawData);
 
