@@ -18,12 +18,11 @@ public class Test extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			stg = primaryStage;
-			//BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
-			VBox root = (VBox) FXMLLoader.load(getClass().getResource("Main.fxml")); 	// Uncomment this to test MainPage gui
+			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 700, 500);
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("Login");
-			primaryStage.show();
+			stg.setScene(scene);
+			stg.setTitle("Login");
+			stg.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

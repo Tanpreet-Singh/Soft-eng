@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainPage">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -32,13 +32,14 @@
         </Label>
             <TreeTableView layoutX="39.0" layoutY="63.0" prefHeight="283.0" prefWidth="551.0" AnchorPane.bottomAnchor="28.33333333333337" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="49.66666666666663" AnchorPane.topAnchor="63.0">
               <columns>
-                <TreeTableColumn prefWidth="549.999989827474" text="Threat Details" />
+                <TreeTableColumn fx:id="threat_details" prefWidth="550.0" text="Threat Details" />
               </columns>
             </TreeTableView>
-            <Button layoutX="528.0" layoutY="26.0" mnemonicParsing="false" text="Gen PDF" AnchorPane.rightAnchor="50.0" />
-            <Button layoutX="39.0" layoutY="26.0" mnemonicParsing="false" text="Add" />
-            <Button layoutX="99.0" layoutY="26.0" mnemonicParsing="false" text="Edit" />
-            <Button layoutX="157.0" layoutY="26.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="genPdf" layoutX="528.0" layoutY="26.0" mnemonicParsing="false" text="Gen PDF" AnchorPane.rightAnchor="50.0" />
+            <Button fx:id="add" layoutX="39.0" layoutY="26.0" mnemonicParsing="false" text="Add" />
+            <Button fx:id="edit" layoutX="99.0" layoutY="26.0" mnemonicParsing="false" text="Edit" />
+            <Button fx:id="delete" layoutX="157.0" layoutY="26.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="logout" layoutX="315.0" layoutY="26.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
       </children>
     </AnchorPane>
   </children>
