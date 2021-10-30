@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ 
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Users" />
+        <Menu mnemonicParsing="false" text="Help" />
+        <Menu mnemonicParsing="false" text="Logout" />
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="99.0" layoutY="173.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <TreeTableView layoutX="39.0" layoutY="63.0" prefHeight="283.0" prefWidth="551.0" AnchorPane.bottomAnchor="28.33333333333337" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="49.66666666666663" AnchorPane.topAnchor="63.0">
+              <columns>
+                <TreeTableColumn prefWidth="549.999989827474" text="Threat Details" />
+              </columns>
+            </TreeTableView>
+            <Button layoutX="528.0" layoutY="26.0" mnemonicParsing="false" text="Gen PDF" AnchorPane.rightAnchor="50.0" />
+            <Button layoutX="39.0" layoutY="26.0" mnemonicParsing="false" text="Add" />
+            <Button layoutX="99.0" layoutY="26.0" mnemonicParsing="false" text="Edit" />
+            <Button layoutX="157.0" layoutY="26.0" mnemonicParsing="false" text="Delete" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

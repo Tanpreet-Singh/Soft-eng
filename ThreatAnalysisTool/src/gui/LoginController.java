@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class WindowController {
+public class LoginController {
 
     @FXML
     private Button userLogin;
