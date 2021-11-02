@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView prefHeight="291.0" prefWidth="700.0">
+        <columns>
+          <TableColumn prefWidth="158.66665136814117" text="Username" />
+          <TableColumn prefWidth="193.33335876464844" text="Password" />
+            <TableColumn prefWidth="130.00003051757812" text="Access Level" />
+        </columns>
+      </TableView>
+      <Button mnemonicParsing="false" text="Go back" />
+      <ButtonBar prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+          <Button mnemonicParsing="false" text="Add User" />
+        </buttons>
+      </ButtonBar>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Access Level - " wrappingWidth="532.5787658691406">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" 1 indicates Admin level access where user can add users">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" 2 indicates engineer level access where user can add, edit and remove threats">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" 3 indicates view only access where user can only generate pdfs">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+   </children>
+</VBox>
