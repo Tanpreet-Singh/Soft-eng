@@ -1,3 +1,4 @@
+package gui;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ public class DatabaseTest {
 	
 	public static void main(String[] args) {
 		//System.out.println(authenticateUser("testUser", "123"));
-		System.out.println(addUser("testUser3", "password123", 3));
+		//System.out.println(addUser("testUser2", "password123"));
 	}
 	
 	public static boolean addUser(String username, String password, int accessLevel) {
@@ -25,7 +26,7 @@ public class DatabaseTest {
 		String databaseQuery = "INSERT INTO user_credentials"
 				+ "(username, password, last_login, access_level)"
 				+ "VALUES"
-				+ "(\"" + username + "\", SHA1(\"" + password + "\"), \"" + dateFormatter.format(date) + "\", \"" + accessLevel + "\")";
+				+ "(\"" + username + "\", \"" + password + "\", \"" + dateFormatter.format(date) + "\", \"" + accessLevel + "\")";
 		try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 				Statement statement = connection.createStatement();) {
 				statement.executeUpdate(databaseQuery);

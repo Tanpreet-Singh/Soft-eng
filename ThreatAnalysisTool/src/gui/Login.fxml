@@ -10,9 +10,9 @@
 
 <BorderPane minHeight="250.0" minWidth="250.0" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginController">
    <center>
-      <Pane maxHeight="250.0" maxWidth="250.0" minHeight="250.0" minWidth="250.0" prefHeight="225.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+      <Pane maxHeight="250.0" maxWidth="250.0" minHeight="250.0" minWidth="250.0" prefHeight="250.0" prefWidth="283.0" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="18.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Threat Analysis Tool" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="221.4901990890503">
+            <Text layoutX="18.0" layoutY="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Threat Analysis Tool" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="221.4901990890503">
                <font>
                   <Font name="DIN Condensed Bold" size="33.0" />
                </font>
@@ -31,7 +31,7 @@
                <font>
                   <Font name="DIN Alternate Bold" size="13.0" />
                </font></Button>
-            <Text fx:id="wrongLogin" fill="#2274c6" layoutX="3.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, please sign in." textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="244.5186767578125">
+            <Text fx:id="wrongLogin" fill="#2274c6" layoutX="7.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, please sign in." textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="244.5186767578125">
                <font>
                   <Font name="DIN Alternate Bold" size="13.0" />
                </font></Text>

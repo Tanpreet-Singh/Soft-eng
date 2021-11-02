@@ -23,7 +23,7 @@ public class Test extends Application {
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 700, 500);
 			stg.setScene(scene);
-			stg.setTitle("Login");
+			stg.setTitle("Data Threat Tool");
 			stg.show();
 		} catch (Exception e) {
 			e.printStackTrace();

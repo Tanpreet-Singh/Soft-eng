@@ -25,7 +25,7 @@ public class MainPage {
 	private Button logout;
 
 	@FXML
-	private TreeTableColumn<?, ?> threat_details;
+	private TreeTableColumn<Threat, String> threat_details;
 
 	@FXML
 	public void logout(ActionEvent event) throws IOException {
