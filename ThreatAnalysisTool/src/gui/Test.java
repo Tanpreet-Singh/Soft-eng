@@ -6,9 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Test extends Application {
@@ -18,8 +16,8 @@ public class Test extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			stg = primaryStage;
-			stg.setMinHeight(320);
-			stg.setMinWidth(320);
+			stg.setMinHeight(400);
+			stg.setMinWidth(640);
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 700, 500);
 			stg.setScene(scene);
