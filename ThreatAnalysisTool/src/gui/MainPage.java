@@ -1,8 +1,6 @@
 package gui;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -46,6 +44,15 @@ public class MainPage {
 	@FXML
 	public void initialize() throws IOException {
 		listView.setItems(threatList);
+		
+		searchField.textProperty().addListener((observable, oldValue, newValue) ->  {
+    		if (newValue.isEmpty()) {
+        		threatList.setPredicate(null);
+    		} else {
+        		final String searchString = newValue.toUpperCase();
+        		threatList.setPredicate(s -> s.toUpperCase().contains(searchString));
+    		}
+});
 	}
 	
 	@FXML
