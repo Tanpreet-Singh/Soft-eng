@@ -30,7 +30,7 @@ public class LoginController {
 
 	private void checkLogin() throws IOException {
 		Test m = new Test();
-		if (username.getText().toString().equals("admin") && password.getText().equals("123")) {
+		if (username.getText().equals("admin") && password.getText().equals("123")) {
 			wrongLogin.setText("success");
 
 			m.changeScene("Main.fxml");

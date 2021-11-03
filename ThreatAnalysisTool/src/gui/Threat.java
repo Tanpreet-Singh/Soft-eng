@@ -298,8 +298,9 @@ class Threat
 	
 	@Override
 	public String toString() {
-		String outputString = "Threat Name:    " + getName() + "\n";
-		outputString += "Threat ID:      " + getID() + "\n";
+		String outputString = getType() + "\n"
+				+ "   Name:    " + getName() + "\n"
+				+ "   ID:           " + getID() + "\n\n";
 		return outputString;
 		
 	}

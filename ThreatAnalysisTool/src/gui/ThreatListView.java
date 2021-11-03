@@ -60,7 +60,7 @@ public class ThreatListView {
 				filterField,
 				listView);
 		mainElements.setAlignment(Pos.CENTER);
-		mainElements.setVgrow(listView, Priority.ALWAYS);
+		VBox.setVgrow(listView, Priority.ALWAYS);
 		return mainElements;
 
 		
