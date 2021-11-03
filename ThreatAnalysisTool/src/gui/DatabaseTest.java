@@ -1,4 +1,5 @@
 package gui;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,8 +16,8 @@ public class DatabaseTest {
 
 	
 	public static void main(String[] args) {
-		//System.out.println(authenticateUser("testUser", "123"));
-		//System.out.println(addUser("testUser2", "password123"));
+		System.out.println(authenticateUser("testUser3", "password123"));
+		//System.out.println(addUser("testUser3", "password123", 3));
 	}
 	
 	public static boolean addUser(String username, String password, int accessLevel) {
@@ -26,7 +27,7 @@ public class DatabaseTest {
 		String databaseQuery = "INSERT INTO user_credentials"
 				+ "(username, password, last_login, access_level)"
 				+ "VALUES"
-				+ "(\"" + username + "\", \"" + password + "\", \"" + dateFormatter.format(date) + "\", \"" + accessLevel + "\")";
+				+ "(\"" + username + "\", SHA1(\"" + password + "\"), \"" + dateFormatter.format(date) + "\", \"" + accessLevel + "\")";
 		try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 				Statement statement = connection.createStatement();) {
 				statement.executeUpdate(databaseQuery);
@@ -42,25 +43,39 @@ public class DatabaseTest {
 		return userAdded;
 	}
 	
-	public static boolean authenticateUser(String username, String password) {
-		String databaseQuery = "SELECT * FROM user_credentials WHERE username=\'" + username + "\'";
+	public static int authenticateUser(String username, String password) {
+		//function will return  1 if user was authenticated
+		//function will return  2 if username/password combo was incorrect
+		//function will return -1 for any other error (db-related)
+		int returnCode = -1;
+		String databaseQuery = "SELECT * FROM user_credentials WHERE "
+				+ "username=\"" + username + "\""
+				+ "AND password=SHA1(\"" + password + "\")";
 		try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(databaseQuery);) {
-				//Parse result set
-				while (resultSet.next()) {
+				
+			//Parse result set
+				if (resultSet.next()) {
+					//found user/password combo in database
+					returnCode = 1;
 					System.out.println("ID: " + resultSet.getInt("user_id"));
 					System.out.println("Username: " + resultSet.getString("username"));
 					System.out.println("Password: " + resultSet.getString("password"));
 					System.out.println("Last Login: " + resultSet.getString("last_login"));
 					System.out.println("Access Level: " + resultSet.getInt("access_level"));
+				} else {
+					//did not find user/password combo in database
+					returnCode = 2;
+					System.out.println("Incorrect username/password combination");
 				}
+				
 				statement.close();
 				resultSet.close();
 				connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		return true;
+		return returnCode;
 	}
 }
