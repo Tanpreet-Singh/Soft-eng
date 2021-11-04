@@ -8,19 +8,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UsersController">
    <children>
-      <TableView prefHeight="291.0" prefWidth="700.0">
+      <TableView fx:id="table_users" prefHeight="291.0" prefWidth="700.0">
         <columns>
-          <TableColumn prefWidth="158.66665136814117" text="Username" />
-          <TableColumn prefWidth="193.33335876464844" text="Password" />
-            <TableColumn prefWidth="130.00003051757812" text="Access Level" />
+          <TableColumn fx:id="col_username" prefWidth="158.66665136814117" text="Username" />
+          <TableColumn fx:id="col_password" prefWidth="193.33335876464844" text="Password" />
+            <TableColumn fx:id="col_level" prefWidth="130.00003051757812" text="Access Level" />
         </columns>
       </TableView>
-      <Button mnemonicParsing="false" text="Go back" />
+      <Button fx:id="back" mnemonicParsing="false" onAction="#back" text="Go back" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Add User" />
+          <Button fx:id="adduser" mnemonicParsing="false" onAction="#addUser" text="Add User" />
         </buttons>
       </ButtonBar>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Access Level - " wrappingWidth="532.5787658691406">

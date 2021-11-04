@@ -7,10 +7,15 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+<<<<<<< Updated upstream:ThreatAnalysisTool/src/gui/MainPage.java
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+=======
+import javafx.scene.control.Menu;
+import javafx.scene.control.TreeTableColumn;
+>>>>>>> Stashed changes:ThreatAnalysisTool/src/gui/MainController.java
 
-public class MainPage {
+public class MainController {
 
 	@FXML
 	private Button add;
@@ -23,6 +28,7 @@ public class MainPage {
 	@FXML
 	private Button logout;
 	@FXML
+<<<<<<< Updated upstream:ThreatAnalysisTool/src/gui/MainPage.java
 	private ListView<String> listView;
 	@FXML
 	private TextField searchField;
@@ -55,9 +61,31 @@ public class MainPage {
 });
 	}
 	
+=======
+	private Button help;
+
+	@FXML
+	private Button users;
+
+	@FXML
+	private TreeTableColumn<Threat, String> threat_details;
+
+>>>>>>> Stashed changes:ThreatAnalysisTool/src/gui/MainController.java
 	@FXML
 	public void logout(ActionEvent event) throws IOException {
 		Test m = new Test();
 		m.changeScene("login.fxml");
+	}
+	
+	@FXML
+	public void users(ActionEvent event) throws IOException {
+		Test m = new Test();
+		m.changeScene("Users.fxml");
+	}
+	
+	@FXML
+	public void help(ActionEvent event) throws IOException {
+		Test m = new Test();
+		m.changeScene("Help.fxml");
 	}
 }

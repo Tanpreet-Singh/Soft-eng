@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javafx.scene.control.TableColumn;
+
 public class DatabaseTest {
 	//connection credentials for testing purposes
 	static final String DB_URL = "jdbc:mysql://174.57.254.128/ThreatAnalysisTool";
@@ -19,14 +21,14 @@ public class DatabaseTest {
 		//System.out.println(addUser("testUser2", "password123"));
 	}
 	
-	public static boolean addUser(String username, String password, int accessLevel) {
+	public static boolean addUser(String username, String password, String level) {
 		boolean userAdded = false;
 		Date date = new Date();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String databaseQuery = "INSERT INTO user_credentials"
 				+ "(username, password, last_login, access_level)"
 				+ "VALUES"
-				+ "(\"" + username + "\", \"" + password + "\", \"" + dateFormatter.format(date) + "\", \"" + accessLevel + "\")";
+				+ "(\"" + username + "\", \"" + password + "\", \"" + dateFormatter.format(date) + "\", \"" + level + "\")";
 		try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 				Statement statement = connection.createStatement();) {
 				statement.executeUpdate(databaseQuery);
@@ -42,7 +44,7 @@ public class DatabaseTest {
 		return userAdded;
 	}
 	
-	public static boolean authenticateUser(String username, String password) {
+	public static boolean authenticateUser(String username, String password, String level) {
 		String databaseQuery = "SELECT * FROM user_credentials WHERE username=\'" + username + "\'";
 		try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 				Statement statement = connection.createStatement();
