@@ -7,13 +7,9 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-<<<<<<< Updated upstream:ThreatAnalysisTool/src/gui/MainPage.java
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-=======
-import javafx.scene.control.Menu;
-import javafx.scene.control.TreeTableColumn;
->>>>>>> Stashed changes:ThreatAnalysisTool/src/gui/MainController.java
 
 public class MainController {
 
@@ -26,9 +22,14 @@ public class MainController {
 	@FXML
 	private Button genPdf;
 	@FXML
-	private Button logout;
+	private MenuItem help;
 	@FXML
-<<<<<<< Updated upstream:ThreatAnalysisTool/src/gui/MainPage.java
+	private MenuItem users;
+	@FXML
+	private MenuItem logout;
+	@FXML
+	private Button importButton;
+	@FXML
 	private ListView<String> listView;
 	@FXML
 	private TextField searchField;
@@ -37,7 +38,7 @@ public class MainController {
 	private ObservableList<String> threats;
 	private FilteredList<String> threatList;
 	
-	public MainPage() throws IOException {
+	public MainController() throws IOException {
 		parser = new ParseFunction();
 		threats = FXCollections.observableArrayList();
 		for (Threat threat : parser.parseJSON().getObjects()) {
@@ -61,30 +62,25 @@ public class MainController {
 });
 	}
 	
-=======
-	private Button help;
-
 	@FXML
-	private Button users;
-
-	@FXML
-	private TreeTableColumn<Threat, String> threat_details;
-
->>>>>>> Stashed changes:ThreatAnalysisTool/src/gui/MainController.java
-	@FXML
-	public void logout(ActionEvent event) throws IOException {
+	public void logoutFunction(ActionEvent event) throws IOException {
 		Test m = new Test();
 		m.changeScene("login.fxml");
 	}
 	
 	@FXML
-	public void users(ActionEvent event) throws IOException {
+	public void importJSON(ActionEvent event) throws IOException {
+		
+	}
+
+	@FXML
+	public void usersFunction(ActionEvent event) throws IOException {
 		Test m = new Test();
 		m.changeScene("Users.fxml");
 	}
 	
 	@FXML
-	public void help(ActionEvent event) throws IOException {
+	public void helpFunction(ActionEvent event) throws IOException {
 		Test m = new Test();
 		m.changeScene("Help.fxml");
 	}

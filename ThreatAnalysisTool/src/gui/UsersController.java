@@ -52,8 +52,9 @@ public class UsersController {
 
 	@FXML
 	public void addUser(ActionEvent event) throws IOException {
+		DatabaseTest databaseTest = new DatabaseTest();
 		//DatabaseTest db = new DatabaseTest();
-		DatabaseTest.addUser(col_username.getText(), col_password.getText(), col_level.getText());
+		databaseTest.addUser(col_username.getText(), col_password.getText(), 1);
 	}
 
 	@FXML
@@ -114,8 +115,8 @@ public class UsersController {
             String value1 = col_username.getText();
             String value2 = col_password.getText();
             String value3 = col_level.getText();
-            String sql = "update Users set user_id= '"+value1+"',username= '"+value2+"',password= '"+
-                    value3+"',email= '"+value4+"',type= '"+value5+"' where user_id='"+value1+"' ";
+            //String sql = "update Users set username= '"+value1+"',password= '"+
+            //        value2+"',email= '"+value4+"',type= '"+value5+"' where username='"+value1+"' ";
             pst= conn.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null, "Update");
