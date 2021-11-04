@@ -23,6 +23,8 @@ public class MainPage {
 	@FXML
 	private Button logout;
 	@FXML
+	private Button importButton;
+	@FXML
 	private ListView<String> listView;
 	@FXML
 	private TextField searchField;
@@ -59,5 +61,10 @@ public class MainPage {
 	public void logout(ActionEvent event) throws IOException {
 		Test m = new Test();
 		m.changeScene("login.fxml");
+	}
+	
+	@FXML
+	public void importJSON(ActionEvent event) throws IOException {
+		
 	}
 }

@@ -19,7 +19,7 @@
       <menus>
         <Menu mnemonicParsing="false" text="Users" />
         <Menu mnemonicParsing="false" text="Help" />
-        <Menu mnemonicParsing="false" text="Logout" />
+        <Menu mnemonicParsing="false" onAction="#logout" text="Logout" />
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="368.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
@@ -32,6 +32,7 @@
             <ListView fx:id="listView" layoutX="46.0" layoutY="78.0" prefHeight="237.0" prefWidth="532.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="78.0" />
             <TextField fx:id="searchField" layoutX="87.0" layoutY="47.0" prefHeight="25.0" prefWidth="499.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="54.0" />
             <Text layoutX="46.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search" AnchorPane.leftAnchor="54.0" />
+            <Button fx:id="importButton" layoutX="463.0" layoutY="14.0" mnemonicParsing="false" onAction="#importJSON" text="Import" />
       </children>
     </AnchorPane>
   </children>
