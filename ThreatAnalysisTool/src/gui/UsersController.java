@@ -62,137 +62,137 @@ public class UsersController {
 		Test m = new Test();
 		m.changeScene("Main.fxml");
 	}
-	
-	ObservableList<Users> listM;
-    ObservableList<Users> dataList;
-    
-   
-    
-    int index = -1;
-    
-    Connection conn =null;
-    ResultSet rs = null;
-    PreparedStatement pst = null;
-    
-     
-    public void Add_Users (){    
-        conn = mysqlconnect.ConnectDb();
-        String sql = "insert into Users (username,password,email,type)values(?,?,?,? )";
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, col_username.getText());
-            pst.setString(2, col_password.getText());
-            pst.setString(3, col_level.getText());
-            pst.execute();
-            
-            JOptionPane.showMessageDialog(null, "Users Add succes");
-            UpdateTable();
-            search_user();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-    
-
-    //////// methode select Users ///////
-    @FXML
-    void getSelected (MouseEvent event){
-    index = table_Users.getSelectionModel().getSelectedIndex();
-    if (index <= -1){
-    
-        return;
-    }
-    
-    col_username.setText(col_username.getCellData(index).toString());
-    col_password.setText(col_password.getCellData(index).toString());
-    col_level.setText(col_level.getCellData(index).toString());
-    
-    }
-
-    public void Edit (){   
-        try {
-            conn = mysqlconnect.ConnectDb();
-            String value1 = col_username.getText();
-            String value2 = col_password.getText();
-            String value3 = col_level.getText();
-            //String sql = "update Users set username= '"+value1+"',password= '"+
-            //        value2+"',email= '"+value4+"',type= '"+value5+"' where username='"+value1+"' ";
-            pst= conn.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Update");
-            UpdateTable();
-            search_user();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        
-    }
-    
-    public void Delete(){
-    conn = mysqlconnect.ConnectDb();
-    String sql = "delete from Users where user_id = ?";
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Delete");
-            UpdateTable();
-            search_user();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    
-    }
-
-    
-    public void UpdateTable(){
-        col_username.setCellValueFactory(new PropertyValueFactory<Users,String>("username"));
-        col_password.setCellValueFactory(new PropertyValueFactory<Users,String>("password"));
-        
-        listM = mysqlconnect.getDatausers();
-        table_Users.setItems(listM);
-    }
-    
-    
-
-    
- @FXML
-    void search_user() {          
-        col_username.setCellValueFactory(new PropertyValueFactory<Users,String>("username"));
-        col_password.setCellValueFactory(new PropertyValueFactory<Users,String>("password"));
-        
-        dataList = mysqlconnect.getDatausers();
-        table_Users.setItems(dataList);
-        FilteredList<Users> filteredData = new FilteredList<>(dataList, b -> true);  
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-        filteredData.setPredicate(person -> {
-    if (newValue == null || newValue.isEmpty()) {
-     return true;
-    }    
-    String lowerCaseFilter = newValue.toLowerCase();
-    
-    if (person.getUsername().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
-     return true; // Filter matches username
-    } else if (person.getPassword().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-     return true; // Filter matches password
-    }else if (person.getType().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-     return true; // Filter matches password
-    }
-    else if (String.valueOf(person.getEmail()).indexOf(lowerCaseFilter)!=-1)
-         return true;// Filter matches email
-                                
-         else  
-          return false; // Does not match.
-   });
-  });  
-  SortedList<Users> sortedData = new SortedList<>(filteredData);  
-  sortedData.comparatorProperty().bind(table_Users.comparatorProperty());  
-  table_Users.setItems(sortedData);      
-    }
-    
-    public void initialize(URL url, ResourceBundle rb) {
-    UpdateTable();
-    search_user();
-    } 
+//	
+//	ObservableList<Users> listM;
+//    ObservableList<Users> dataList;
+//    
+//   
+//    
+//    int index = -1;
+//    
+//    Connection conn =null;
+//    ResultSet rs = null;
+//    PreparedStatement pst = null;
+//    
+//     
+//    public void Add_Users (){    
+//        conn = mysqlconnect.ConnectDb();
+//        String sql = "insert into Users (username,password,email,type)values(?,?,?,? )";
+//        try {
+//            pst = conn.prepareStatement(sql);
+//            pst.setString(1, col_username.getText());
+//            pst.setString(2, col_password.getText());
+//            pst.setString(3, col_level.getText());
+//            pst.execute();
+//            
+//            JOptionPane.showMessageDialog(null, "Users Add succes");
+//            UpdateTable();
+//            search_user();
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//    }
+//    
+//
+//    //////// methode select Users ///////
+//    @FXML
+//    void getSelected (MouseEvent event){
+//    index = table_Users.getSelectionModel().getSelectedIndex();
+//    if (index <= -1){
+//    
+//        return;
+//    }
+//    
+//    col_username.setText(col_username.getCellData(index).toString());
+//    col_password.setText(col_password.getCellData(index).toString());
+//    col_level.setText(col_level.getCellData(index).toString());
+//    
+//    }
+//
+//    public void Edit (){   
+//        try {
+//            conn = mysqlconnect.ConnectDb();
+//            String value1 = col_username.getText();
+//            String value2 = col_password.getText();
+//            String value3 = col_level.getText();
+//            //String sql = "update Users set username= '"+value1+"',password= '"+
+//            //        value2+"',email= '"+value4+"',type= '"+value5+"' where username='"+value1+"' ";
+//            pst= conn.prepareStatement(sql);
+//            pst.execute();
+//            JOptionPane.showMessageDialog(null, "Update");
+//            UpdateTable();
+//            search_user();
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//        
+//    }
+//    
+//    public void Delete(){
+//    conn = mysqlconnect.ConnectDb();
+//    String sql = "delete from Users where user_id = ?";
+//        try {
+//            pst = conn.prepareStatement(sql);
+//            pst.execute();
+//            JOptionPane.showMessageDialog(null, "Delete");
+//            UpdateTable();
+//            search_user();
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//    
+//    }
+//
+//    
+//    public void UpdateTable(){
+//        col_username.setCellValueFactory(new PropertyValueFactory<Users,String>("username"));
+//        col_password.setCellValueFactory(new PropertyValueFactory<Users,String>("password"));
+//        
+//        listM = mysqlconnect.getDatausers();
+//        table_Users.setItems(listM);
+//    }
+//    
+//    
+//
+//    
+// @FXML
+//    void search_user() {          
+//        col_username.setCellValueFactory(new PropertyValueFactory<Users,String>("username"));
+//        col_password.setCellValueFactory(new PropertyValueFactory<Users,String>("password"));
+//        
+//        dataList = mysqlconnect.getDatausers();
+//        table_Users.setItems(dataList);
+//        FilteredList<Users> filteredData = new FilteredList<>(dataList, b -> true);  
+//        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+//        filteredData.setPredicate(person -> {
+//    if (newValue == null || newValue.isEmpty()) {
+//     return true;
+//    }    
+//    String lowerCaseFilter = newValue.toLowerCase();
+//    
+//    if (person.getUsername().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+//     return true; // Filter matches username
+//    } else if (person.getPassword().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+//     return true; // Filter matches password
+//    }else if (person.getType().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+//     return true; // Filter matches password
+//    }
+//    else if (String.valueOf(person.getEmail()).indexOf(lowerCaseFilter)!=-1)
+//         return true;// Filter matches email
+//                                
+//         else  
+//          return false; // Does not match.
+//   });
+//  });  
+//  SortedList<Users> sortedData = new SortedList<>(filteredData);  
+//  sortedData.comparatorProperty().bind(table_Users.comparatorProperty());  
+//  table_Users.setItems(sortedData);      
+//    }
+//    
+//    public void initialize(URL url, ResourceBundle rb) {
+//    UpdateTable();
+//    search_user();
+//    } 
 }
 
 

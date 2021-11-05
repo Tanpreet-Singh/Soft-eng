@@ -15,6 +15,7 @@ public class MainController {
 
 	@FXML
 	private Button add;
+	
 	@FXML
 	private Button delete;
 	@FXML
