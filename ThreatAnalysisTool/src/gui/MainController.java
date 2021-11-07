@@ -87,9 +87,9 @@ public class MainController {
 	public void importJSON(ActionEvent event) throws IOException, ParseException {
 		FileDialog fileDialog = new FileDialog(new Frame(), "Select JSON file", FileDialog.LOAD);
 		fileDialog.setVisible(true);
-		String pathToImportFile = fileDialog.getDirectory() + fileDialog.getFile();
 
-		if (pathToImportFile != null) {
+		if (fileDialog != null) {
+			String pathToImportFile = fileDialog.getDirectory() + fileDialog.getFile();
 			DatabaseTest databaseConnection = new DatabaseTest();
 			databaseConnection.importThreats(parser.parseJSON(pathToImportFile));
 

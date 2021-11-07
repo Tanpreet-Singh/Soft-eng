@@ -64,30 +64,6 @@ public class DatabaseTest {
 //			JOptionPane.showMessageDialog(null, e);
 //		}
 //	}
-//
-//	public int addUser(String username, String password, int accessLevel) {
-//		// function will return 1 if user was added
-//		// function will return 2 if username not added
-//		// function will return -1 for any other error (db-related)
-//		int code = 2;
-//
-//		Date date = new Date();
-//		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		String databaseQuery = "INSERT INTO user_credentials" + "(username, password, last_login, access_level)"
-//				+ "VALUES" + "(\"" + username + "\", SHA1(\"" + password + "\"), \"" + dateFormatter.format(date)
-//				+ "\", \"" + accessLevel + "\")";
-//		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-//				Statement statement = connection.createStatement();) {
-//			statement.executeUpdate(databaseQuery);
-//			statement.close();
-//			connection.close();
-//			code = 1;
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			code = -1;
-//		}
-//		return code;
-//	}
 
 	public int deleteUser(String username) {
 		// function will return 1 if user was deleted
