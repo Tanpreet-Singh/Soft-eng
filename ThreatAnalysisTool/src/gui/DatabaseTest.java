@@ -9,14 +9,15 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.sql.Timestamp;
 
 public class DatabaseTest {
 	//Database credentials
 	final String DB_URL = "jdbc:mysql://174.57.254.128/ThreatAnalysisTool";
 	final String DB_USER = "testUser";
 	final String DB_PASS = "VulturesA";
-
 	
+
 	public int addUser(String username, String password, int accessLevel) {
 		//return code -1 - error occurred (database-related)
 		//return code  1 - user added
@@ -116,25 +117,25 @@ public class DatabaseTest {
 		
 		//prepare local variables for database query
 		String databaseQuery = "INSERT INTO threats(threat_id, access_level, name, description, created, modified, type, created_by_ref, spec_version, x_mitre_platforms) values(?,1,?,?,?,?,?,?,?,?)";
-//		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		java.sql.Date sqlCreatedDate;
-//		java.sql.Date sqlModifiedDate;
+		Timestamp sqlCreatedTimestamp;
+		Timestamp sqlModifiedTimestamp;
 		
 		try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 				PreparedStatement statement = connection.prepareStatement(databaseQuery);) {
 
+				connection.setAutoCommit(false);
 				//loop through threats
-				for (Threat threat : threatBundle.getObjects().subList(0, 9)) {
+				for (Threat threat : threatBundle.getObjects()) {
 					if (!threatExists(threat)) {
 						statement.setString(1, threat.getID());
 						statement.setString(2, threat.getName());
 						statement.setString(3, threat.getDescription());
 						
 						//convert to different Date object (required to be from mySQL package)
-						//sqlCreatedDate = new java.sql.Date(dateFormatter.parse(threat.getDateCreated()).getTime());
-						//sqlModifiedDate = new java.sql.Date(dateFormatter.parse(threat.getDateCreated()).getTime());
-						statement.setDate(4, null);
-						statement.setDate(5, null);
+						sqlCreatedTimestamp = convertToSqlDate(threat.getDateCreated());
+						sqlModifiedTimestamp = convertToSqlDate(threat.getDateModified());
+						statement.setTimestamp(4, sqlCreatedTimestamp);
+						statement.setTimestamp(5, sqlModifiedTimestamp);
 						
 						statement.setString(6, threat.getType());
 						statement.setString(7, threat.getCreated_by_ref());
@@ -142,9 +143,12 @@ public class DatabaseTest {
 						statement.setString(9, threat.getPlatforms());
 						
 						//execute query once all values are set
-						statement.executeUpdate();
+						statement.addBatch();
 					}
 				}
+				
+				statement.executeBatch();
+				connection.commit();
 				statement.close();
 				connection.close();
 				returnCode = 1;
@@ -183,7 +187,29 @@ public class DatabaseTest {
 		return exists;
 	}
 	
-	
+	private Timestamp convertToSqlDate(String dateString) throws ParseException{
+		if (dateString != null) {
+			//handle error in date formatting
+			//need to remove 
+			SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String[] dateStringSplit = dateString.split("T", 0);
+			String dateStringProper = "";
+			int count = 0;
+			for (String s : dateStringSplit) {
+				if (count == 0) {
+					dateStringProper += s;
+				}else {
+					dateStringProper += " " + s;
+				}
+				count++;
+			}
+			dateStringProper.replaceFirst("\\.(\\d*)Z", "");
+			
+			return new Timestamp(dateFormatter.parse(dateStringProper).getTime());
+		}else {
+			return null;
+		}
+	}
 	
 	
 	
