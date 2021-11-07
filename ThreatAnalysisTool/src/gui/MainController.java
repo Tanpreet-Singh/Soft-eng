@@ -1,6 +1,10 @@
 package gui;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.awt.FileDialog;
+import java.awt.Frame;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -70,8 +74,13 @@ public class MainController {
 	}
 	
 	@FXML
-	public void importJSON(ActionEvent event) throws IOException {
+	public void importJSON(ActionEvent event) throws IOException, ParseException {
+		FileDialog fileDialog = new FileDialog(new Frame(), "Select JSON file", FileDialog.LOAD);
+		fileDialog.setVisible(true);
+		String pathToImportFile = fileDialog.getDirectory() + fileDialog.getFile();
 		
+		DatabaseTest databaseConnection = new DatabaseTest();
+		databaseConnection.importThreats(parser.parseJSON(pathToImportFile));
 	}
 
 	@FXML

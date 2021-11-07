@@ -2,9 +2,11 @@ package gui;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -98,4 +100,100 @@ public class DatabaseTest {
 		
 		return exists;
 	}
+	
+	public int importThreats(JSONBundle threatBundle) throws ParseException {
+		//returnCode -1 - database error
+		//returnCode 1  - successful import 
+		int returnCode = -1;
+		
+		//store bundle information
+//		String bundleType = threatBundle.getObjects().get(0).getType();
+//		String bundleName = threatBundle.getObjects().get(0).getName();
+//		String bundleID = threatBundle.getObjects().get(0).getID();
+//		String bundleDescription = threatBundle.getObjects().get(0).getDescription();
+		//remove bundle from loop, to only grab threats
+		threatBundle.getObjects().remove(0);
+		
+		//prepare local variables for database query
+		String databaseQuery = "INSERT INTO threats(threat_id, access_level, name, description, created, modified, type, created_by_ref, spec_version, x_mitre_platforms) values(?,1,?,?,?,?,?,?,?,?)";
+//		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		java.sql.Date sqlCreatedDate;
+//		java.sql.Date sqlModifiedDate;
+		
+		try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+				PreparedStatement statement = connection.prepareStatement(databaseQuery);) {
+
+				//loop through threats
+				for (Threat threat : threatBundle.getObjects().subList(0, 9)) {
+					if (!threatExists(threat)) {
+						statement.setString(1, threat.getID());
+						statement.setString(2, threat.getName());
+						statement.setString(3, threat.getDescription());
+						
+						//convert to different Date object (required to be from mySQL package)
+						//sqlCreatedDate = new java.sql.Date(dateFormatter.parse(threat.getDateCreated()).getTime());
+						//sqlModifiedDate = new java.sql.Date(dateFormatter.parse(threat.getDateCreated()).getTime());
+						statement.setDate(4, null);
+						statement.setDate(5, null);
+						
+						statement.setString(6, threat.getType());
+						statement.setString(7, threat.getCreated_by_ref());
+						statement.setString(8, threat.getSpecVersion());
+						statement.setString(9, threat.getPlatforms());
+						
+						//execute query once all values are set
+						statement.executeUpdate();
+					}
+				}
+				statement.close();
+				connection.close();
+				returnCode = 1;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				//System.out.println("User Not Added");
+				returnCode = -1;
+			}
+		
+		
+		
+		
+		return returnCode;
+	}
+	
+	private boolean threatExists(Threat threat) {
+		boolean exists = false;
+		String databaseQuery = "SELECT * FROM threats WHERE threat_id=\"" + threat.getID() + "\"";
+		try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery(databaseQuery);) {
+				
+				//Parse result set
+				if (resultSet.next()) {
+					//found existing user in database
+					exists = true;
+				}
+				
+				statement.close();
+				resultSet.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		return exists;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

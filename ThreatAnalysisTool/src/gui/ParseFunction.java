@@ -45,7 +45,7 @@ public class ParseFunction {
 		 JsonNode jsonNodeRoot = objectMapper.readTree(jsonData);
 	
 		 JSONBundle bundle = objectMapper.convertValue(jsonNodeRoot, JSONBundle.class);
-//		 Left this block of code to 
+//		 Left this block of code to demonstrate how to loop through threat bundle
 //		 for (Threat threat : bundle.getObjects().subList(1, 10)) {
 //				System.out.println("---Threat Info---");
 //				System.out.println(threat);
