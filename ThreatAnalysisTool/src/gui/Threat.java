@@ -8,12 +8,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * These objects hold the values of individual threats within the JSON files that have been parsed.
  * These will be held in an array, and be used to populate the database and manipulate GUI.
  * 
- * @author
+ * @author	Vultures
  * @version 10/13/2021
- * @param <KillChainPhase>
  */
 class Threat
 {
+	//all fields annotated "JsonProperty" are the attributes present within the JSON file
 	@JsonProperty("type")
 	private String type;
 	@JsonProperty("id")
@@ -36,6 +36,8 @@ class Threat
 	private String spec_version;
 	@JsonProperty("x_mitre_platforms")
 	private ArrayList<String> x_mitre_platforms;
+	
+	
 	
 
 	Threat() {
