@@ -27,7 +27,6 @@
       <TableView fx:id="table_users" layoutX="208.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="241.0" prefWidth="391.0" AnchorPane.bottomAnchor="158.66666666666666" AnchorPane.leftAnchor="207.99999999999994" AnchorPane.rightAnchor="0.6666666666666856" AnchorPane.topAnchor="0.0">
          <columns>
             <TableColumn fx:id="col_username" prefWidth="128.666748046875" text="Username" />
-            <TableColumn fx:id="col_password" prefWidth="157.333251953125" text="Password" />
             <TableColumn fx:id="col_level" prefWidth="103.33331298828125" text="Access Level" />
          </columns>
          <columnResizePolicy>

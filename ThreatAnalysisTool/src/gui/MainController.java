@@ -19,78 +19,81 @@ public class MainController {
 
 	@FXML
 	private Button add;
-	
+
 	@FXML
 	private Button delete;
-	
+
 	@FXML
 	private Button edit;
-	
+
 	@FXML
 	private Button genPdf;
-	
+
 	@FXML
 	private MenuItem help;
-	
+
 	@FXML
 	private MenuItem users;
-	
+
 	@FXML
 	private MenuItem logout;
-	
+
 	@FXML
 	private Button importButton;
-	
+
 	@FXML
 	private ListView<String> listView;
-	
+
 	@FXML
 	private TextField searchField;
 
 	private ParseFunction parser;
-	
+
 	private ObservableList<String> threats;
-	
+
 	private FilteredList<String> threatList;
-	
+
 	public MainController() throws IOException {
 		parser = new ParseFunction();
 		threats = FXCollections.observableArrayList();
 		for (Threat threat : parser.parseJSON().getObjects()) {
 			threats.add(threat.toString());
 		}
-		
+
 		threatList = new FilteredList<>(threats);
 	}
-	
+
 	@FXML
 	public void initialize() throws IOException {
 		listView.setItems(threatList);
-		
-		searchField.textProperty().addListener((observable, oldValue, newValue) ->  {
-    		if (newValue.isEmpty()) {
-        		threatList.setPredicate(null);
-    		} else {
-        		final String searchString = newValue.toUpperCase();
-        		threatList.setPredicate(s -> s.toUpperCase().contains(searchString));
-    		}
-});
+
+		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue.isEmpty()) {
+				threatList.setPredicate(null);
+			} else {
+				final String searchString = newValue.toUpperCase();
+				threatList.setPredicate(s -> s.toUpperCase().contains(searchString));
+			}
+		});
 	}
-	
+
 	@FXML
 	public void logoutFunction(ActionEvent event) throws IOException {
 		Test m = new Test();
 		m.changeScene("login.fxml");
 	}
-	
+
 	@FXML
 	public void importJSON(ActionEvent event) throws IOException, ParseException {
 		FileDialog fileDialog = new FileDialog(new Frame(), "Select JSON file", FileDialog.LOAD);
 		fileDialog.setVisible(true);
 		String pathToImportFile = fileDialog.getDirectory() + fileDialog.getFile();
-		
-		DatabaseTest databaseConnection = new DatabaseTest();
-		databaseConnection.importThreats(parser.parseJSON(pathToImportFile));
+
+		if (pathToImportFile != null) {
+			DatabaseTest databaseConnection = new DatabaseTest();
+			databaseConnection.importThreats(parser.parseJSON(pathToImportFile));
+
+		}
 	}
 
 	@FXML
@@ -98,7 +101,7 @@ public class MainController {
 		Test m = new Test();
 		m.changeScene("Users.fxml");
 	}
-	
+
 	@FXML
 	public void helpFunction(ActionEvent event) throws IOException {
 		Test m = new Test();
