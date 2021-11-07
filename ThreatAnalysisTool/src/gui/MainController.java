@@ -88,7 +88,7 @@ public class MainController {
 		FileDialog fileDialog = new FileDialog(new Frame(), "Select JSON file", FileDialog.LOAD);
 		fileDialog.setVisible(true);
 
-		if (fileDialog != null) {
+		if (fileDialog.getDirectory() != null) {
 			String pathToImportFile = fileDialog.getDirectory() + fileDialog.getFile();
 			DatabaseTest databaseConnection = new DatabaseTest();
 			databaseConnection.importThreats(parser.parseJSON(pathToImportFile));
