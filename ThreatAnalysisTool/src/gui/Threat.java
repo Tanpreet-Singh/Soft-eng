@@ -1,7 +1,6 @@
 package gui;
 
 import java.util.ArrayList;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -33,10 +32,10 @@ class Threat
 	private ArrayList<ExternalRef> external_references;
 	@JsonProperty("kill_chain_phases")
 	private ArrayList<KillChainPhase> kill_chain_phases;
-	@JsonProperty("x_mitre_permissions_required")
-	private List<String> x_mitre_permissions_required;
 	@JsonProperty("spec_version")
 	private String spec_version;
+	@JsonProperty("x_mitre_platforms")
+	private ArrayList<String> x_mitre_platforms;
 	
 
 	Threat() {
@@ -123,16 +122,6 @@ class Threat
 	}
 
 	/**
-	 * Accessor method for x_mitre_permissions_required field
-	 * 
-	 * @return The list of String values stored in the x_mitre_permissions_required field
-	 */
-	List<String> getx_mitre_permissions_required()
-	{
-		return x_mitre_permissions_required;
-	}
-
-	/**
 	 * Accessor method for spec_version field
 	 * 
 	 * @return String value of spec_version field
@@ -150,6 +139,36 @@ class Threat
 	ArrayList<KillChainPhase> getKillChains()
 	{
 		return kill_chain_phases;
+	}
+	
+	/**
+	 * Accessor method for x_mitre_platforms field
+	 * 
+	 * @return ArrayList of x_mitre_platform field
+	 */
+	ArrayList<String> getPlatformsArray()
+	{
+		return x_mitre_platforms;
+	}
+	
+	/**
+	 * Accessor method for x_mitre_platforms field, in formatted String
+	 * 
+	 * @return String of x_mitre_platform field, formatted to print out all
+	 */
+	String getPlatforms()
+	{
+		String returnString = "";
+		if (x_mitre_platforms != null) {
+			for (String platform : x_mitre_platforms) {
+				if (returnString.equals("")) {
+					returnString += platform;
+				}else {
+					returnString += ", " + platform;
+				}
+			}
+		}
+		return returnString;
 	}
 
 	/**
@@ -241,15 +260,15 @@ class Threat
 	{
 		this.external_references = external_references;
 	}
-
+	
 	/**
-	 * Mutator method for x_mitre_permissions_required field
+	 * Mutator method for x_mitre_platforms field
 	 * 
-	 * @param	x_mitre_permissions_required	new List<String> to assign to x_mitre_persmissions_required field
+	 * @param	x_mitre_platforms new ArrayList<String> to assign to x_mitre_platforms field
 	 */
-	void setx_mitre_permissions_required(List<String> x_mitre_permissions_required )
+	void setPlatforms(ArrayList<String> x_mitre_platforms)
 	{
-		this.x_mitre_permissions_required =  x_mitre_permissions_required;
+		this.x_mitre_platforms = x_mitre_platforms;
 	}
 
 	/**
@@ -300,7 +319,12 @@ class Threat
 	public String toString() {
 		String outputString = getType() + "\n"
 				+ "   Name:    " + getName() + "\n"
-				+ "   ID:           " + getID() + "\n\n";
+				+ "   ID:           " + getID() + "\n";
+		if (!getPlatforms().equals("")) {
+			outputString += "   Platforms:    " + getPlatforms() + "\n\n";
+		}else {
+			outputString += "\n";
+		}
 		return outputString;
 		
 	}
