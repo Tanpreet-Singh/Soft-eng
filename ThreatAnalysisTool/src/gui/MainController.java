@@ -22,25 +22,35 @@ public class MainController {
 	
 	@FXML
 	private Button delete;
+	
 	@FXML
 	private Button edit;
+	
 	@FXML
 	private Button genPdf;
+	
 	@FXML
 	private MenuItem help;
+	
 	@FXML
 	private MenuItem users;
+	
 	@FXML
 	private MenuItem logout;
+	
 	@FXML
 	private Button importButton;
+	
 	@FXML
 	private ListView<String> listView;
+	
 	@FXML
 	private TextField searchField;
 
 	private ParseFunction parser;
+	
 	private ObservableList<String> threats;
+	
 	private FilteredList<String> threatList;
 	
 	public MainController() throws IOException {

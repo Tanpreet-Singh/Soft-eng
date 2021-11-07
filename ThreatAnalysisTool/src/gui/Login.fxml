@@ -12,7 +12,7 @@
    <center>
       <Pane maxHeight="250.0" maxWidth="250.0" minHeight="250.0" minWidth="250.0" prefHeight="250.0" prefWidth="283.0" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="18.0" layoutY="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Threat Analysis Tool" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="221.4901990890503">
+            <Text layoutX="32.0" layoutY="-7.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Threat Analysis Tool" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="207.4902000427246">
                <font>
                   <Font name="DIN Condensed Bold" size="33.0" />
                </font>

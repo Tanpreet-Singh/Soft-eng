@@ -6,9 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Test extends Application {
@@ -22,6 +20,7 @@ public class Test extends Application {
 			stg.setMinWidth(640);
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 700, 500);
+			stg.setMaximized(true);
 			stg.setScene(scene);
 			stg.setTitle("Data Threat Tool");
 			stg.show();
@@ -36,6 +35,7 @@ public class Test extends Application {
 	}
 
 	public static void main(String[] args) {
+//		DatabaseTest db = new DatabaseTest();
 		launch(args);
 	}
 }
