@@ -11,11 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.sql.Timestamp;
 
-import javax.swing.JOptionPane;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 public class DatabaseTest {
 	// Database credentials
 	final String DB_URL = "jdbc:mysql://174.57.254.128/ThreatAnalysisTool";
@@ -167,10 +162,10 @@ public class DatabaseTest {
 					statement.setString(3, threat.getDescription());
 
 					// convert to different Date object (required to be from mySQL package)
-					sqlCreatedTimestamp = convertToSqlDate(threat.getDateCreated());
-					sqlModifiedTimestamp = convertToSqlDate(threat.getDateModified());
-					statement.setTimestamp(4, sqlCreatedTimestamp);
-					statement.setTimestamp(5, sqlModifiedTimestamp);
+//					sqlCreatedTimestamp = convertToSqlDate(threat.getDateCreated());
+//					sqlModifiedTimestamp = convertToSqlDate(threat.getDateModified());
+					statement.setTimestamp(4, null);
+					statement.setTimestamp(5, null);
 
 					statement.setString(6, threat.getType());
 					statement.setString(7, threat.getCreated_by_ref());
