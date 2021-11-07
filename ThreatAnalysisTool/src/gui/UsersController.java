@@ -54,7 +54,7 @@ public class UsersController {
 	public void addUser(ActionEvent event) throws IOException {
 		DatabaseTest databaseTest = new DatabaseTest();
 		//DatabaseTest db = new DatabaseTest();
-		databaseTest.addUser(col_username.getText(), col_password.getText(), 1);
+		//databaseTest.addUser(col_username.getText(), col_password.getText(), 1);
 	}
 
 	@FXML
