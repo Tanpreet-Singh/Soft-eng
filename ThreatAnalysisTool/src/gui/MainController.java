@@ -28,6 +28,12 @@ public class MainController {
 	@FXML
 	private Button genPdf;
 	@FXML
+	private Button importButton;
+	@FXML
+	private Button addToPDF;
+	@FXML
+	private Button remove;
+	@FXML
 	private MenuItem help;
 	@FXML
 	private MenuItem users;
@@ -36,24 +42,29 @@ public class MainController {
 	@FXML
 	private MenuItem theme;
 	@FXML
-	private Button importButton;
-	@FXML
 	private ListView<String> listView;
+	@FXML
+	private ListView<String> listViewPDF;
 	@FXML
 	private TextField searchField;
 	
 	private boolean darkMode;
 	private ParseFunction parser;
-	//private JSONBundle threatBundle;
+	private JSONBundle threatBundle;
 	private ObservableList<String> threats;
 	private FilteredList<String> threatList;
 	
+	ObservableList<String> genPDFThreats;
+	
 	
 	public MainController() throws IOException {
+		genPDFThreats = FXCollections.observableArrayList();
+		
 		darkMode = false;
 		parser = new ParseFunction();
+		threatBundle = parser.parseJSON();
 		threats = FXCollections.observableArrayList();
-		for (Threat threat : parser.parseJSON().getObjects()) {
+		for (Threat threat : threatBundle.getObjects()) {
 			threats.add(threat.toString());
 		}
 
@@ -124,14 +135,38 @@ public class MainController {
 	
 	@FXML
 	public void addToPdfFunction(ActionEvent event) throws IOException {
-		if (!darkMode) {
-			theme.setText("Light Mode");
-			add.getScene().getStylesheets().add(getClass().getResource("darkmode.css").toExternalForm());
-		}else {
-			theme.setText("Dark Mode");
-			add.getScene().getStylesheets().remove(getClass().getResource("darkmode.css").toExternalForm());
+		for (String selectedThreat: listView.getSelectionModel().getSelectedItems()) {
+			Threat threat = getThreatFromString(selectedThreat);
+			String threatName = threat.getName();
+			if (!genPDFThreats.contains(threatName)) {
+				genPDFThreats.add(threatName);
+			}
+		}
+		listViewPDF.setItems(genPDFThreats);
+	}
+	
+	@FXML
+	public void removeFromPdfFunction(ActionEvent event) throws IOException {
+		String selectedThreat = listViewPDF.getSelectionModel().getSelectedItem();
+		genPDFThreats.remove(selectedThreat);
+		
+		listViewPDF.setItems(genPDFThreats);
+	}
+	
+	public Threat getThreatFromString(String threatString) {
+		String threatID = "";
+		Threat returnThreat = null;
+		for (String string : threatString.split("\\r?\\n")) {
+			if (string.contains("   ID:           ")) {
+				threatID = string.substring(17);
+			}
 		}
 		
-		darkMode = !darkMode;
+		for (Threat threat : threatBundle.getObjects()) {
+			if (threat.getID().equals(threatID)) {
+				returnThreat = threat;
+			}
+		}
+		return returnThreat;
 	}
 }

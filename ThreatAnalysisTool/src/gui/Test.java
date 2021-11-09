@@ -22,7 +22,7 @@ public class Test extends Application {
 			Scene scene = new Scene(root, 700, 500);
 			//stg.setMaximized(true);
 			stg.setScene(scene);
-			stg.setTitle("Data Threat Tool");
+			stg.setTitle("Threat Analysis Tool");
 			stg.show();
 		} catch (Exception e) {
 			e.printStackTrace();
