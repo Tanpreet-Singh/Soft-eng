@@ -55,26 +55,20 @@ public class UsersController {
 	ResultSet rs = null;
 	PreparedStatement pst = null;
 	
-<<<<<<< Updated upstream
 	public UsersController() {
 		
 	}
 	
-=======
 	DatabaseTest db = new DatabaseTest();
->>>>>>> Stashed changes
-
-	public UsersController() {
-	}
 	
-	@FXML
-	public void initialize() throws IOException {
-		col_username.setCellValueFactory(new PropertyValueFactory<Users, String>("username"));
-		col_level.setCellValueFactory(new PropertyValueFactory<Users, Integer>("access_level"));
-
-		listM = db.getDatausers();
-		table_Users.setItems(listM);
-	}
+//	@FXML
+//	public void initialize() throws IOException {
+//		col_username.setCellValueFactory(new PropertyValueFactory<Users, String>("username"));
+//		col_level.setCellValueFactory(new PropertyValueFactory<Users, Integer>("access_level"));
+//
+//		listM = db.getDatausers();
+//		table_Users.setItems(listM);
+//	}
 
 	@FXML
 	public void addUser(ActionEvent event) throws IOException {

@@ -9,6 +9,10 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.Timestamp;
 
 public class DatabaseTest {
@@ -237,20 +241,20 @@ public class DatabaseTest {
 		}
 	}
 
-	public ObservableList<Users> getDatausers() {
-		String databaseQuery = "select *from user_credentials";
-		ObservableList<Users> list = FXCollections.observableArrayList();
-
-		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-				Statement statement = connection.createStatement();
-				ResultSet rs = statement.executeQuery(databaseQuery);) {
-
-			while (rs.next()) {
-				list.add(new Users(rs.getString("username"), rs.getString("password"), rs.getInt("access_level")));
-				System.out.println(rs.getString("username"));
-			}
-		} catch (Exception e) {
-		}
-		return list;
-	}
+//	public ObservableList<Users> getDatausers() {
+//		String databaseQuery = "select *from user_credentials";
+//		ObservableList<Users> list = FXCollections.observableArrayList();
+//
+//		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+//				Statement statement = connection.createStatement();
+//				ResultSet rs = statement.executeQuery(databaseQuery);) {
+//
+//			while (rs.next()) {
+//				list.add(new Users(rs.getString("username"), rs.getString("password"), rs.getInt("access_level")));
+//				System.out.println(rs.getString("username"));
+//			}
+//		} catch (Exception e) {
+//		}
+//		return list;
+//	}
 }
