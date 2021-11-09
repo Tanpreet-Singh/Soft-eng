@@ -45,20 +45,6 @@ public class DatabaseTest {
 
 		return returnCode;
 	}
-//	
-//	// Database credentials
-//	final static String DB_URL = "jdbc:mysql://174.57.254.128/ThreatAnalysisTool";
-//	final static String DB_USER = "testUser";
-//	final static String DB_PASS = "VulturesA";
-//
-//	public static void connect() {
-//		try {
-//			Class.forName("com.mysql.jdbc.Driver");
-//			Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-//		} catch (Exception e) {
-//			JOptionPane.showMessageDialog(null, e);
-//		}
-//	}
 
 	public int deleteUser(String username) {
 		// function will return 1 if user was deleted
@@ -138,10 +124,10 @@ public class DatabaseTest {
 		int returnCode = -1;
 
 		// store bundle information
-//		String bundleType = threatBundle.getObjects().get(0).getType();
-//		String bundleName = threatBundle.getObjects().get(0).getName();
-//		String bundleID = threatBundle.getObjects().get(0).getID();
-//		String bundleDescription = threatBundle.getObjects().get(0).getDescription();
+		// String bundleType = threatBundle.getObjects().get(0).getType();
+		// String bundleName = threatBundle.getObjects().get(0).getName();
+		// String bundleID = threatBundle.getObjects().get(0).getID();
+		// String bundleDescription = threatBundle.getObjects().get(0).getDescription();
 		// remove bundle from loop, to only grab threats
 		threatBundle.getObjects().remove(0);
 
@@ -227,10 +213,10 @@ public class DatabaseTest {
 		return exists;
 	}
 
-	private Timestamp convertToSqlDate(String dateString) throws ParseException{
+	private Timestamp convertToSqlDate(String dateString) throws ParseException {
 		if (dateString != null) {
-			//handle error in date formatting
-			//need to remove 
+			// handle error in date formatting
+			// need to remove
 			SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String[] dateStringSplit = dateString.split("T", 0);
 			String dateStringProper = "";
@@ -238,33 +224,33 @@ public class DatabaseTest {
 			for (String s : dateStringSplit) {
 				if (count == 0) {
 					dateStringProper += s;
-				}else {
+				} else {
 					dateStringProper += " " + s;
 				}
 				count++;
 			}
 			dateStringProper.replaceFirst("\\.(\\d*)Z", "");
-			
+
 			return new Timestamp(dateFormatter.parse(dateStringProper).getTime());
-		}else {
+		} else {
 			return null;
 		}
 	}
 
-//	public static ObservableList<Users> getDatausers() {
-//		String databaseQuery = "select * from users";
-//		ObservableList<Users> list = FXCollections.observableArrayList();
-//
-//		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-//				Statement statement = connection.createStatement();
-//				ResultSet rs = statement.executeQuery(databaseQuery);) {
-//
-//			while (rs.next()) {
-//				list.add(new Users(rs.getString("username"), rs.getString("password"),
-//						(Integer.parseInt(rs.getString("level")))));
-//			}
-//		} catch (Exception e) {
-//		}
-//		return list;
-//	}
+	public ObservableList<Users> getDatausers() {
+		String databaseQuery = "select *from user_credentials";
+		ObservableList<Users> list = FXCollections.observableArrayList();
+
+		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+				Statement statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery(databaseQuery);) {
+
+			while (rs.next()) {
+				list.add(new Users(rs.getString("username"), rs.getString("password"), rs.getInt("access_level")));
+				System.out.println(rs.getString("username"));
+			}
+		} catch (Exception e) {
+		}
+		return list;
+	}
 }
