@@ -55,17 +55,24 @@ public class UsersController {
 	ResultSet rs = null;
 	PreparedStatement pst = null;
 	
+<<<<<<< Updated upstream
 	public UsersController() {
 		
 	}
 	
+=======
+	DatabaseTest db = new DatabaseTest();
+>>>>>>> Stashed changes
 
-	public void initialize(URL url, ResourceBundle rb) {
+	public UsersController() {
+	}
+	
+	@FXML
+	public void initialize() throws IOException {
 		col_username.setCellValueFactory(new PropertyValueFactory<Users, String>("username"));
-		col_password.setCellValueFactory(new PropertyValueFactory<Users, String>("password"));
 		col_level.setCellValueFactory(new PropertyValueFactory<Users, Integer>("access_level"));
 
-		//listM = DatabaseTest.getDatausers();
+		listM = db.getDatausers();
 		table_Users.setItems(listM);
 	}
 
