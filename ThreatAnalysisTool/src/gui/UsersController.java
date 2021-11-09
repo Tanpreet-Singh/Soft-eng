@@ -3,12 +3,9 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
-
-import javax.swing.JOptionPane;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,50 +23,41 @@ public class UsersController {
 
 	@FXML
 	private Text wrongLogin;
-	
 	@FXML
 	private TextField username;
-	
 	@FXML
 	private PasswordField password;
-	
 	@FXML
 	private Button adduser;
-
 	@FXML
 	private TextField delete;
-	
 	@FXML
 	private Button deleteuser;
-	
 	@FXML
 	private Text wrong;
-
 	@FXML
 	private Button back;
-
 	@FXML
 	private TableView<Users> table_Users;
-
 	@FXML
 	private TableColumn<Users, Integer> col_level;
-
 	@FXML
 	private TableColumn<Users, String> col_password;
-
 	@FXML
 	private TableColumn<Users, String> col_username;
-
 	@FXML
 	private TextField level;
 
+	
 	ObservableList<Users> listM;
-
-	int index = -1;
 
 	Connection conn = null;
 	ResultSet rs = null;
 	PreparedStatement pst = null;
+	
+	public UsersController() {
+		
+	}
 	
 
 	public void initialize(URL url, ResourceBundle rb) {

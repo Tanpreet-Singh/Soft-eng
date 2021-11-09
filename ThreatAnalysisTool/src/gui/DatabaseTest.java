@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 
 public class DatabaseTest {
 	// Database credentials
-	final String DB_URL = "jdbc:mysql://174.57.254.128/ThreatAnalysisTool";
+	final String DB_URL = "jdbc:mysql://174.57.254.128/ThreatAnalysisTool?rewriteBatchedStatements=true";
 	final String DB_USER = "testUser";
 	final String DB_PASS = "VulturesA";
 
@@ -149,36 +149,49 @@ public class DatabaseTest {
 		String databaseQuery = "INSERT INTO threats(threat_id, access_level, name, description, created, modified, type, created_by_ref, spec_version, x_mitre_platforms) values(?,1,?,?,?,?,?,?,?,?)";
 		Timestamp sqlCreatedTimestamp;
 		Timestamp sqlModifiedTimestamp;
+//		long totalTimeStart;
+//		long startTime;
+//		long stopTime;
+//		long totalTimeStop;
+//		int count = 0;
 
 		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 				PreparedStatement statement = connection.prepareStatement(databaseQuery);) {
 
 			connection.setAutoCommit(false);
+			//totalTimeStart = System.currentTimeMillis();
 			// loop through threats
 			for (Threat threat : threatBundle.getObjects()) {
+				//count++;
+				//startTime = System.currentTimeMillis();
 				if (!threatExists(threat)) {
 					statement.setString(1, threat.getID());
 					statement.setString(2, threat.getName());
 					statement.setString(3, threat.getDescription());
 
 					// convert to different Date object (required to be from mySQL package)
-//					sqlCreatedTimestamp = convertToSqlDate(threat.getDateCreated());
-//					sqlModifiedTimestamp = convertToSqlDate(threat.getDateModified());
-					statement.setTimestamp(4, null);
-					statement.setTimestamp(5, null);
+					sqlCreatedTimestamp = convertToSqlDate(threat.getDateCreated());
+					sqlModifiedTimestamp = convertToSqlDate(threat.getDateModified());
+					statement.setTimestamp(4, sqlCreatedTimestamp);
+					statement.setTimestamp(5, sqlModifiedTimestamp);
 
 					statement.setString(6, threat.getType());
 					statement.setString(7, threat.getCreated_by_ref());
 					statement.setString(8, threat.getSpecVersion());
 					statement.setString(9, threat.getPlatforms());
 
-					// execute query once all values are set
+					// add query once all values are set
 					statement.addBatch();
 				}
+				//stopTime = System.currentTimeMillis();
+				//System.out.println(count + ". duration: " + (stopTime - startTime) + " milliseconds." );
 			}
+			//totalTimeStop = System.currentTimeMillis();
+			//System.out.println(count + ". duration: " + (totalTimeStop - totalTimeStart)/1000.0 + " seconds." );
 
 			statement.executeBatch();
 			connection.commit();
+			connection.setAutoCommit(true);
 			statement.close();
 			connection.close();
 			returnCode = 1;
