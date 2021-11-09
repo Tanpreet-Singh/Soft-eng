@@ -149,11 +149,11 @@ public class DatabaseTest {
 				PreparedStatement statement = connection.prepareStatement(databaseQuery);) {
 
 			connection.setAutoCommit(false);
-			//totalTimeStart = System.currentTimeMillis();
+			// totalTimeStart = System.currentTimeMillis();
 			// loop through threats
 			for (Threat threat : threatBundle.getObjects()) {
-				//count++;
-				//startTime = System.currentTimeMillis();
+				// count++;
+				// startTime = System.currentTimeMillis();
 				if (!threatExists(threat)) {
 					statement.setString(1, threat.getID());
 					statement.setString(2, threat.getName());
@@ -173,11 +173,13 @@ public class DatabaseTest {
 					// add query once all values are set
 					statement.addBatch();
 				}
-				//stopTime = System.currentTimeMillis();
-				//System.out.println(count + ". duration: " + (stopTime - startTime) + " milliseconds." );
+				// stopTime = System.currentTimeMillis();
+				// System.out.println(count + ". duration: " + (stopTime - startTime) + "
+				// milliseconds." );
 			}
-			//totalTimeStop = System.currentTimeMillis();
-			//System.out.println(count + ". duration: " + (totalTimeStop - totalTimeStart)/1000.0 + " seconds." );
+			// totalTimeStop = System.currentTimeMillis();
+			// System.out.println(count + ". duration: " + (totalTimeStop -
+			// totalTimeStart)/1000.0 + " seconds." );
 
 			statement.executeBatch();
 			connection.commit();
@@ -241,20 +243,20 @@ public class DatabaseTest {
 		}
 	}
 
-//	public ObservableList<Users> getDatausers() {
-//		String databaseQuery = "select *from user_credentials";
-//		ObservableList<Users> list = FXCollections.observableArrayList();
-//
-//		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-//				Statement statement = connection.createStatement();
-//				ResultSet rs = statement.executeQuery(databaseQuery);) {
-//
-//			while (rs.next()) {
-//				list.add(new Users(rs.getString("username"), rs.getString("password"), rs.getInt("access_level")));
-//				System.out.println(rs.getString("username"));
-//			}
-//		} catch (Exception e) {
-//		}
-//		return list;
-//	}
+	public ObservableList<String> getDatausers() {
+		String databaseQuery = "select *from user_credentials";
+		ObservableList<String> list = FXCollections.observableArrayList();
+
+		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+				Statement statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery(databaseQuery);) {
+
+			while (rs.next()) {
+				list.add(rs.getString("username") + "   Access_level: " + rs.getInt("access_level"));
+				//System.out.println(rs.getString("username"));
+			}
+		} catch (Exception e) {
+		}
+		return list;
+	}
 }

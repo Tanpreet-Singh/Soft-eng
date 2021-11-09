@@ -35,7 +35,6 @@ public class Test extends Application {
 	}
 
 	public static void main(String[] args) {
-//		DatabaseTest db = new DatabaseTest();
 		launch(args);
 	}
 }

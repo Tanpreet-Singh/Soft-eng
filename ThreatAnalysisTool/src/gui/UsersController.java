@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn;
@@ -38,18 +39,18 @@ public class UsersController {
 	@FXML
 	private Button back;
 	@FXML
-	private TableView<Users> table_Users;
-	@FXML
-	private TableColumn<Users, Integer> col_level;
-	@FXML
-	private TableColumn<Users, String> col_password;
-	@FXML
-	private TableColumn<Users, String> col_username;
+	private ListView<String> table_Users;
+//	@FXML
+//	private TableColumn<Users, Integer> col_level;
+//	@FXML
+//	private TableColumn<Users, String> col_password;
+//	@FXML
+//	private TableColumn<Users, String> col_username;
 	@FXML
 	private TextField level;
 
 	
-	ObservableList<Users> listM;
+	ObservableList<String> listM;
 
 	Connection conn = null;
 	ResultSet rs = null;
@@ -61,20 +62,19 @@ public class UsersController {
 	
 	DatabaseTest db = new DatabaseTest();
 	
-//	@FXML
-//	public void initialize() throws IOException {
+	@FXML
+	public void initialize() throws IOException {
 //		col_username.setCellValueFactory(new PropertyValueFactory<Users, String>("username"));
 //		col_level.setCellValueFactory(new PropertyValueFactory<Users, Integer>("access_level"));
-//
-//		listM = db.getDatausers();
-//		table_Users.setItems(listM);
-//	}
+
+		listM = db.getDatausers();
+		table_Users.setItems(listM);
+	}
 
 	@FXML
 	public void addUser(ActionEvent event) throws IOException {
 		DatabaseTest databaseTest = new DatabaseTest();
-		//DatabaseTest db = new DatabaseTest();
-		//databaseTest.addUser(col_username.getText(), col_password.getText(), 1);
+
 		int code = databaseTest.addUser(username.getText(), password.getText(), 1);
 		
 		if (code == 1) {
