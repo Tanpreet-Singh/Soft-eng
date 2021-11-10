@@ -87,6 +87,8 @@ public class UsersController {
 			username.setText("");
 			password.setText("");
 			username.requestFocus();
+			listM = db.getDatausers();
+			table_Users.setItems(listM);
 		}
 		else {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -111,6 +113,8 @@ public class UsersController {
 			
 			delete.setText("");
 			delete.requestFocus();
+			listM = db.getDatausers();
+			table_Users.setItems(listM);
 		}
 		else {
 			Alert alert = new Alert(Alert.AlertType.ERROR);

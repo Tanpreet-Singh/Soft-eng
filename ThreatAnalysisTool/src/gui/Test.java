@@ -20,7 +20,7 @@ public class Test extends Application {
 			stg.setMinWidth(640);
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 700, 500);
-			//stg.setMaximized(true);
+			stg.setMaximized(true);
 			stg.setScene(scene);
 			stg.setTitle("Threat Analysis Tool");
 			stg.show();

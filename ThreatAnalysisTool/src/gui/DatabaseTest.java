@@ -253,7 +253,6 @@ public class DatabaseTest {
 
 			while (rs.next()) {
 				list.add(rs.getString("username") + "   Access_level: " + rs.getInt("access_level"));
-				//System.out.println(rs.getString("username"));
 			}
 		} catch (Exception e) {
 		}
