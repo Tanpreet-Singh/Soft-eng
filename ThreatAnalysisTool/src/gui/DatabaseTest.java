@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+//import java.util.ArrayList;
 import java.util.Date;
 
 import javafx.collections.FXCollections;
@@ -127,69 +128,103 @@ public class DatabaseTest {
 		// returnCode 1 - successful import
 		int returnCode = -1;
 
-		// store bundle information
-		// String bundleType = threatBundle.getObjects().get(0).getType();
-		// String bundleName = threatBundle.getObjects().get(0).getName();
-		// String bundleID = threatBundle.getObjects().get(0).getID();
-		// String bundleDescription = threatBundle.getObjects().get(0).getDescription();
-		// remove bundle from loop, to only grab threats
-		threatBundle.getObjects().remove(0);
-
-		// prepare local variables for database query
-		String databaseQuery = "INSERT INTO threats(threat_id, access_level, name, description, created, modified, type, created_by_ref, spec_version, x_mitre_platforms) values(?,1,?,?,?,?,?,?,?,?)";
+		// prepare local variables for database queries
+		String threatQuery = "INSERT INTO threats(threat_id, access_level, name, description, created, modified, type, created_by_ref, spec_version, x_mitre_platforms) values(?,1,?,?,?,?,?,?,?,?)";
+		String externalRefQuery = "INSERT INTO external_refs(threat_id, source_name, description, url, external_id) values(?,?,?,?,?)";
+		String killChainQuery = "INSERT INTO kill_chain_phases(threat_id, kill_chain_name, phase_name) values(?,?,?)";
+		int threatsAdded = 0;
+		int externalRefsAdded = 0;
+		int killChainsAdded = 0;
 		Timestamp sqlCreatedTimestamp;
 		Timestamp sqlModifiedTimestamp;
-//		long totalTimeStart;
-//		long startTime;
-//		long stopTime;
-//		long totalTimeStop;
-//		int count = 0;
 
 		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-				PreparedStatement statement = connection.prepareStatement(databaseQuery);) {
+				PreparedStatement threatStatement = connection.prepareStatement(threatQuery);
+				PreparedStatement externalRefStatement = connection.prepareStatement(externalRefQuery);
+				PreparedStatement killChainStatement = connection.prepareStatement(killChainQuery);) {
 
 			connection.setAutoCommit(false);
-			// totalTimeStart = System.currentTimeMillis();
+
+			
 			// loop through threats
 			for (Threat threat : threatBundle.getObjects()) {
-				// count++;
-				// startTime = System.currentTimeMillis();
 				if (!threatExists(threat)) {
-					statement.setString(1, threat.getID());
-					statement.setString(2, threat.getName());
-					statement.setString(3, threat.getDescription());
+					// inserting values into threat query
+					threatStatement.setString(1, threat.getID());
+					threatStatement.setString(2, threat.getName());
+					threatStatement.setString(3, threat.getDescription());
 
-					// convert to different Date object (required to be from mySQL package)
+						// convert to different Date object (required to be from mySQL package)
 					sqlCreatedTimestamp = convertToSqlDate(threat.getDateCreated());
 					sqlModifiedTimestamp = convertToSqlDate(threat.getDateModified());
-					statement.setTimestamp(4, sqlCreatedTimestamp);
-					statement.setTimestamp(5, sqlModifiedTimestamp);
+					threatStatement.setTimestamp(4, sqlCreatedTimestamp);
+					threatStatement.setTimestamp(5, sqlModifiedTimestamp);
 
-					statement.setString(6, threat.getType());
-					statement.setString(7, threat.getCreated_by_ref());
-					statement.setString(8, threat.getSpecVersion());
-					statement.setString(9, threat.getPlatforms());
+					threatStatement.setString(6, threat.getType());
+					threatStatement.setString(7, threat.getCreated_by_ref());
+					threatStatement.setString(8, threat.getSpecVersion());
+					threatStatement.setString(9, threat.getPlatforms());
 
-					// add query once all values are set
-					statement.addBatch();
+						// add threat query once all values are set
+					threatStatement.addBatch();
+					threatsAdded++;
+					
+					// inserting values into external_ref query, if exists
+					if (threat.getExernalRef() != null) {
+						//loop through external references on threat object
+						for (ExternalRef exRef : threat.getExernalRef()) {
+							externalRefStatement.setString(1, threat.getID());
+							externalRefStatement.setString(2, exRef.getSourceName());
+							externalRefStatement.setString(3, exRef.getDescription());
+							externalRefStatement.setString(4, exRef.getURL());
+							externalRefStatement.setString(5, exRef.getExternalId());
+							
+							// add threat query once all values are set
+							externalRefStatement.addBatch();
+							externalRefsAdded++;
+						}
+					}
+					
+					// inserting values into kill_chin_phase query, if exists
+					if (threat.getKillChains() != null) {
+						//loop through KillChainPhases on threat object
+						for (KillChainPhase killChain : threat.getKillChains()) {
+							killChainStatement.setString(1, threat.getID());
+							killChainStatement.setString(2, killChain.getKillChainName());
+							killChainStatement.setString(3, killChain.getPhaseName());
+							
+							// add threat query once all values are set
+							killChainStatement.addBatch();
+							killChainsAdded++;
+						}
+					}
 				}
-				// stopTime = System.currentTimeMillis();
-				// System.out.println(count + ". duration: " + (stopTime - startTime) + "
-				// milliseconds." );
 			}
-			// totalTimeStop = System.currentTimeMillis();
-			// System.out.println(count + ". duration: " + (totalTimeStop -
-			// totalTimeStart)/1000.0 + " seconds." );
 
-			statement.executeBatch();
+			// check if any queries were added to each statement, execute if so, close regardless
+			if (threatsAdded > 0) {
+				threatStatement.executeBatch();
+			}
+			threatStatement.close();
+			
+			if (externalRefsAdded > 0) {
+				externalRefStatement.executeBatch();
+			}
+			externalRefStatement.close();
+			
+			if (killChainsAdded > 0) {
+				killChainStatement.executeBatch();
+			}
+			killChainStatement.close();
+			
+			
 			connection.commit();
 			connection.setAutoCommit(true);
-			statement.close();
 			connection.close();
 			returnCode = 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			// System.out.println("User Not Added");
+			// System.out.println("Threats not added");
 			returnCode = -1;
 		}
 
@@ -258,4 +293,8 @@ public class DatabaseTest {
 		}
 		return list;
 	}
+	
+//	public ArrayList<Threat> getUserLevelThreats(int access_level) {
+//		return new ArrayList<Threat>();
+//	}
 }

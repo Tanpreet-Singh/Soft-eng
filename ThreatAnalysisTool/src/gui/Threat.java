@@ -311,7 +311,7 @@ class Threat
 		if(kill_chain_phases!=null)
 		{
 			for (KillChainPhase kill : kill_chain_phases) {
-				System.out.println("\nKill Chain Phase:   "+kill.getKillChainPhase());
+				System.out.println("\nKill Chain Name:   "+kill.getKillChainName());
 				System.out.println("Phase Name:         "+kill.getPhaseName()+"\n");
 			}
 		}

@@ -141,6 +141,9 @@ public class MainController {
 			if (!genPDFThreats.contains(threatName)) {
 				genPDFThreats.add(threatName);
 			}
+			for (ExternalRef exRef : threat.getExernalRef()) {
+				System.out.println(exRef.getDescription());
+			}
 		}
 		listViewPDF.setItems(genPDFThreats);
 	}

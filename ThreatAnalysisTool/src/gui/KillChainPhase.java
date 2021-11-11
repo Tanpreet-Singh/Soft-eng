@@ -18,7 +18,7 @@ public class KillChainPhase {
         this.phase_name = phase_name;
     }
 
-    String getKillChainPhase()
+    String getKillChainName()
 	{
 		return kill_chain_name;
 	}

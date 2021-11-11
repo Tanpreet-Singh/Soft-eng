@@ -4,22 +4,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ExternalRef
 {
 	@JsonProperty("source_name")
-	String source_name;
+	private String source_name;
 	@JsonProperty("external_id")
-	String external_id;
+	private String external_id;
 	@JsonProperty("url")
-	String url;
+	private String url;
+	@JsonProperty("description")
+	private String description;
 	
 	public ExternalRef()
 	{
 		
 	}
 	
-	public ExternalRef(String source_name, String external_id, String url)
+	public ExternalRef(String source_name, String external_id, String url, String description)
 	{
 		this.source_name = source_name;
 		this.external_id = external_id;
 		this.url = url;
+		this.description = description;
 	}
 	
 	String getSourceName()
@@ -37,6 +40,11 @@ public class ExternalRef
 		return url;
 	}
 	
+	String getDescription()
+	{
+		return description;
+	}
+	
 	void setSourceName(String sourceName)
 	{
 		this.source_name = sourceName;
@@ -50,5 +58,10 @@ public class ExternalRef
 	void setURL(String url)
 	{
 		this.url = url;
+	}
+	
+	void setDescription(String description)
+	{
+		this.description = description;
 	}
 }
