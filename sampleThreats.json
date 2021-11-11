@@ -1,0 +1,565 @@
+{
+    "type": "bundle",
+    "id": "bundle--372f553b-f787-414a-a7e1-f0239732dc11",
+    "spec_version": "2.1",
+    "objects": [
+        {
+            "type": "x-mitre-collection",
+            "id": "x-mitre-collection--23320f4-22ad-8467-3b73-ed0c869a12838",
+            "spec_version": "2.1",
+            "name": "Enterprise ATT&CK",
+            "x_mitre_version": "1.0",
+            "description": "ATT&CK for Enterprise provides a knowledge base of real-world adversary behavior targeting traditional enterprise networks. ATT&CK for Enterprise covers the following platforms: Windows, macOS, Linux, PRE, Office 365, Google Workspace, IaaS, Network, and Containers.",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "created": "2018-01-17T12:56:55.080Z",
+            "modified": "2018-01-17T12:56:55.080Z",
+            "object_marking_refs": [
+                "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"
+            ],
+            "x_mitre_contents": [
+                {
+                    "object_ref": "course-of-action--4f170666-7edb-4489-85c2-9affa28a72e0",
+                    "object_modified": "2018-01-17T12:56:55.080Z"
+                },
+                {
+                    "object_ref": "attack-pattern--01df3350-ce05-4bdf-bdf8-0a919a66d4a8",
+                    "object_modified": "2018-01-17T12:56:55.080Z"
+                },
+                {
+                    "object_ref": "course-of-action--c61fee9f-16fb-4f8c-bbf0-869093fcd4a6",
+                    "object_modified": "2018-01-17T12:56:55.080Z"
+                },
+                {
+                    "object_ref": "attack-pattern--dcaa092b-7de9-4a21-977f-7fcb77e89c48",
+                    "object_modified": "2018-01-17T12:56:55.080Z"
+                },
+                {
+                    "object_ref": "course-of-action--c085476e-1964-4d7f-86e1-d8657a7741e8",
+                    "object_modified": "2018-01-17T12:56:55.080Z"
+                },
+                {
+                    "object_ref": "attack-pattern--9b99b83a-1aac-4e29-b975-b374950551a3",
+                    "object_modified": "2018-01-17T12:56:55.080Z"
+                },
+                {
+                    "object_ref": "course-of-action--5c49bc54-9929-48ca-b581-7018219b5a97",
+                    "object_modified": "2018-01-17T12:56:55.080Z"
+                },
+                {
+                    "object_ref": "attack-pattern--72b74d71-8169-42aa-92e0-e7b04b9f5a08",
+                    "object_modified": "2018-01-17T12:56:55.080Z"
+                },
+                {
+                    "object_ref": "course-of-action--fdb1ae84-7b00-4d3d-b7dc-c774beef6425",
+                    "object_modified": "2018-01-17T12:56:55.080Z"
+                },
+                {
+                    "object_ref": "attack-pattern--a10641f4-87b4-45a3-a906-92a149cb2c27",
+                    "object_modified": "2018-01-17T12:56:55.080Z"
+                }
+            ]
+        },
+        {
+            "type": "course-of-action",
+            "id": "course-of-action--4f170666-7edb-4489-85c2-9affa28a72e0",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "created": "2018-01-17T12:56:55.080Z",
+            "modified": "2018-01-17T12:56:55.080Z",
+            "name": ".bash_profile and .bashrc Mitigation",
+            "description": "Making these files immutable and only changeable by certain administrators will limit the ability for adversaries to easily create user level persistence.",
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1156",
+                    "external_id": "T1156"
+                }
+            ],
+            "spec_version": "2.1",
+            "x_mitre_domains": [
+                "enterprise-attack"
+            ],
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "x_mitre_version": "1.0"
+        },
+        {
+            "type": "attack-pattern",
+            "id": "attack-pattern--01df3350-ce05-4bdf-bdf8-0a919a66d4a8",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "created": "2017-12-14T16:46:06.044Z",
+            "modified": "2018-01-17T12:56:55.080Z",
+            "name": ".bash_profile and .bashrc",
+            "description": "<code>~/.bash_profile</code> and <code>~/.bashrc</code> are executed in a user's context when a new shell opens or when a user logs in so that their environment is set correctly. <code>~/.bash_profile</code> is executed for login shells and <code>~/.bashrc</code> is executed for interactive non-login shells. This means that when a user logs in (via username and password) to the console (either locally or remotely via something like SSH), <code>~/.bash_profile</code> is executed before the initial command prompt is returned to the user. After that, every time a new shell is opened, <code>~/.bashrc</code> is executed. This allows users more fine grained control over when they want certain commands executed.\n\nMac's Terminal.app is a little different in that it runs a login shell by default each time a new terminal window is opened, thus calling <code>~/.bash_profile</code> each time instead of <code>~/.bashrc</code>.\n\nThese files are meant to be written to by the local user to configure their own environment; however, adversaries can also insert code into these files to gain persistence each time a user logs in or opens a new shell.\n\nDetection: While users may customize their <code>~/.bashrc</code> and <code>~/.bash_profile</code> files , there are only certain types of commands that typically appear in these files. Monitor for abnormal commands such as execution of unknown programs, opening network sockets, or reaching out across the network when user profiles are loaded during the login process.\n\nPlatforms: Linux, macOS\n\nData Sources: File monitoring, Process Monitoring, Process command-line parameters, Process use of network\n\nPermissions Required: User, Administrator",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "persistence"
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1156",
+                    "external_id": "T1156"
+                }
+            ],
+            "object_marking_refs": [
+                "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"
+            ],
+            "x_mitre_data_sources": [
+                "File monitoring",
+                "Process Monitoring",
+                "Process command-line parameters",
+                "Process use of network"
+            ],
+            "x_mitre_permissions_required": [
+                "User",
+                "Administrator"
+            ],
+            "x_mitre_platforms": [
+                "Linux",
+                "macOS"
+            ],
+            "spec_version": "2.1",
+            "x_mitre_domains": [
+                "enterprise-attack"
+            ],
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "x_mitre_version": "1.0"
+        },
+        {
+            "type": "course-of-action",
+            "id": "course-of-action--c61fee9f-16fb-4f8c-bbf0-869093fcd4a6",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "created": "2018-01-17T12:56:55.080Z",
+            "modified": "2018-01-17T12:56:55.080Z",
+            "name": "Access Token Manipulation Mitigation",
+            "description": "Access tokens are an integral part of the security system within Windows and cannot be turned off.  However, an attacker must already have administrator level access on the local system to make full use of this technique; be sure to restrict users and accounts to the least privileges they require to do their job.\n\nAny user can also spoof access tokens if they have legitimate credentials.  Follow mitigation guidelines for preventing adversary use of Valid Accounts. Limit permissions so that users and user groups cannot create tokens. This setting should be defined for the local system account only. GPO: Computer Configuration > [Policies] > Windows Settings > Security Settings > Local Policies > User Rights Assignment: Create a token object. (Citation: Microsoft Create Token) Also define who can create a process level token to only the local and network service through GPO: Computer Configuration > [Policies] > Windows Settings > Security Settings > Local Policies > User Rights Assignment: Replace a process level token. (Citation: Microsoft Replace Process Token)\n\nAlso limit opportunities for adversaries to increase privileges by limiting Privilege Escalation opportunities.",
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1134",
+                    "external_id": "T1134"
+                },
+                {
+                    "source_name": "Microsoft Create Token",
+                    "description": "Brower, N., Lich, B. (2017, April 19). Create a token object. Retrieved December 19, 2017.",
+                    "url": "https://docs.microsoft.com/windows/device-security/security-policy-settings/create-a-token-object"
+                },
+                {
+                    "source_name": "Microsoft Replace Process Token",
+                    "description": "Brower, N., Lich, B. (2017, April 19). Replace a process level token. Retrieved December 19, 2017.",
+                    "url": "https://docs.microsoft.com/windows/device-security/security-policy-settings/replace-a-process-level-token"
+                }
+            ],
+            "spec_version": "2.1",
+            "x_mitre_domains": [
+                "enterprise-attack"
+            ],
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "x_mitre_version": "1.0"
+        },
+        {
+            "type": "attack-pattern",
+            "id": "attack-pattern--dcaa092b-7de9-4a21-977f-7fcb77e89c48",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "created": "2017-12-14T16:46:06.044Z",
+            "modified": "2018-01-17T12:56:55.080Z",
+            "name": "Access Token Manipulation",
+            "description": "Windows uses access tokens to determine the ownership of a running process.  A user can manipulate access tokens to make a running process appear as though it belongs to someone other than the user that started the process.  When this occurs, the process also takes on the security context associated with the new token.  For example, Microsoft promotes the use of access tokens as a security best practice.  Administrators should log in as a standard user but run their tools with administrator privileges using the built-in access token manipulation command <code>runas</code>.  (Citation: Microsoft runas)\n  \nAdversaries may use access tokens to operate under a different user or system security context to perform actions and evade detection. An adversary can use built-in Windows API functions to copy access tokens from existing processes; this is known as token stealing.  An adversary must already be in a privileged user context (i.e. administrator) to steal a token.  However, adversaries commonly use token stealing to elevate their security context from the administrator level to the SYSTEM level. An adversary can use a token to authenticate to a remote system as the account for that token if the account has appropriate permissions on the remote system. (Citation: Pentestlab Token Manipulation)\n\nAccess tokens can be leveraged by adversaries through three methods: (Citation: BlackHat Atkinson Winchester Token Manipulation)\n\n'''Token Impersonation/Theft''' - An adversary creates a new access token that duplicates an existing token using <code>DuplicateToken(Ex)</code>. The token can then be used with <code>ImpersonateLoggedOnUser</code> to allow the calling thread to impersonate a logged on user's security context, or with <code>SetThreadToken</code> to assign the impersonated token to a thread. This is useful for when the target user has a non-network logon session on the system.\n\n'''Create Process with a Token''' - An adversary creates a new access token with <code>DuplicateToken(Ex)</code> and uses it with <code>CreateProcessWithTokenW</code> to create a new process running under the security context of the impersonated user. This is useful for creating a new process under the security context of a different user.\n\n'''Make and Impersonate Token''' - An adversary has a username and password but the user is not logged onto the system. The adversary can then create a logon session for the user using the <code>LogonUser</code> function. The function will return a copy of the new session's access token and the adversary can use <code>SetThreadToken</code> to assign the token to a thread.\n\nAny standard user can use the <code>runas</code> command, and the Windows API functions, to create impersonation tokens; it does not require access to an administrator account.\n\nMetasploit\u2019s Meterpreter payload allows arbitrary token manipulation and uses token impersonation to escalate privileges.  (Citation: Metasploit access token)  The Cobalt Strike beacon payload allows arbitrary token impersonation and can also create tokens.  (Citation: Cobalt Strike Access Token)\n\nDetection: If an adversary is using a standard command-line shell, analysts can detect token manipulation by auditing command-line activity.  Specifically, analysts should look for use of the <code>runas</code> command. Detailed command-line logging is not enabled by default in Windows. (Citation: Microsoft Command-line Logging)\n\nIf an adversary is using a payload that calls the Windows token APIs directly, analysts can detect token manipulation only through careful analysis of user network activity, examination of running processes, and correlation with other endpoint and network behavior.  \n\nThere are many Windows API calls a payload can take advantage of to manipulate access tokens (e.g., <code>LogonUser</code> (Citation: Microsoft LogonUser), <code>DuplicateTokenEx</code> (Citation: Microsoft DuplicateTokenEx), and <code>ImpersonateLoggedOnUser</code> (Citation: Microsoft ImpersonateLoggedOnUser)).  Please see the referenced Windows API pages for more information.\n\nQuery systems for process and thread token information and look for inconsistencies such as user owns processes impersonating the local SYSTEM account. (Citation: BlackHat Atkinson Winchester Token Manipulation)\n\nPlatforms: Windows\n\nData Sources: API monitoring, Access Tokens\n\nEffective Permissions: SYSTEM\n\nPermissions Required: User, Administrator\n\nContributors: Tom Ueltschi @c_APT_ure, Travis Smith, Tripwire, Jared Atkinson, @jaredcatkinson, Robby Winchester, @robwinchester3",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "defense-evasion"
+                },
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "privilege-escalation"
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1134",
+                    "external_id": "T1134"
+                },
+                {
+                    "source_name": "Microsoft runas",
+                    "description": "Microsoft TechNet. (n.d.). Runas. Retrieved April 21, 2017.",
+                    "url": "https://technet.microsoft.com/en-us/library/bb490994.aspx"
+                },
+                {
+                    "source_name": "Pentestlab Token Manipulation",
+                    "description": "netbiosX. (2017, April 3). Token Manipulation. Retrieved April 21, 2017.",
+                    "url": "https://pentestlab.blog/2017/04/03/token-manipulation/"
+                },
+                {
+                    "source_name": "Metasploit access token",
+                    "description": "Offensive Security. (n.d.). What is Incognito. Retrieved April 21, 2017.",
+                    "url": "https://www.offensive-security.com/metasploit-unleashed/fun-incognito/"
+                },
+                {
+                    "source_name": "Cobalt Strike Access Token",
+                    "description": "Mudge, R. (n.d.). Windows Access Tokens and Alternate Credentials. Retrieved April 21, 2017.",
+                    "url": "https://blog.cobaltstrike.com/2015/12/16/windows-access-tokens-and-alternate-credentials/"
+                },
+                {
+                    "source_name": "Microsoft Command-line Logging",
+                    "description": "Mathers, B. (2017, March 7). Command line process auditing. Retrieved April 21, 2017.",
+                    "url": "https://technet.microsoft.com/en-us/windows-server-docs/identity/ad-ds/manage/component-updates/command-line-process-auditing"
+                },
+                {
+                    "source_name": "Microsoft LogonUser",
+                    "description": "Microsoft TechNet. (n.d.).  Retrieved April 25, 2017.",
+                    "url": "https://msdn.microsoft.com/en-us/library/windows/desktop/aa378184(v=vs.85).aspx"
+                },
+                {
+                    "source_name": "Microsoft DuplicateTokenEx",
+                    "description": "Microsoft TechNet. (n.d.).  Retrieved April 25, 2017.",
+                    "url": "https://msdn.microsoft.com/en-us/library/windows/desktop/aa446617(v=vs.85).aspx"
+                },
+                {
+                    "source_name": "Microsoft ImpersonateLoggedOnUser",
+                    "description": "Microsoft TechNet. (n.d.).  Retrieved April 25, 2017.",
+                    "url": "https://msdn.microsoft.com/en-us/library/windows/desktop/aa378612(v=vs.85).aspx"
+                },
+                {
+                    "source_name": "BlackHat Atkinson Winchester Token Manipulation",
+                    "description": "Atkinson, J., Winchester, R. (2017, December 7). A Process is No One: Hunting for Token Manipulation. Retrieved December 21, 2017.",
+                    "url": "https://www.blackhat.com/docs/eu-17/materials/eu-17-Atkinson-A-Process-Is-No-One-Hunting-For-Token-Manipulation.pdf"
+                }
+            ],
+            "object_marking_refs": [
+                "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"
+            ],
+            "x_mitre_contributors": [
+                "Tom Ueltschi @c_APT_ure",
+                "Travis Smith, Tripwire",
+                "Jared Atkinson, @jaredcatkinson",
+                "Robby Winchester, @robwinchester3"
+            ],
+            "x_mitre_data_sources": [
+                "API monitoring",
+                "Access Tokens"
+            ],
+            "x_mitre_permissions_required": [
+                "User",
+                "Administrator"
+            ],
+            "x_mitre_effective_permissions": [
+                "SYSTEM"
+            ],
+            "x_mitre_platforms": [
+                "Windows"
+            ],
+            "spec_version": "2.1",
+            "x_mitre_domains": [
+                "enterprise-attack"
+            ],
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "x_mitre_version": "1.0"
+        },
+        {
+            "type": "course-of-action",
+            "id": "course-of-action--c085476e-1964-4d7f-86e1-d8657a7741e8",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "created": "2018-01-17T12:56:55.080Z",
+            "modified": "2018-01-17T12:56:55.080Z",
+            "name": "Accessibility Features Mitigation",
+            "description": "To use this technique remotely, an adversary must use it in conjunction with RDP. Ensure that Network Level Authentication is enabled to force the remote desktop session to authenticate before the session is created and the login screen displayed. It is enabled by default on Windows Vista and later. (Citation: TechNet RDP NLA)\n\nIf possible, use a Remote Desktop Gateway to manage connections and security configuration of RDP within a network. (Citation: TechNet RDP Gateway)\n\nIdentify and block potentially malicious software that may be executed by an adversary with this technique by using whitelisting (Citation: Beechey 2010) tools, like AppLocker, (Citation: Windows Commands JPCERT) (Citation: NSA MS AppLocker) or Software Restriction Policies (Citation: Corio 2008) where appropriate. (Citation: TechNet Applocker vs SRP)",
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1015",
+                    "external_id": "T1015"
+                },
+                {
+                    "source_name": "TechNet RDP NLA",
+                    "description": "Microsoft. (n.d.). Configure Network Level Authentication for Remote Desktop Services Connections. Retrieved June 6, 2016.",
+                    "url": "https://technet.microsoft.com/en-us/library/cc732713.aspx"
+                },
+                {
+                    "source_name": "TechNet RDP Gateway",
+                    "description": "Microsoft. (n.d.). Overview of Remote Desktop Gateway. Retrieved June 6, 2016.",
+                    "url": "https://technet.microsoft.com/en-us/library/cc731150.aspx"
+                },
+                {
+                    "source_name": "Beechey 2010",
+                    "description": "Beechey, J. (2010, December). Application Whitelisting: Panacea or Propaganda?. Retrieved November 18, 2014.",
+                    "url": "http://www.sans.org/reading-room/whitepapers/application/application-whitelisting-panacea-propaganda-33599"
+                },
+                {
+                    "source_name": "Windows Commands JPCERT",
+                    "description": "Tomonaga, S. (2016, January 26). Windows Commands Abused by Attackers. Retrieved February 2, 2016.",
+                    "url": "http://blog.jpcert.or.jp/2016/01/windows-commands-abused-by-attackers.html"
+                },
+                {
+                    "source_name": "NSA MS AppLocker",
+                    "description": "NSA Information Assurance Directorate. (2014, August). Application Whitelisting Using Microsoft AppLocker. Retrieved March 31, 2016.",
+                    "url": "https://www.iad.gov/iad/library/ia-guidance/tech-briefs/application-whitelisting-using-microsoft-applocker.cfm"
+                },
+                {
+                    "source_name": "Corio 2008",
+                    "description": "Corio, C., & Sayana, D. P. (2008, June). Application Lockdown with Software Restriction Policies. Retrieved November 18, 2014.",
+                    "url": "http://technet.microsoft.com/en-us/magazine/2008.06.srp.aspx"
+                },
+                {
+                    "source_name": "TechNet Applocker vs SRP",
+                    "description": "Microsoft. (2012, June 27). Using Software Restriction Policies and AppLocker Policies. Retrieved April 7, 2016.",
+                    "url": "https://technet.microsoft.com/en-us/library/ee791851.aspx"
+                }
+            ],
+            "spec_version": "2.1",
+            "x_mitre_domains": [
+                "enterprise-attack"
+            ],
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "x_mitre_version": "1.0"
+        },
+        {
+            "type": "attack-pattern",
+            "id": "attack-pattern--9b99b83a-1aac-4e29-b975-b374950551a3",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "created": "2017-05-31T21:30:26.946Z",
+            "modified": "2018-01-17T12:56:55.080Z",
+            "name": "Accessibility Features",
+            "description": "Windows contains accessibility features that may be launched with a key combination before a user has logged in (for example, when the user is on the Windows logon screen). An adversary can modify the way these programs are launched to get a command prompt or backdoor without logging in to the system.\n\nTwo common accessibility programs are <code>C:\\Windows\\System32\\sethc.exe</code>, launched when the shift key is pressed five times and <code>C:\\Windows\\System32\\utilman.exe</code>, launched when the Windows + U key combination is pressed. The sethc.exe program is often referred to as \"sticky keys\", and has been used by adversaries for unauthenticated access through a remote desktop login screen. (Citation: FireEye Hikit Rootkit)\n\nDepending on the version of Windows, an adversary may take advantage of these features in different ways because of code integrity enhancements. In newer versions of Windows, the replaced binary needs to be digitally signed for x64 systems, the binary must reside in <code>%systemdir%\\</code>, and it must be protected by Windows File or Resource Protection (WFP/WRP). (Citation: DEFCON2016 Sticky Keys) The debugger method was likely discovered as a potential workaround because it does not require the corresponding accessibility feature binary to be replaced. Examples for both methods:\n\nFor simple binary replacement on Windows XP and later as well as and Windows Server 2003/R2 and later, for example, the program (e.g., <code>C:\\Windows\\System32\\utilman.exe</code>) may be replaced with \"cmd.exe\" (or another program that provides backdoor access). Subsequently, pressing the appropriate key combination at the login screen while sitting at the keyboard or when connected over Remote Desktop Protocol will cause the replaced file to be executed with SYSTEM privileges. (Citation: Tilbury 2014)\n\nFor the debugger method on Windows Vista and later as well as Windows Server 2008 and later, for example, a Registry key may be modified that configures \"cmd.exe,\" or another program that provides backdoor access, as a \"debugger\" for the accessibility program (e.g., \"utilman.exe\"). After the Registry is modified, pressing the appropriate key combination at the login screen while at the keyboard or when connected with RDP will cause the \"debugger\" program to be executed with SYSTEM privileges. (Citation: Tilbury 2014)\n\nOther accessibility features exist that may also be leveraged in a similar fashion: (Citation: DEFCON2016 Sticky Keys)\n\n*On-Screen Keyboard: <code>C:\\Windows\\System32\\osk.exe</code>\n*Magnifier: <code>C:\\Windows\\System32\\Magnify.exe</code>\n*Narrator: <code>C:\\Windows\\System32\\Narrator.exe</code>\n*Display Switcher: <code>C:\\Windows\\System32\\DisplaySwitch.exe</code>\n*App Switcher: <code>C:\\Windows\\System32\\AtBroker.exe</code>\n\nDetection: Changes to accessibility utility binaries or binary paths that do not correlate with known software, patch cycles, etc., are suspicious. Command line invocation of tools capable of modifying the Registry for associated keys are also suspicious. Utility arguments and the binaries themselves should be monitored for changes. Monitor Registry keys within <code>HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options</code>.\n\nPlatforms: Windows\n\nData Sources: Windows Registry, File monitoring, Process monitoring\n\nEffective Permissions: SYSTEM\n\nPermissions Required: Administrator\n\nContributors: Paul Speulstra, AECOM Global Security Operations Center",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "persistence"
+                },
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "privilege-escalation"
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1015",
+                    "external_id": "T1015"
+                },
+                {
+                    "source_name": "FireEye Hikit Rootkit",
+                    "description": "Glyer, C., Kazanciyan, R. (2012, August 20). THE \u201cHIKIT\u201d ROOTKIT: ADVANCED AND PERSISTENT ATTACK TECHNIQUES (PART 1). Retrieved June 6, 2016.",
+                    "url": "https://www.fireeye.com/blog/threat-research/2012/08/hikit-rootkit-advanced-persistent-attack-techniques-part-1.html"
+                },
+                {
+                    "source_name": "DEFCON2016 Sticky Keys",
+                    "description": "Maldonado, D., McGuffin, T. (2016, August 6). Sticky Keys to the Kingdom. Retrieved July 5, 2017.",
+                    "url": "https://www.slideshare.net/DennisMaldonado5/sticky-keys-to-the-kingdom"
+                },
+                {
+                    "source_name": "Tilbury 2014",
+                    "description": "Tilbury, C. (2014, August 28). Registry Analysis with CrowdResponse. Retrieved November 12, 2014.",
+                    "url": "http://blog.crowdstrike.com/registry-analysis-with-crowdresponse/"
+                }
+            ],
+            "object_marking_refs": [
+                "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"
+            ],
+            "x_mitre_contributors": [
+                "Paul Speulstra, AECOM Global Security Operations Center"
+            ],
+            "x_mitre_data_sources": [
+                "Windows Registry",
+                "File monitoring",
+                "Process monitoring"
+            ],
+            "x_mitre_effective_permissions": [
+                "SYSTEM"
+            ],
+            "x_mitre_permissions_required": [
+                "Administrator"
+            ],
+            "x_mitre_platforms": [
+                "Windows"
+            ],
+            "spec_version": "2.1",
+            "x_mitre_domains": [
+                "enterprise-attack"
+            ],
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "x_mitre_version": "1.0"
+        },
+        {
+            "type": "course-of-action",
+            "id": "course-of-action--5c49bc54-9929-48ca-b581-7018219b5a97",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "created": "2018-01-17T12:56:55.080Z",
+            "modified": "2018-01-17T12:56:55.080Z",
+            "name": "Account Discovery Mitigation",
+            "description": "Prevent administrator accounts from being enumerated when an application is elevating through UAC since it can lead to the disclosure of account names. The Registry key is located <code>HKLM\\ SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI\\EnumerateAdministrators</code>. It can be disabled through GPO: Computer Configuration > [Policies] > Administrative Templates > Windows Components > Credential User Interface: E numerate administrator accounts on elevation. (Citation: UCF STIG Elevation Account Enumeration)\n\nIdentify unnecessary system utilities or potentially malicious software that may be used to acquire information about system and domain accounts, and audit and/or block them by using whitelisting (Citation: Beechey 2010) tools, like AppLocker, (Citation: Windows Commands JPCERT) (Citation: NSA MS AppLocker) or Software Restriction Policies (Citation: Corio 2008) where appropriate. (Citation: TechNet Applocker vs SRP)",
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1087",
+                    "external_id": "T1087"
+                },
+                {
+                    "source_name": "Beechey 2010",
+                    "description": "Beechey, J. (2010, December). Application Whitelisting: Panacea or Propaganda?. Retrieved November 18, 2014.",
+                    "url": "http://www.sans.org/reading-room/whitepapers/application/application-whitelisting-panacea-propaganda-33599"
+                },
+                {
+                    "source_name": "Corio 2008",
+                    "description": "Corio, C., & Sayana, D. P. (2008, June). Application Lockdown with Software Restriction Policies. Retrieved November 18, 2014.",
+                    "url": "http://technet.microsoft.com/en-us/magazine/2008.06.srp.aspx"
+                },
+                {
+                    "source_name": "NSA MS AppLocker",
+                    "description": "NSA Information Assurance Directorate. (2014, August). Application Whitelisting Using Microsoft AppLocker. Retrieved March 31, 2016.",
+                    "url": "https://www.iad.gov/iad/library/ia-guidance/tech-briefs/application-whitelisting-using-microsoft-applocker.cfm"
+                },
+                {
+                    "source_name": "TechNet Applocker vs SRP",
+                    "description": "Microsoft. (2012, June 27). Using Software Restriction Policies and AppLocker Policies. Retrieved April 7, 2016.",
+                    "url": "https://technet.microsoft.com/en-us/library/ee791851.aspx"
+                },
+                {
+                    "source_name": "UCF STIG Elevation Account Enumeration",
+                    "description": "UCF. (n.d.). The system must require username and password to elevate a running application.. Retrieved December 18, 2017.",
+                    "url": "https://www.stigviewer.com/stig/microsoft%20windows%20server%202012%20member%20server/2013-07-25/finding/WN12-CC-000077"
+                },
+                {
+                    "source_name": "Windows Commands JPCERT",
+                    "description": "Tomonaga, S. (2016, January 26). Windows Commands Abused by Attackers. Retrieved February 2, 2016.",
+                    "url": "http://blog.jpcert.or.jp/2016/01/windows-commands-abused-by-attackers.html"
+                }
+            ],
+            "spec_version": "2.1",
+            "x_mitre_domains": [
+                "enterprise-attack"
+            ],
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "x_mitre_version": "1.0"
+        },
+        {
+            "type": "attack-pattern",
+            "id": "attack-pattern--72b74d71-8169-42aa-92e0-e7b04b9f5a08",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "created": "2017-05-31T21:31:06.988Z",
+            "modified": "2018-01-17T12:56:55.080Z",
+            "name": "Account Discovery",
+            "description": "Adversaries may attempt to get a listing of local system or domain accounts. \n\n===Windows===\n\nExample commands that can acquire this information are <code>net user</code>, <code>net group <groupname></code>, and <code>net localgroup <groupname></code> using the Net utility or through use of dsquery. If adversaries attempt to identify the primary user, currently logged in user, or set of users that commonly uses a system, System Owner/User Discovery may apply.\n\n===Mac===\n\nOn Mac, groups can be enumerated through the <code>groups</code> and <code>id</code> commands. In mac specifically, <code>dscl . list /Groups</code> and <code>dscacheutil -q group</code> can also be used to enumerate groups and users.\n\n===Linux===\n\nOn Linux, local users can be enumerated through the use of the <code>/etc/passwd</code> file which is world readable. In mac, this same file is only used in single-user mode in addition to the <code>/etc/master.passwd</code> file.\n\nAlso, groups can be enumerated through the <code>groups</code> and <code>id</code> commands. In mac specifically, <code>dscl . list /Groups</code> and <code>dscacheutil -q group</code> can also be used to enumerate groups and users.\n\nDetection: System and network discovery techniques normally occur throughout an operation as an adversary learns the environment. Data and events should not be viewed in isolation, but as part of a chain of behavior that could lead to other activities, such as Lateral Movement, based on the information obtained.\n\nMonitor processes and command-line arguments for actions that could be taken to gather system and network information. Remote access tools with built-in features may interact directly with the Windows API to gather information. Information may also be acquired through Windows system management tools such as Windows Management Instrumentation and PowerShell.\n\nPlatforms: Linux, macOS, Windows\n\nData Sources: API monitoring, Process command-line parameters, Process monitoring\n\nPermissions Required: User\n\nContributors: Travis Smith, Tripwire",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "discovery"
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1087",
+                    "external_id": "T1087"
+                }
+            ],
+            "object_marking_refs": [
+                "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"
+            ],
+            "x_mitre_contributors": [
+                "Travis Smith, Tripwire"
+            ],
+            "x_mitre_data_sources": [
+                "API monitoring",
+                "Process command-line parameters",
+                "Process monitoring"
+            ],
+            "x_mitre_permissions_required": [
+                "User"
+            ],
+            "x_mitre_platforms": [
+                "Linux",
+                "macOS",
+                "Windows"
+            ],
+            "spec_version": "2.1",
+            "x_mitre_domains": [
+                "enterprise-attack"
+            ],
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "x_mitre_version": "1.0"
+        },
+        {
+            "type": "course-of-action",
+            "id": "course-of-action--fdb1ae84-7b00-4d3d-b7dc-c774beef6425",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "created": "2018-01-17T12:56:55.080Z",
+            "modified": "2018-01-17T12:56:55.080Z",
+            "name": "Account Manipulation Mitigation",
+            "description": "Use multifactor authentication. Follow guidelines to prevent or limit adversary access to Valid Accounts.\n\nProtect domain controllers by ensuring proper security configuration for critical servers. Configure access controls and firewalls to limit access to these systems. Do not allow domain administrator accounts to be used for day-to-day operations that may expose them to potential adversaries on unprivileged systems.",
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1098",
+                    "external_id": "T1098"
+                }
+            ],
+            "spec_version": "2.1",
+            "x_mitre_domains": [
+                "enterprise-attack"
+            ],
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "x_mitre_version": "1.0"
+        },
+        {
+            "type": "attack-pattern",
+            "id": "attack-pattern--a10641f4-87b4-45a3-a906-92a149cb2c27",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "created": "2017-05-31T21:31:12.196Z",
+            "modified": "2018-01-17T12:56:55.080Z",
+            "name": "Account Manipulation",
+            "description": "Account manipulation may aid adversaries in maintaining access to credentials and certain permission levels within an environment. Manipulation could consist of modifying permissions, modifying credentials, adding or changing permission groups, modifying account settings, or modifying how authentication is performed. In order to create or manipulate accounts, the adversary must already have sufficient permissions on systems or the domain.\n\nDetection: Collect events that correlate with changes to account objects on systems and the domain, such as event ID 4738. (Citation: Microsoft User Modified Event) Monitor for modification of accounts in correlation with other suspicious activity. Changes may occur at unusual times or from unusual systems. Especially flag events where the subject and target accounts differ (Citation: InsiderThreat ChangeNTLM July 2017) or that include additional flags such as changing a password without knowledge of the old password. (Citation: GitHub Mimikatz Issue 92 June 2017)\n\nUse of credentials may also occur at unusual times or to unusual systems or services and may correlate with other suspicious activity.\n\nPlatforms: Windows\n\nData Sources: Authentication logs, API monitoring, Windows event logs, Packet capture\n\nPermissions Required: Administrator",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "credential-access"
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1098",
+                    "external_id": "T1098"
+                },
+                {
+                    "source_name": "Microsoft User Modified Event",
+                    "description": "Lich, B., Miroshnikov, A. (2017, April 5). 4738(S): A user account was changed. Retrieved June 30, 2017.",
+                    "url": "https://docs.microsoft.com/windows/device-security/auditing/event-4738"
+                },
+                {
+                    "source_name": "InsiderThreat ChangeNTLM July 2017",
+                    "description": "Warren, J. (2017, July 11). Manipulating User Passwords with Mimikatz. Retrieved December 4, 2017.",
+                    "url": "https://blog.stealthbits.com/manipulating-user-passwords-with-mimikatz-SetNTLM-ChangeNTLM"
+                },
+                {
+                    "source_name": "GitHub Mimikatz Issue 92 June 2017",
+                    "description": "Warren, J. (2017, June 22). lsadump::changentlm and lsadump::setntlm work, but generate Windows events #92. Retrieved December 4, 2017.",
+                    "url": "https://github.com/gentilkiwi/mimikatz/issues/92"
+                }
+            ],
+            "object_marking_refs": [
+                "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"
+            ],
+            "x_mitre_data_sources": [
+                "Authentication logs",
+                "API monitoring",
+                "Windows event logs",
+                "Packet capture"
+            ],
+            "x_mitre_permissions_required": [
+                "Administrator"
+            ],
+            "x_mitre_platforms": [
+                "Windows"
+            ],
+            "spec_version": "2.1",
+            "x_mitre_domains": [
+                "enterprise-attack"
+            ],
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "x_mitre_version": "1.0"
+        }   
+    ]
+}

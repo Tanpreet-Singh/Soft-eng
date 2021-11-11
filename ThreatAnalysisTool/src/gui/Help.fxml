@@ -1,52 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HelpController">
    <children>
-      <TitledPane animated="false" text="ADD">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="604.0" />
-        </content>
-      </TitledPane>
-      <TextArea prefHeight="61.0" prefWidth="606.0" style="-fx-border-color: #808080#808080; -fx-font-style: font-family:verdanafont-family:helvetica;" text="This option gives the users an option to add threats from their local computer to the database so &#10;that everyone else has access to this software">
-         <font>
-            <Font size="13.0" />
-         </font></TextArea>
-      <TitledPane animated="false" text="DELETE">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="604.0" />
-        </content>
-      </TitledPane>
-      <TextArea layoutX="10.0" layoutY="212.0" prefHeight="44.0" prefWidth="606.0" style="-fx-border-color: #808080#808080; -fx-font-style: font-family:verdanafont-family:helvetica;" text="Users will be able to delete the threat from the database and is lost forever so please be careful using this" />
-      <TitledPane animated="false" layoutX="10.0" layoutY="391.0" text="EDIT">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="604.0" />
-         </content>
-      </TitledPane>
-      <TextArea layoutX="10.0" layoutY="300.0" prefHeight="39.0" prefWidth="606.0" style="-fx-border-color: #808080#808080; -fx-font-style: font-family:verdanafont-family:helvetica;" text="Users will be able to edit the threat file and then updates the database accordingly" />
-      <TitledPane animated="false" text="THREAT FILES">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="604.0" />
-        </content>
-      </TitledPane>
-      <TextArea layoutX="10.0" layoutY="270.0" prefHeight="39.0" prefWidth="606.0" style="-fx-border-color: #808080#808080; -fx-font-style: font-family:verdanafont-family:helvetica;" text="Users will be able to access a list view of all threat files in the database" />
-      <TitledPane animated="false" text="Add Users ">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="604.0" />
-         </content>
-      </TitledPane>
-      <TextArea layoutX="10.0" layoutY="349.0" prefHeight="65.0" prefWidth="606.0" style="-fx-border-color: #808080#808080; -fx-font-style: font-family:verdanafont-family:helvetica;" text="A place where any authorised user can add more users to the software so they can have access to this database&#10;" />
-      <ButtonBar prefHeight="40.0" prefWidth="200.0">
-        <buttons>
-          <Button fx:id="goBack" minWidth="61.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" text="Go Back" />
-        </buttons>
-      </ButtonBar>
+      <AnchorPane prefHeight="463.0" prefWidth="606.0">
+         <children>
+            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Need Help?" AnchorPane.leftAnchor="14.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Accordion layoutX="14.0" layoutY="70.0" prefHeight="256.0" prefWidth="578.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="70.0">
+              <panes>
+                <TitledPane animated="false" text="Application Overview">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Text layoutX="14.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This application is a tool for users to efficiently analyze and manipulate cyber threat intelligence (CTI). By making use of STIX (Structured Threat Information eXpression) format, this tool can convert any properly formatted JSON file of threat information and display all of this to the user. The imported threats can be searched for by specific strings, identification sequences, etc. Threats then can be selected by the user and added to a PDF report. Once generated, all of the selected threat's data will be exported into a human-readable PDF file." wrappingWidth="543.7109375" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                              <Text layoutX="21.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imported threat information will also be pushed to the application's database, so that our users can access the same threat data. Threats are based on access levels, with users only being able to see threats that are equal to their individual access level or lower. Users are separated into three groups: Admin, Normal User, and View Only." wrappingWidth="540.13671875" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane animated="false" text="Main Page">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Accordion layoutX="18.0" prefHeight="180.0" prefWidth="557.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                <panes>
+                                  <TitledPane animated="false" prefHeight="206.0" prefWidth="671.0" text="Importing Threats">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="367.0" />
+                                    </content>
+                                  </TitledPane>
+                                  <TitledPane animated="false" text="Generating PDF Report">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    </content>
+                                  </TitledPane>
+                                  <TitledPane animated="false" text="Detailed Threat Information">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    </content>
+                                  </TitledPane>
+                                </panes>
+                              </Accordion>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane animated="false" text="Users Page">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </TitledPane>
+              </panes>
+            </Accordion>
+            <Button fx:id="goBack" layoutX="540.0" layoutY="335.0" mnemonicParsing="false" onAction="#back" text="Button" AnchorPane.rightAnchor="14.0" />
+            <Text layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use the following help sections to review the application and key features:" />
+         </children>
+      </AnchorPane>
    </children>
 </VBox>
