@@ -48,6 +48,9 @@ public class MainController {
 	@FXML
 	private TextField searchField;
 	
+	private boolean macFilter = false;
+	private boolean winFilter = false;
+	private boolean linFilter = false;
 	private boolean darkMode;
 	private ParseFunction parser;
 	private JSONBundle threatBundle;
@@ -89,6 +92,81 @@ public class MainController {
 		
 	}
 
+	@FXML
+	public void filterMac() throws IOException {
+//		threatList.setPredicate(s -> s.toString().contains("macOS"));
+//		listView.setItems(threatList);
+		if(!macFilter) {
+			macFilter = true;
+		}
+		else {
+			macFilter = false;
+		}
+		filter();
+	}
+
+	@FXML
+	public void filterWindows() throws IOException {
+//		if(!winFilter)
+//		{
+//			threatList.setPredicate(s -> s.toString().contains("Windows"));
+//			listView.setItems(threatList);
+//			winFilter = true;
+//		}
+//		else
+//		{
+//			threatList.setPredicate(null);
+//			listView.setItems(threatList);
+//			winFilter = false;
+//		}
+		if(!winFilter) {
+			winFilter = true;
+		}
+		else {
+			winFilter = false;
+		}
+		filter();
+	}
+	
+	@FXML
+	public void filterLinux() throws IOException {
+		if(!linFilter) {
+			linFilter = true;
+		}
+		else {
+			linFilter = false;
+		}
+		filter();
+	}
+	
+	private void filter() {
+		if(macFilter && !winFilter && !linFilter) {
+			threatList.setPredicate(s -> s.toString().contains("macOS"));
+		}
+		else if(!macFilter && winFilter && !linFilter) {
+			threatList.setPredicate(s -> s.toString().contains("Windows"));
+		}
+		else if(!macFilter && !winFilter && linFilter) {
+			threatList.setPredicate(s -> s.toString().contains("Linux"));
+		}
+		else if(macFilter && winFilter && !linFilter) {
+			threatList.setPredicate(s -> s.toString().contains("macOS") && s.toString().contains("Windows"));
+		}
+		else if(macFilter && !winFilter && linFilter) {
+			threatList.setPredicate(s -> s.toString().contains("macOS") && s.toString().contains("Linux"));
+		}
+		else if(!macFilter && winFilter && linFilter) {
+			threatList.setPredicate(s -> s.toString().contains("Windows") && s.toString().contains("Linux"));
+		}
+		else if(macFilter && winFilter && linFilter) {
+			threatList.setPredicate(s -> s.toString().contains("macOS") && s.toString().contains("Windows") && s.toString().contains("Linux"));
+		}
+		else {
+			threatList.setPredicate(null);
+		}
+	}
+
+	
 	@FXML
 	public void logoutFunction(ActionEvent event) throws IOException {
 		Test m = new Test();
