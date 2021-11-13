@@ -63,7 +63,7 @@
                 </TitledPane>
               </panes>
             </Accordion>
-            <Button fx:id="goBack" layoutX="540.0" layoutY="335.0" mnemonicParsing="false" onAction="#back" text="Button" AnchorPane.rightAnchor="14.0" />
+            <Button fx:id="goBack" layoutX="540.0" layoutY="335.0" mnemonicParsing="false" onAction="#back" text="Go Back" AnchorPane.rightAnchor="14.0" />
             <Text layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use the following help sections to review the application and key features:" />
          </children>
       </AnchorPane>
