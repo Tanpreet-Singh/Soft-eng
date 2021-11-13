@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author	Vultures
  * @version 10/13/2021
  */
-class Threat
+public class Threat
 {
 	//all fields annotated "JsonProperty" are the attributes present within the JSON file
 	@JsonProperty("type")
@@ -40,7 +40,7 @@ class Threat
 	
 	
 
-	Threat() {
+	public Threat() {
 	}
 
     /**
@@ -48,7 +48,7 @@ class Threat
 	 * 
 	 * @return String value of field type
 	 */
-	String getType()
+	public String getType()
 	{
 		return type;
 	}
@@ -58,7 +58,7 @@ class Threat
 	 * 
 	 * @return String value of field id
 	 */
-	String getID()
+	public String getID()
 	{
 		return id;
 	}
@@ -68,7 +68,7 @@ class Threat
 	 * 
 	 * @return String value of field created_by_ref
 	 */
-	String getCreated_by_ref()
+	public String getCreated_by_ref()
 	{
 		return created_by_ref;
 	}	
@@ -78,7 +78,7 @@ class Threat
 	 * 
 	 * @return String value of created field
 	 */
-	String getDateCreated()
+	public String getDateCreated()
 	{
 		return created;
 	}
@@ -88,7 +88,7 @@ class Threat
 	 * 
 	 * @return String value of modified field
 	 */
-	String getDateModified()
+	public String getDateModified()
 	{
 		return modified;
 	}
@@ -98,7 +98,7 @@ class Threat
 	 * 
 	 * @return String value of the field name
 	 */
-	String getName()
+	public String getName()
 	{
 		return name;
 	}
@@ -108,7 +108,7 @@ class Threat
 	 * 
 	 * @return String value of description field
 	 */
-	String getDescription()
+	public String getDescription()
 	{
 		return description;
 	}
@@ -118,7 +118,7 @@ class Threat
 	 * 
 	 * @return ArrayList of external_references
 	 */
-	ArrayList<ExternalRef> getExernalRef()
+	public ArrayList<ExternalRef> getExernalRef()
 	{
 		return external_references;
 	}
@@ -128,7 +128,7 @@ class Threat
 	 * 
 	 * @return String value of spec_version field
 	 */
-	String getSpecVersion()
+	public String getSpecVersion()
 	{
 		return spec_version;
 	}
@@ -138,7 +138,7 @@ class Threat
 	 * 
 	 * @return ArrayList of kill_chain_phases field
 	 */
-	ArrayList<KillChainPhase> getKillChains()
+	public ArrayList<KillChainPhase> getKillChains()
 	{
 		return kill_chain_phases;
 	}
@@ -148,7 +148,7 @@ class Threat
 	 * 
 	 * @return ArrayList of x_mitre_platform field
 	 */
-	ArrayList<String> getPlatformsArray()
+	public ArrayList<String> getPlatformsArray()
 	{
 		return x_mitre_platforms;
 	}
@@ -158,7 +158,7 @@ class Threat
 	 * 
 	 * @return String of x_mitre_platform field, formatted to print out all
 	 */
-	String getPlatforms()
+	public String getPlatforms()
 	{
 		String returnString = "";
 		if (x_mitre_platforms != null) {
@@ -178,7 +178,7 @@ class Threat
 	 * 
 	 * @param	type	new String value to assign to type field
 	 */
-	void setType(String type)
+	public void setType(String type)
 	{
 		this.type = type;
 	}
@@ -188,7 +188,7 @@ class Threat
 	 * 
 	 * @param	id	new String value to assign to id field
 	 */
-	void setID(String id)
+	public void setID(String id)
 	{
 		this.id = id;
 	}
@@ -198,7 +198,7 @@ class Threat
 	 * 
 	 * @param	created_by_ref	new String value to assign to created_by_ref field
 	 */
-	void setCreatedBy(String created_by_ref)
+	public void setCreatedBy(String created_by_ref)
 	{
 		this.created_by_ref = created_by_ref;
 	}
@@ -208,7 +208,7 @@ class Threat
 	 * 
 	 * @param	created	new String value to assign to created field
 	 */
-	void setCreated(String created)
+	public void setCreated(String created)
 	{
 		this.created = created;
 	}
@@ -218,7 +218,7 @@ class Threat
 	 * 
 	 * @param	modified	new String value to assign to modified field
 	 */
-	void setDateModified(String modified)
+	public void setDateModified(String modified)
 	{
 		this.modified = modified;
 	}
@@ -228,7 +228,7 @@ class Threat
 	 * 
 	 * @param	kill_chain_phases	new ArrayList<KillChainPhase> to assign to kill_chain_phases field
 	 */
-	void setKillChainPhase(ArrayList<KillChainPhase> kill_chain_phases)
+	public void setKillChainPhase(ArrayList<KillChainPhase> kill_chain_phases)
 	{
 		this.kill_chain_phases = kill_chain_phases;
 	}
@@ -238,7 +238,7 @@ class Threat
 	 * 
 	 * @param	name	new String value to assign to name field
 	 */
-	void setName(String name)
+	public void setName(String name)
 	{
 		this.name = name;
 	}
@@ -248,7 +248,7 @@ class Threat
 	 * 
 	 * @param	description	new String value to assign to description field
 	 */
-	void setDescription(String description)
+	public void setDescription(String description)
 	{
 		this.description = description;
 	}
@@ -258,7 +258,7 @@ class Threat
 	 * 
 	 * @param	external_references	new ArrayList<ExternalRef> to assign to external_references field
 	 */
-	void setExernalRef(ArrayList<ExternalRef> external_references)
+	public void setExernalRef(ArrayList<ExternalRef> external_references)
 	{
 		this.external_references = external_references;
 	}
@@ -268,7 +268,7 @@ class Threat
 	 * 
 	 * @param	x_mitre_platforms new ArrayList<String> to assign to x_mitre_platforms field
 	 */
-	void setPlatforms(ArrayList<String> x_mitre_platforms)
+	public void setPlatforms(ArrayList<String> x_mitre_platforms)
 	{
 		this.x_mitre_platforms = x_mitre_platforms;
 	}
@@ -278,7 +278,7 @@ class Threat
 	 * 
 	 * @param	spec_version	new String value to assign to spec_version field
 	 */
-	void setSpecVersion(String spec_version)
+	public void setSpecVersion(String spec_version)
 	{
 		this.spec_version =  spec_version;
 	}
@@ -288,7 +288,7 @@ class Threat
 	 * Nicely formats the Source Name, External ID, and URL of all external references in a Threat Object
 	 * 
 	 */
-	void printExternalReferences()
+	public void printExternalReferences()
 	{
 		if(external_references!= null)
 		{
@@ -306,7 +306,7 @@ class Threat
 	 * Nicely formats the Kill-Chain-Phase, and Phase Name of all kill_chain_phases in a Threat Object
 	 * 
 	 */
-	void printKillChainPhases()
+	public void printKillChainPhases()
 	{
 		if(kill_chain_phases!=null)
 		{
