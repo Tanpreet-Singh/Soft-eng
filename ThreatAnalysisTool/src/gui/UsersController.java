@@ -24,30 +24,33 @@ public class UsersController {
 
 	@FXML
 	private Text wrongLogin;
+	
 	@FXML
 	private TextField username;
+	
 	@FXML
 	private PasswordField password;
-	@FXML
-	private Button adduser;
-	@FXML
-	private TextField delete;
-	@FXML
-	private Button deleteuser;
-	@FXML
-	private Text wrong;
-	@FXML
-	private Button back;
-	@FXML
-	private ListView<String> table_Users;
-//	@FXML
-//	private TableColumn<Users, Integer> col_level;
-//	@FXML
-//	private TableColumn<Users, String> col_password;
-//	@FXML
-//	private TableColumn<Users, String> col_username;
+	
 	@FXML
 	private TextField level;
+	
+	@FXML
+	private Button adduser;
+	
+	@FXML
+	private TextField delete;
+	
+	@FXML
+	private Button deleteuser;
+	
+	@FXML
+	private Text wrong;
+	
+	@FXML
+	private Button back;
+	
+	@FXML
+	private ListView<String> table_Users;
 
 	
 	ObservableList<String> listM;
@@ -64,8 +67,6 @@ public class UsersController {
 	
 	@FXML
 	public void initialize() throws IOException {
-//		col_username.setCellValueFactory(new PropertyValueFactory<Users, String>("username"));
-//		col_level.setCellValueFactory(new PropertyValueFactory<Users, Integer>("access_level"));
 
 		listM = db.getDatausers();
 		table_Users.setItems(listM);
@@ -75,7 +76,7 @@ public class UsersController {
 	public void addUser(ActionEvent event) throws IOException {
 		DatabaseTest databaseTest = new DatabaseTest();
 
-		int code = databaseTest.addUser(username.getText(), password.getText(), 1);
+		int code = databaseTest.addUser(username.getText(), password.getText(), Integer.parseInt(level.getText()));
 		
 		if (code == 1) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -86,6 +87,7 @@ public class UsersController {
 			
 			username.setText("");
 			password.setText("");
+			level.setText("");
 			username.requestFocus();
 			listM = db.getDatausers();
 			table_Users.setItems(listM);

@@ -75,8 +75,8 @@ public class DatabaseTest {
 		// function will return 1 if user was authenticated
 		// function will return 2 if username/password combo was incorrect
 		// function will return -1 for any other error (db-related)
-		int returnCode = -1;
-		String databaseQuery = "SELECT * FROM user_credentials WHERE " + "username=\"" + username + "\""
+		int level = -1;
+		String databaseQuery = "SELECT access_level FROM user_credentials WHERE " + "username=\"" + username + "\""
 				+ "AND password=SHA1(\"" + password + "\")";
 		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 				Statement statement = connection.createStatement();
@@ -84,11 +84,10 @@ public class DatabaseTest {
 
 			// Parse result set
 			if (resultSet.next()) {
-				// found user/password combo in database
-				returnCode = 1;
+				level = resultSet.getInt("access_level");
 			} else {
 				// did not find user/password combo in database
-				returnCode = 2;
+				level = -2;
 			}
 
 			statement.close();
@@ -97,7 +96,7 @@ public class DatabaseTest {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return returnCode;
+		return level;
 	}
 
 	private boolean userExists(String username) {
@@ -123,6 +122,26 @@ public class DatabaseTest {
 		return exists;
 	}
 
+	public int checkLevel(String username) {
+		int level = 0;
+		String databaseQuery = "SELECT access_level FROM user_credentials WHERE username=\"" + username + "\"";
+		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery(databaseQuery);) {
+
+			if (resultSet.next()) {
+				level = resultSet.getInt("access_level");
+			}
+
+			statement.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return level;
+	}
+
 	public int importThreats(JSONBundle threatBundle) throws ParseException {
 		// returnCode -1 - database error
 		// returnCode 1 - successful import
@@ -145,7 +164,6 @@ public class DatabaseTest {
 
 			connection.setAutoCommit(false);
 
-			
 			// loop through threats
 			for (Threat threat : threatBundle.getObjects()) {
 				if (!threatExists(threat)) {
@@ -154,7 +172,7 @@ public class DatabaseTest {
 					threatStatement.setString(2, threat.getName());
 					threatStatement.setString(3, threat.getDescription());
 
-						// convert to different Date object (required to be from mySQL package)
+					// convert to different Date object (required to be from mySQL package)
 					sqlCreatedTimestamp = convertToSqlDate(threat.getDateCreated());
 					sqlModifiedTimestamp = convertToSqlDate(threat.getDateModified());
 					threatStatement.setTimestamp(4, sqlCreatedTimestamp);
@@ -165,34 +183,34 @@ public class DatabaseTest {
 					threatStatement.setString(8, threat.getSpecVersion());
 					threatStatement.setString(9, threat.getPlatforms());
 
-						// add threat query once all values are set
+					// add threat query once all values are set
 					threatStatement.addBatch();
 					threatsAdded++;
-					
+
 					// inserting values into external_ref query, if exists
 					if (threat.getExernalRef() != null) {
-						//loop through external references on threat object
+						// loop through external references on threat object
 						for (ExternalRef exRef : threat.getExernalRef()) {
 							externalRefStatement.setString(1, threat.getID());
 							externalRefStatement.setString(2, exRef.getSourceName());
 							externalRefStatement.setString(3, exRef.getDescription());
 							externalRefStatement.setString(4, exRef.getURL());
 							externalRefStatement.setString(5, exRef.getExternalId());
-							
+
 							// add threat query once all values are set
 							externalRefStatement.addBatch();
 							externalRefsAdded++;
 						}
 					}
-					
+
 					// inserting values into kill_chin_phase query, if exists
 					if (threat.getKillChains() != null) {
-						//loop through KillChainPhases on threat object
+						// loop through KillChainPhases on threat object
 						for (KillChainPhase killChain : threat.getKillChains()) {
 							killChainStatement.setString(1, threat.getID());
 							killChainStatement.setString(2, killChain.getKillChainName());
 							killChainStatement.setString(3, killChain.getPhaseName());
-							
+
 							// add threat query once all values are set
 							killChainStatement.addBatch();
 							killChainsAdded++;
@@ -201,23 +219,23 @@ public class DatabaseTest {
 				}
 			}
 
-			// check if any queries were added to each statement, execute if so, close regardless
+			// check if any queries were added to each statement, execute if so, close
+			// regardless
 			if (threatsAdded > 0) {
 				threatStatement.executeBatch();
 			}
 			threatStatement.close();
-			
+
 			if (externalRefsAdded > 0) {
 				externalRefStatement.executeBatch();
 			}
 			externalRefStatement.close();
-			
+
 			if (killChainsAdded > 0) {
 				killChainStatement.executeBatch();
 			}
 			killChainStatement.close();
-			
-			
+
 			connection.commit();
 			connection.setAutoCommit(true);
 			connection.close();
@@ -293,7 +311,7 @@ public class DatabaseTest {
 		}
 		return list;
 	}
-	
+
 //	public ArrayList<Threat> getUserLevelThreats(int access_level) {
 //		return new ArrayList<Threat>();
 //	}
