@@ -25,15 +25,31 @@ public class LoginController {
 
 	@FXML
 	public void userLogin(ActionEvent event) throws IOException {
-		Test m = new Test();
+		int level = 0;
+		
 		DatabaseTest db = new DatabaseTest();
-		if (db.authenticateUser(username.getText(), password.getText()) == 1) {
+		
+		level = db.authenticateUser(username.getText(), password.getText());
+		
+		if (level == 1) {
 			wrongLogin.setText("success");
-
+			Test m = new Test(level);
 			m.changeScene("Main.fxml");
 		}
+		
+		if (level == 2) {
+			wrongLogin.setText("success");
+			Test m = new Test(level);
+			m.changeScene("Engineer.fxml");
+		}
+		
+		if (level == 3) {
+			wrongLogin.setText("success");
+			Test m = new Test(level);
+			m.changeScene("Viewer.fxml");
+		}
 
-		else if (db.authenticateUser(username.getText(), password.getText()) == 2) {
+		else if (level == -2) {
 			wrongLogin.setText("Please enter correct username and password");
 		}
 

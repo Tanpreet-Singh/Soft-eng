@@ -7,20 +7,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UsersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UsersController">
    <children>
       <AnchorPane layoutY="1.0" prefHeight="400.0" prefWidth="214.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="1.0">
          <children>
             <TextField fx:id="username" layoutX="28.0" layoutY="74.0" promptText="username" />
             <PasswordField fx:id="password" layoutX="28.0" layoutY="129.0" promptText="password" />
-            <Button fx:id="adduser" layoutX="70.0" layoutY="163.0" mnemonicParsing="false" onAction="#addUser" text="Add User" />
+            <Button fx:id="adduser" layoutX="70.0" layoutY="224.0" mnemonicParsing="false" onAction="#addUser" text="Add User" />
             <Text layoutX="72.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
             <Text layoutX="74.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
             <Text fx:id="wrongLogin" layoutX="61.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Users here" wrappingWidth="115.33333333333337" />
-            <Text layoutX="30.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Users here" />
-            <TextField fx:id="delete" layoutX="28.0" layoutY="282.0" promptText="username" />
-            <Button fx:id="deleteuser" layoutX="64.0" layoutY="322.0" mnemonicParsing="false" onAction="#deleteUser" text="Delete User" />
+            <Text layoutX="26.0" layoutY="399.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Users here" />
+            <TextField fx:id="delete" layoutX="24.0" layoutY="417.0" promptText="username" />
+            <Button fx:id="deleteuser" layoutX="60.0" layoutY="457.0" mnemonicParsing="false" onAction="#deleteUser" text="Delete User" />
             <Text fx:id="wrong" layoutX="30.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text layoutX="70.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Access Level" />
+            <TextField fx:id="level" layoutX="28.0" layoutY="187.0" promptText="Access Level" />
          </children>
       </AnchorPane>
       <Button fx:id="back" layoutX="248.0" layoutY="253.0" mnemonicParsing="false" onAction="#back" text="Go back" AnchorPane.bottomAnchor="121.66666666666667" />

@@ -10,9 +10,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Test extends Application {
-	
+
 	private static Stage stg;
-	
+	private int level;
+
+	public Test(int level) {
+		this.level = level;
+	}
+
+	public Test() {
+	}
+
 	public void start(Stage primaryStage) {
 		try {
 			stg = primaryStage;
@@ -20,7 +28,7 @@ public class Test extends Application {
 			stg.setMinWidth(640);
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 700, 500);
-			stg.setMaximized(true);
+			// stg.setMaximized(true);
 			stg.setScene(scene);
 			stg.setTitle("Threat Analysis Tool");
 			stg.show();
@@ -28,13 +36,16 @@ public class Test extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void changeScene(String fxml) throws IOException {
 		Parent pane = FXMLLoader.load(getClass().getResource(fxml));
 		stg.getScene().setRoot(pane);
 	}
 
 	public static void main(String[] args) {
+
+//		DatabaseTest db = new DatabaseTest();
+//		System.out.println(db.checkLevel("dsd"));
 		launch(args);
 	}
 }
