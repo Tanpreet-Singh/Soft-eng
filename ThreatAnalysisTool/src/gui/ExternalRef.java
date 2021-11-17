@@ -64,4 +64,26 @@ public class ExternalRef
 	{
 		this.description = description;
 	}
+	
+	public String printRef() {
+		String outputString = "";
+		if (source_name != null) {
+			outputString +=  "Source Name: " + source_name + "\n";
+		}
+		if (description != null) {
+			outputString +=  "Description: " + description + "\n";
+		}
+		if (url != null) {
+			outputString +=  "URL: " + url + "\n";
+		}
+		if (external_id != null) {
+			outputString +=  "External ID: " + external_id + "\n";
+		}
+		
+		if (outputString.equals("")) {
+			outputString = null;
+		}
+		
+		return outputString;
+	}
 }
