@@ -16,6 +16,7 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewerController">
   <children>
@@ -42,7 +43,10 @@
             <ListView fx:id="listViewPDF" layoutX="410.0" layoutY="47.0" prefHeight="268.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="47.0" />
             <Button fx:id="remove" layoutX="479.0" layoutY="323.0" mnemonicParsing="false" onAction="#removeFromPdfFunction" text="Remove" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="102.0" />
             <Label layoutX="30.0" layoutY="51.0" text="Search" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="51.0" />
-             <Label layoutX="431.0" layoutY="18.0" text="Threats Added To PDF Report" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="18.0" />
+             <Label layoutX="431.0" layoutY="18.0" text="Threats Added To PDF Report" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="18.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
             <MenuButton layoutX="335.0" layoutY="47.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Filter" AnchorPane.rightAnchor="243.0">
                <items>
                   <CheckMenuItem mnemonicParsing="false" onAction="#filterMac" text="MacOS" />
