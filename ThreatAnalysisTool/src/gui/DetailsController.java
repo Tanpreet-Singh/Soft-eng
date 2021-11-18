@@ -1,17 +1,26 @@
 package gui;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class DetailsController extends Controller{
 
@@ -46,6 +55,8 @@ public class DetailsController extends Controller{
     private Button save;
     @FXML
     private Button returnToMain;
+    
+    private boolean darkMode;
     
     //object that is used to populate GUI components
     private ObservableList<String> externalRefs;
@@ -96,23 +107,53 @@ public class DetailsController extends Controller{
     }
     
     @FXML
-    void darkModeFunction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void helpFunction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void logoutFunction(ActionEvent event) {
-
-    }
+	public void darkModeFunction(ActionEvent event) throws IOException {
+		if (!darkMode) {
+			theme.setText("Light Mode");
+			save.getScene().getStylesheets().add(getClass().getResource("darkmode.css").toExternalForm());
+		}else {
+			theme.setText("Dark Mode");
+			save.getScene().getStylesheets().remove(getClass().getResource("darkmode.css").toExternalForm());
+		}
+		
+		darkMode = !darkMode;
+	}
 
     @FXML
-    void usersFunction(ActionEvent event) {
+	public void helpFunction(ActionEvent event) throws IOException {
+		
+		Parent root = FXMLLoader.load(getClass().getResource("Help.fxml"));
+		Scene scene = new Scene(root, 700, 500);
 
+		Stage stg = new Stage();
+		stg.setScene(scene);
+		stg.setTitle("Help Page");
+		stg.show();
+
+	}
+
+    @FXML
+	public void logoutFunction(ActionEvent event) throws IOException {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Logout");
+		alert.setHeaderText("You are about to logout");
+		alert.setContentText("Are you sure you want to logout?");
+		
+		if(alert.showAndWait().get() == ButtonType.OK) {
+			Test m = new Test();
+			m.changeScene("login.fxml");
+		}
+	}
+
+    @FXML
+	public void usersFunction(ActionEvent event) throws IOException {
+		Test m = new Test();
+		m.changeScene("Users.fxml");
+	}
+    
+    @FXML
+	public void returnFunction(ActionEvent event) throws IOException {
+    	Test m = new Test(level);
+		m.changeScene("Main.fxml");
     }
-
 }
