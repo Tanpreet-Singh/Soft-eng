@@ -57,7 +57,9 @@ public class DetailsController {
     	killChainPhases = FXCollections.observableArrayList();
     	
     	for (ExternalRef exRef : threat.getExernalRef()) {
-    		externalRefs.add(null);
+    		if (exRef.printRef() != null) {
+    			externalRefs.add(exRef.printRef());
+    		}
     	}
     }
     
@@ -69,6 +71,9 @@ public class DetailsController {
     	created.setPromptText(threat.getDateCreated());
     	modified.setPromptText(threat.getDateModified());
     	description.setPromptText(threat.getDescription());
+    	
+    	externalRefList.setItems(externalRefs);
+    	killChainList.setItems(killChainPhases);
     }
     
     

@@ -38,5 +38,22 @@ public class KillChainPhase {
 		this.phase_name = phase_name;
 	}
 	
+	public String printKillChain() {
+		String outputString = "";
+		
+		if (kill_chain_name != null) {
+			outputString += "Kill Chain Name: " + kill_chain_name + "\n";
+		}
+		if (phase_name != null) {
+			outputString += "Phase Name: " + phase_name + "\n";
+		}
+		
+		if (outputString.equals("")) {
+			outputString = null;
+		}
+		
+		return outputString;
+	}
+	
 	
 }
