@@ -291,7 +291,14 @@ public class MainController extends Controller{
 	public void deleteThreat() {
 		if (listView.getSelectionModel().getSelectedItems().size() == 1) {
 			int selectedIndex = listView.getSelectionModel().getSelectedIndex();
-			threats.remove(selectedIndex);
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Delete Threat?");
+			alert.setHeaderText("This threat will be deleted from the database.");
+			alert.setContentText("Are you sure you want to delete?");
+			
+			if(alert.showAndWait().get() == ButtonType.OK) {
+				threats.remove(selectedIndex);
+			}
 		}else {
 			System.out.println("ERROR: more than 1 selected.");
 		}
