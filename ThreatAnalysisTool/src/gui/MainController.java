@@ -14,7 +14,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
@@ -174,8 +177,15 @@ public class MainController {
 	
 	@FXML
 	public void logoutFunction(ActionEvent event) throws IOException {
-		Test m = new Test();
-		m.changeScene("login.fxml");
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Logout");
+		alert.setHeaderText("You are about to logout");
+		alert.setContentText("Are you sure you want to logout?");
+		
+		if(alert.showAndWait().get() == ButtonType.OK) {
+			Test m = new Test();
+			m.changeScene("login.fxml");
+		}
 	}
 
 	@FXML
