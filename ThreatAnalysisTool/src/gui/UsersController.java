@@ -14,7 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class UsersController{
+public class UsersController extends Controller{
 
 	@FXML
 	private Text wrongLogin;
@@ -26,7 +26,7 @@ public class UsersController{
 	private PasswordField password;
 	
 	@FXML
-	private TextField level;
+	private TextField userLevel;
 	
 	@FXML
 	private Button adduser;
@@ -70,7 +70,7 @@ public class UsersController{
 	public void addUser(ActionEvent event) throws IOException {
 		DatabaseTest databaseTest = new DatabaseTest();
 
-		int code = databaseTest.addUser(username.getText(), password.getText(), Integer.parseInt(level.getText()));
+		int code = databaseTest.addUser(username.getText(), password.getText(), Integer.parseInt(userLevel.getText()));
 		
 		if (code == 1) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -81,7 +81,7 @@ public class UsersController{
 			
 			username.setText("");
 			password.setText("");
-			level.setText("");
+			userLevel.setText("");
 			username.requestFocus();
 			listM = db.getDatausers();
 			table_Users.setItems(listM);

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 //import java.util.ArrayList;
 import java.util.Date;
 
@@ -312,7 +313,32 @@ public class DatabaseTest {
 		return list;
 	}
 
-//	public ArrayList<Threat> getUserLevelThreats(int access_level) {
-//		return new ArrayList<Threat>();
-//	}
+	public ArrayList<Threat> getUserLevelThreats(int access_level) {
+		String databaseQuery = "select * from threats where access_level>=\"" + access_level + "\"";
+		ArrayList<Threat> threats = new ArrayList<Threat>();
+
+		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+				Statement statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery(databaseQuery);) {
+
+			while (rs.next()) {
+				Threat threat = new Threat();
+				threat.setType(rs.getString("type"));
+				threat.setName(rs.getString("name"));
+				threat.setCreated(rs.getString("created"));
+				threat.setDateModified(rs.getString("modified"));
+				threat.setDescription(rs.getString("description"));
+				threat.setID(rs.getString("threat_id"));
+				threat.setCreatedBy(rs.getString("created_by_ref"));
+				threat.setSpecVersion(rs.getString("spec_version"));
+				//externalRefs
+				//killChains
+				//platforms
+				threats.add(threat);
+			}
+		} catch (Exception e) {
+		}
+		
+		return threats;
+	}
 }

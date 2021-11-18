@@ -68,6 +68,8 @@ public class DetailsController extends Controller{
         	
         	externalRefList.setItems(externalRefs);
         	killChainList.setItems(killChainPhases);
+        	
+        	save.setDisable(true);
         });
     }
     

@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +50,19 @@ public class Test extends Application {
 		stg.setScene(scene);    
 
 		controller.setLevel(level);
+		stg.show();
+	}
+	
+	public void changeSceneToMain() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));     
+
+		Parent root = (Parent)fxmlLoader.load();          
+		MainController controller = fxmlLoader.getController();
+		Scene scene = new Scene(root, 700, 500); 
+
+		stg.setScene(scene);    
+
+		controller.initData(new ArrayList<Threat>());
 		stg.show();
 	}
 	
