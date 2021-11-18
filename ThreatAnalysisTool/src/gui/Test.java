@@ -18,6 +18,7 @@ public class Test extends Application {
 		this.level = level;
 	}
 
+	
 	public Test() {
 		this.level = 0;
 	}
@@ -29,7 +30,7 @@ public class Test extends Application {
 			stg.setMinWidth(700);
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 700, 500);
-			// stg.setMaximized(true);
+			stg.setMaximized(true);
 			stg.setScene(scene);
 			stg.setTitle("Threat Analysis Tool");
 			stg.show();
@@ -38,10 +39,7 @@ public class Test extends Application {
 		}
 	}
 
-	public void changeScene(String fxml) throws IOException {
-//		Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-//		stg.getScene().setRoot(pane);
-		
+	public void changeScene(String fxml) throws IOException {	
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));     
 
 		Parent root = (Parent)fxmlLoader.load();          
@@ -72,8 +70,6 @@ public class Test extends Application {
 
 	public static void main(String[] args) {
 
-//		DatabaseTest db = new DatabaseTest();
-//		System.out.println(db.checkLevel("dsd"));
 		launch(args);
 	}
 }

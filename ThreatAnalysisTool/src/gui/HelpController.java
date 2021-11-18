@@ -13,7 +13,9 @@ public class HelpController {
 
 	@FXML
 	public void back(ActionEvent event) throws IOException {
+		
 		Test m = new Test();
+
 		m.changeScene("Main.fxml");
 	}
 

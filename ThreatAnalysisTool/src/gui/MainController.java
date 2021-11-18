@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.function.Predicate;
 import java.awt.FileDialog;
 import java.awt.Frame;
 
@@ -11,11 +12,18 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class MainController extends Controller{
 
@@ -142,26 +150,30 @@ public class MainController extends Controller{
 	}
 	
 	private void filter() {
+		Predicate<String> predicateMac = (s -> getThreatFromString(s).getPlatforms().contains("macOS"));
+		Predicate<String> predicateWin = (s -> getThreatFromString(s).getPlatforms().contains("Windows"));
+		Predicate<String> predicateLin = (s -> getThreatFromString(s).getPlatforms().contains("Linux"));
+		
 		if(macFilter && !winFilter && !linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("macOS"));
+			threatList.setPredicate(predicateMac);
 		}
 		else if(!macFilter && winFilter && !linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("Windows"));
+			threatList.setPredicate(predicateWin);
 		}
 		else if(!macFilter && !winFilter && linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("Linux"));
+			threatList.setPredicate(predicateLin);
 		}
 		else if(macFilter && winFilter && !linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("macOS") && s.toString().contains("Windows"));
+			threatList.setPredicate(predicateMac.and(predicateWin));
 		}
 		else if(macFilter && !winFilter && linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("macOS") && s.toString().contains("Linux"));
+			threatList.setPredicate(predicateMac.and(predicateLin));
 		}
 		else if(!macFilter && winFilter && linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("Windows") && s.toString().contains("Linux"));
+			threatList.setPredicate(predicateWin.and(predicateLin));
 		}
 		else if(macFilter && winFilter && linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("macOS") && s.toString().contains("Windows") && s.toString().contains("Linux"));
+			threatList.setPredicate(predicateMac.and(predicateWin).and(predicateLin));
 		}
 		else {
 			threatList.setPredicate(null);
@@ -171,9 +183,15 @@ public class MainController extends Controller{
 	
 	@FXML
 	public void logoutFunction(ActionEvent event) throws IOException {
-		System.out.println(level);
-		Test m = new Test();
-		m.changeScene("login.fxml");
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Logout");
+		alert.setHeaderText("You are about to logout");
+		alert.setContentText("Are you sure you want to logout?");
+		
+		if(alert.showAndWait().get() == ButtonType.OK) {
+			Test m = new Test();
+			m.changeScene("login.fxml");
+		}
 	}
 
 	@FXML
@@ -197,8 +215,15 @@ public class MainController extends Controller{
 
 	@FXML
 	public void helpFunction(ActionEvent event) throws IOException {
-		Test m = new Test();
-		m.changeScene("Help.fxml");
+		
+		Parent root = FXMLLoader.load(getClass().getResource("Help.fxml"));
+		Scene scene = new Scene(root, 700, 500);
+
+		Stage stg = new Stage();
+		stg.setScene(scene);
+		stg.setTitle("Help Page");
+		stg.show();
+
 	}
 	
 	@FXML
