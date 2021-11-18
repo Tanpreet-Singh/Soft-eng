@@ -141,22 +141,32 @@ public class EngineerController {
 	}
 
 	private void filter() {
-		if (macFilter && !winFilter && !linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("macOS"));
-		} else if (!macFilter && winFilter && !linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("Windows"));
-		} else if (!macFilter && !winFilter && linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("Linux"));
-		} else if (macFilter && winFilter && !linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("macOS") && s.toString().contains("Windows"));
-		} else if (macFilter && !winFilter && linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("macOS") && s.toString().contains("Linux"));
-		} else if (!macFilter && winFilter && linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("Windows") && s.toString().contains("Linux"));
-		} else if (macFilter && winFilter && linFilter) {
-			threatList.setPredicate(s -> s.toString().contains("macOS") && s.toString().contains("Windows")
-					&& s.toString().contains("Linux"));
-		} else {
+		if(macFilter && !winFilter && !linFilter) {
+			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("macOS"));
+		}
+		else if(!macFilter && winFilter && !linFilter) {
+			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("Windows"));
+		}
+		else if(!macFilter && !winFilter && linFilter) {
+			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("Linux"));
+		}
+		else if(macFilter && winFilter && !linFilter) {
+			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("macOS")
+					&& getThreatFromString(s).getPlatforms().contains("Windows"));
+		}
+		else if(macFilter && !winFilter && linFilter) {
+			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("macOS")
+					&& getThreatFromString(s).getPlatforms().contains("Linux"));
+		}
+		else if(!macFilter && winFilter && linFilter) {
+			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("Windows")
+					&& getThreatFromString(s).getPlatforms().contains("Linux"));
+		}
+		else if(macFilter && winFilter && linFilter) {
+			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("macOS")
+					&& getThreatFromString(s).getPlatforms().contains("Windows") && getThreatFromString(s).getPlatforms().contains("Linux"));
+		}
+		else {
 			threatList.setPredicate(null);
 		}
 	}
