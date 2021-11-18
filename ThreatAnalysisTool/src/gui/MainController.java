@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.function.Predicate;
 import java.awt.FileDialog;
 import java.awt.Frame;
 
@@ -148,30 +149,30 @@ public class MainController {
 	}
 	
 	private void filter() {
+		Predicate<String> predicateMac = (s -> getThreatFromString(s).getPlatforms().contains("macOS"));
+		Predicate<String> predicateWin = (s -> getThreatFromString(s).getPlatforms().contains("Windows"));
+		Predicate<String> predicateLin = (s -> getThreatFromString(s).getPlatforms().contains("Linux"));
+		
 		if(macFilter && !winFilter && !linFilter) {
-			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("macOS"));
+			threatList.setPredicate(predicateMac);
 		}
 		else if(!macFilter && winFilter && !linFilter) {
-			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("Windows"));
+			threatList.setPredicate(predicateWin);
 		}
 		else if(!macFilter && !winFilter && linFilter) {
-			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("Linux"));
+			threatList.setPredicate(predicateLin);
 		}
 		else if(macFilter && winFilter && !linFilter) {
-			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("macOS")
-					&& getThreatFromString(s).getPlatforms().contains("Windows"));
+			threatList.setPredicate(predicateMac.and(predicateWin));
 		}
 		else if(macFilter && !winFilter && linFilter) {
-			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("macOS")
-					&& getThreatFromString(s).getPlatforms().contains("Linux"));
+			threatList.setPredicate(predicateMac.and(predicateLin));
 		}
 		else if(!macFilter && winFilter && linFilter) {
-			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("Windows")
-					&& getThreatFromString(s).getPlatforms().contains("Linux"));
+			threatList.setPredicate(predicateWin.and(predicateLin));
 		}
 		else if(macFilter && winFilter && linFilter) {
-			threatList.setPredicate(s -> getThreatFromString(s).getPlatforms().contains("macOS")
-					&& getThreatFromString(s).getPlatforms().contains("Windows") && getThreatFromString(s).getPlatforms().contains("Linux"));
+			threatList.setPredicate(predicateMac.and(predicateWin).and(predicateLin));
 		}
 		else {
 			threatList.setPredicate(null);
