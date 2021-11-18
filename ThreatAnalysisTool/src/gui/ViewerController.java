@@ -25,7 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class ViewerController {
+public class ViewerController extends Controller{
 
 	@FXML
 	private Button add;
