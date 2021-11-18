@@ -19,13 +19,14 @@ public class Test extends Application {
 	}
 
 	public Test() {
+		this.level = 0;
 	}
 
 	public void start(Stage primaryStage) {
 		try {
 			stg = primaryStage;
-			stg.setMinHeight(400);
-			stg.setMinWidth(640);
+			stg.setMinHeight(500);
+			stg.setMinWidth(700);
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 700, 500);
 			// stg.setMaximized(true);
@@ -38,8 +39,35 @@ public class Test extends Application {
 	}
 
 	public void changeScene(String fxml) throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-		stg.getScene().setRoot(pane);
+//		Parent pane = FXMLLoader.load(getClass().getResource(fxml));
+//		stg.getScene().setRoot(pane);
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));     
+
+		Parent root = (Parent)fxmlLoader.load();          
+		Controller controller = fxmlLoader.getController();
+		Scene scene = new Scene(root, 700, 500); 
+
+		stg.setScene(scene);    
+
+		controller.setLevel(level);
+		stg.show();
+	}
+	
+	public void changeSceneToDetails(Threat threat) throws IOException {
+//		Parent pane = FXMLLoader.load(getClass().getResource(fxml));
+//		stg.getScene().setRoot(pane);
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Details.fxml"));     
+
+		Parent root = (Parent)fxmlLoader.load();          
+		DetailsController controller = fxmlLoader.getController();
+		Scene scene = new Scene(root, 700, 500); 
+
+		stg.setScene(scene); 
+
+		controller.initData(threat);
+		stg.show();
 	}
 
 	public static void main(String[] args) {

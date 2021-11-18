@@ -5,8 +5,8 @@
 -->
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -52,6 +52,7 @@
                   <CheckMenuItem mnemonicParsing="false" onAction="#filterLinux" text="Linux" />
                </items>
             </MenuButton>
+            <Button fx:id="getDetails" layoutX="93.0" layoutY="323.0" mnemonicParsing="false" onAction="#getThreatDetails" text="Get Detailed Info" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="93.0" />
  
       </children>
     </AnchorPane>

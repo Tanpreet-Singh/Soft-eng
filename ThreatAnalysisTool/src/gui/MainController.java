@@ -17,7 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 
-public class MainController {
+public class MainController extends Controller{
 
 	@FXML
 	private Button add;
@@ -33,6 +33,8 @@ public class MainController {
 	private Button addToPDF;
 	@FXML
 	private Button remove;
+	@FXML
+	private Button getDetails;
 	@FXML
 	private MenuItem help;
 	@FXML
@@ -169,6 +171,7 @@ public class MainController {
 	
 	@FXML
 	public void logoutFunction(ActionEvent event) throws IOException {
+		System.out.println(level);
 		Test m = new Test();
 		m.changeScene("login.fxml");
 	}
@@ -229,6 +232,17 @@ public class MainController {
 		genPDFThreats.remove(selectedThreat);
 		
 		listViewPDF.setItems(genPDFThreats);
+	}
+	
+	@FXML
+	public void getThreatDetails() throws IOException {
+		if (listView.getSelectionModel().getSelectedItems().size() == 1) {
+			Threat threat = getThreatFromString(listView.getSelectionModel().getSelectedItems().get(0));
+			Test m = new Test();
+			m.changeSceneToDetails(threat);
+		}else {
+			System.out.println("ERROR: more than 1 selected.");
+		}
 	}
 	
 	public Threat getThreatFromString(String threatString) {

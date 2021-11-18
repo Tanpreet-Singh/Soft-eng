@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,7 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class DetailsController {
+public class DetailsController extends Controller{
 
 	//GUI components
     @FXML
@@ -47,36 +48,50 @@ public class DetailsController {
     private Button returnToMain;
     
     //object that is used to populate GUI components
-    private Threat threat;
     private ObservableList<String> externalRefs;
     private ObservableList<String> killChainPhases;
 
-    public DetailsController(Threat threat) {
-    	this.threat = threat;
+    public DetailsController() {
+    
+    }
+    
+    @FXML
+    public void initialize() {
+    	Platform.runLater(() -> {
+    		id.setText(threat.getID());
+        	type.setText(threat.getType());
+        	name.setText(threat.getName());
+        	platforms.setText(threat.getPlatforms());
+        	created.setPromptText(threat.getDateCreated());
+        	modified.setPromptText(threat.getDateModified());
+        	description.setText(threat.getDescription());
+        	
+        	externalRefList.setItems(externalRefs);
+        	killChainList.setItems(killChainPhases);
+        });
+    }
+    
+    public void initData(Threat threat) {
+    	setThreat(threat);
     	externalRefs = FXCollections.observableArrayList();
     	killChainPhases = FXCollections.observableArrayList();
     	
-    	for (ExternalRef exRef : threat.getExernalRef()) {
-    		if (exRef.printRef() != null) {
-    			externalRefs.add(exRef.printRef());
-    		}
+    	if (threat.getExernalRef() != null) {
+    		for (ExternalRef exRef : threat.getExernalRef()) {
+        		if (exRef.printRef() != null) {
+        			externalRefs.add(exRef.printRef());
+        		}
+        	}
+    	}
+    	
+    	if (threat.getKillChains() != null) {
+    		for (KillChainPhase killChain : threat.getKillChains()) {
+        		if (killChain.printKillChain() != null) {
+        			killChainPhases.add(killChain.printKillChain());
+        		}
+        	}
     	}
     }
-    
-    public void initialize() {
-    	id.setText(threat.getID());
-    	type.setPromptText(threat.getType());
-    	name.setPromptText(threat.getName());
-    	platforms.setPromptText(threat.getPlatforms());
-    	created.setPromptText(threat.getDateCreated());
-    	modified.setPromptText(threat.getDateModified());
-    	description.setPromptText(threat.getDescription());
-    	
-    	externalRefList.setItems(externalRefs);
-    	killChainList.setItems(killChainPhases);
-    }
-    
-    
     
     @FXML
     void darkModeFunction(ActionEvent event) {
