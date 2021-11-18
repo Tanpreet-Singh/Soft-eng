@@ -55,6 +55,7 @@
                   <CheckMenuItem mnemonicParsing="false" onAction="#filterLinux" text="Linux" />
                </items>
             </MenuButton>
+            <Button fx:id="getDetails" layoutX="91.0" layoutY="320.0" mnemonicParsing="false" onAction="#getThreatDetails" text="Get Detailed Info" AnchorPane.bottomAnchor="26.5" AnchorPane.leftAnchor="91.0" />
  
       </children>
     </AnchorPane>

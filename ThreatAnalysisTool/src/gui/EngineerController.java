@@ -43,7 +43,8 @@ public class EngineerController extends Controller{
 	private Button remove;
 	@FXML
 	private MenuItem help;
-
+	@FXML
+	private Button getDetails;
 	@FXML
 	private MenuItem logout;
 	@FXML
@@ -221,6 +222,17 @@ public class EngineerController extends Controller{
 			if(alert.showAndWait().get() == ButtonType.OK) {
 				threats.remove(selectedIndex);
 			}
+		}else {
+			System.out.println("ERROR: more than 1 selected.");
+		}
+	}
+	
+	@FXML
+	public void getThreatDetails() throws IOException {
+		if (listView.getSelectionModel().getSelectedItems().size() == 1) {
+			Threat threat = getThreatFromString(listView.getSelectionModel().getSelectedItems().get(0));
+			Test m = new Test();
+			m.changeSceneToDetails(threat);
 		}else {
 			System.out.println("ERROR: more than 1 selected.");
 		}
