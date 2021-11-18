@@ -11,11 +11,15 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class EngineerController {
 
@@ -173,16 +177,15 @@ public class EngineerController {
 		}
 	}
 
-//	@FXML
-//	public void usersFunction(ActionEvent event) throws IOException {
-//		Test m = new Test();
-//		m.changeScene("Users.fxml");
-//	}
-
 	@FXML
 	public void helpFunction(ActionEvent event) throws IOException {
-		Test m = new Test();
-		m.changeScene("Help.fxml");
+		Parent root = FXMLLoader.load(getClass().getResource("Help.fxml"));
+		Scene scene = new Scene(root, 700, 500);
+
+		Stage stg = new Stage();
+		stg.setScene(scene);
+		stg.setTitle("Help Page");
+		stg.show();
 	}
 
 	@FXML

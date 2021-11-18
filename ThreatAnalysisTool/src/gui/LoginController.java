@@ -25,11 +25,11 @@ public class LoginController {
 
 	@FXML
 	public void userLogin(ActionEvent event) throws IOException {
-		int level = 0;
+		
 		
 		DatabaseTest db = new DatabaseTest();
 		
-		level = db.authenticateUser(username.getText(), password.getText());
+		int level = db.authenticateUser(username.getText(), password.getText());
 		
 		if (level == 1) {
 			wrongLogin.setText("success");
