@@ -27,7 +27,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class MainController extends Controller{
+public class MainController extends Controller {
 
 	@FXML
 	private Button add;
@@ -59,7 +59,7 @@ public class MainController extends Controller{
 	private ListView<String> listViewPDF;
 	@FXML
 	private TextField searchField;
-	
+
 	private boolean macFilter = false;
 	private boolean winFilter = false;
 	private boolean linFilter = false;
@@ -68,13 +68,12 @@ public class MainController extends Controller{
 	private JSONBundle threatBundle;
 	private ObservableList<String> threats;
 	private FilteredList<String> threatList;
-	
+
 	ObservableList<String> genPDFThreats;
-	
-	
+
 	public MainController() throws IOException {
 		genPDFThreats = FXCollections.observableArrayList();
-		
+
 		darkMode = false;
 		parser = new ParseFunction();
 		threatBundle = parser.parseJSON();
@@ -85,10 +84,10 @@ public class MainController extends Controller{
 
 		threatList = new FilteredList<>(threats);
 	}
-	
+
 	public void initData(ArrayList<Threat> dbThreats) throws IOException {
 		genPDFThreats = FXCollections.observableArrayList();
-		
+
 		darkMode = false;
 		parser = new ParseFunction();
 		threatBundle = parser.parseJSON();
@@ -103,10 +102,10 @@ public class MainController extends Controller{
 	@FXML
 	public void initialize() throws IOException {
 		Platform.runLater(() -> {
-			//initialize listView, items and click event
+			// initialize listView, items and click event
 			listView.setItems(threatList);
 			listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-	
+
 			searchField.textProperty().addListener((observable, oldValue, newValue) -> {
 				if (newValue.isEmpty()) {
 					threatList.setPredicate(null);
@@ -116,17 +115,16 @@ public class MainController extends Controller{
 				}
 			});
 		});
-		
+
 	}
 
 	@FXML
 	public void filterMac() throws IOException {
 //		threatList.setPredicate(s -> s.toString().contains("macOS"));
 //		listView.setItems(threatList);
-		if(!macFilter) {
+		if (!macFilter) {
 			macFilter = true;
-		}
-		else {
+		} else {
 			macFilter = false;
 		}
 		filter();
@@ -146,66 +144,56 @@ public class MainController extends Controller{
 //			listView.setItems(threatList);
 //			winFilter = false;
 //		}
-		if(!winFilter) {
+		if (!winFilter) {
 			winFilter = true;
-		}
-		else {
+		} else {
 			winFilter = false;
 		}
 		filter();
 	}
-	
+
 	@FXML
 	public void filterLinux() throws IOException {
-		if(!linFilter) {
+		if (!linFilter) {
 			linFilter = true;
-		}
-		else {
+		} else {
 			linFilter = false;
 		}
 		filter();
 	}
-	
+
 	private void filter() {
 		Predicate<String> predicateMac = (s -> getThreatFromString(s).getPlatforms().contains("macOS"));
 		Predicate<String> predicateWin = (s -> getThreatFromString(s).getPlatforms().contains("Windows"));
 		Predicate<String> predicateLin = (s -> getThreatFromString(s).getPlatforms().contains("Linux"));
-		
-		if(macFilter && !winFilter && !linFilter) {
+
+		if (macFilter && !winFilter && !linFilter) {
 			threatList.setPredicate(predicateMac);
-		}
-		else if(!macFilter && winFilter && !linFilter) {
+		} else if (!macFilter && winFilter && !linFilter) {
 			threatList.setPredicate(predicateWin);
-		}
-		else if(!macFilter && !winFilter && linFilter) {
+		} else if (!macFilter && !winFilter && linFilter) {
 			threatList.setPredicate(predicateLin);
-		}
-		else if(macFilter && winFilter && !linFilter) {
+		} else if (macFilter && winFilter && !linFilter) {
 			threatList.setPredicate(predicateMac.and(predicateWin));
-		}
-		else if(macFilter && !winFilter && linFilter) {
+		} else if (macFilter && !winFilter && linFilter) {
 			threatList.setPredicate(predicateMac.and(predicateLin));
-		}
-		else if(!macFilter && winFilter && linFilter) {
+		} else if (!macFilter && winFilter && linFilter) {
 			threatList.setPredicate(predicateWin.and(predicateLin));
-		}
-		else if(macFilter && winFilter && linFilter) {
+		} else if (macFilter && winFilter && linFilter) {
 			threatList.setPredicate(predicateMac.and(predicateWin).and(predicateLin));
-		}
-		else {
+		} else {
 			threatList.setPredicate(null);
 		}
 	}
 
-	
 	@FXML
 	public void logoutFunction(ActionEvent event) throws IOException {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Logout");
 		alert.setHeaderText("You are about to logout");
 		alert.setContentText("Are you sure you want to logout?");
-		
-		if(alert.showAndWait().get() == ButtonType.OK) {
+
+		if (alert.showAndWait().get() == ButtonType.OK) {
 			Test m = new Test();
 			m.changeScene("login.fxml");
 		}
@@ -226,13 +214,21 @@ public class MainController extends Controller{
 
 	@FXML
 	public void usersFunction(ActionEvent event) throws IOException {
-		Test m = new Test();
-		m.changeScene("Users.fxml");
+//		Test m = new Test();
+//		m.changeScene("Users.fxml");
+		
+		Parent root = FXMLLoader.load(getClass().getResource("Users.fxml"));
+		Scene scene = new Scene(root, 700, 500);
+
+		Stage stg = new Stage();
+		stg.setScene(scene);
+		stg.setTitle("Users Page");
+		stg.show();
 	}
 
 	@FXML
 	public void helpFunction(ActionEvent event) throws IOException {
-		
+
 		Parent root = FXMLLoader.load(getClass().getResource("Help.fxml"));
 		Scene scene = new Scene(root, 700, 500);
 
@@ -242,23 +238,23 @@ public class MainController extends Controller{
 		stg.show();
 
 	}
-	
+
 	@FXML
 	public void darkModeFunction(ActionEvent event) throws IOException {
 		if (!darkMode) {
 			theme.setText("Light Mode");
 			add.getScene().getStylesheets().add(getClass().getResource("darkmode.css").toExternalForm());
-		}else {
+		} else {
 			theme.setText("Dark Mode");
 			add.getScene().getStylesheets().remove(getClass().getResource("darkmode.css").toExternalForm());
 		}
-		
+
 		darkMode = !darkMode;
 	}
-	
+
 	@FXML
 	public void addToPdfFunction(ActionEvent event) throws IOException {
-		for (String selectedThreat: listView.getSelectionModel().getSelectedItems()) {
+		for (String selectedThreat : listView.getSelectionModel().getSelectedItems()) {
 			Threat threat = getThreatFromString(selectedThreat);
 			String threatName = threat.getName();
 			if (!genPDFThreats.contains(threatName)) {
@@ -267,26 +263,26 @@ public class MainController extends Controller{
 		}
 		listViewPDF.setItems(genPDFThreats);
 	}
-	
+
 	@FXML
 	public void removeFromPdfFunction(ActionEvent event) throws IOException {
 		String selectedThreat = listViewPDF.getSelectionModel().getSelectedItem();
 		genPDFThreats.remove(selectedThreat);
-		
+
 		listViewPDF.setItems(genPDFThreats);
 	}
-	
+
 	@FXML
 	public void getThreatDetails() throws IOException {
 		if (listView.getSelectionModel().getSelectedItems().size() == 1) {
 			Threat threat = getThreatFromString(listView.getSelectionModel().getSelectedItems().get(0));
 			Test m = new Test();
 			m.changeSceneToDetails(threat);
-		}else {
+		} else {
 			System.out.println("ERROR: more than 1 selected.");
 		}
 	}
-	
+
 	@FXML
 	public void deleteThreat() {
 		if (listView.getSelectionModel().getSelectedItems().size() == 1) {
@@ -295,15 +291,15 @@ public class MainController extends Controller{
 			alert.setTitle("Delete Threat?");
 			alert.setHeaderText("This threat will be deleted from the database.");
 			alert.setContentText("Are you sure you want to delete?");
-			
-			if(alert.showAndWait().get() == ButtonType.OK) {
+
+			if (alert.showAndWait().get() == ButtonType.OK) {
 				threats.remove(selectedIndex);
 			}
-		}else {
+		} else {
 			System.out.println("ERROR: more than 1 selected.");
 		}
 	}
-	
+
 	public Threat getThreatFromString(String threatString) {
 		String threatID = "";
 		Threat returnThreat = null;
@@ -312,12 +308,23 @@ public class MainController extends Controller{
 				threatID = string.substring(17);
 			}
 		}
-		
+
 		for (Threat threat : threatBundle.getObjects()) {
 			if (threat.getID().equals(threatID)) {
 				returnThreat = threat;
 			}
 		}
 		return returnThreat;
+	}
+
+	public String genPdf() {
+		String result = "";
+		if (listView.getSelectionModel().getSelectedItems().size() == 1) {
+			Threat threat = getThreatFromString(listView.getSelectionModel().getSelectedItems().get(0));
+			result = "pdf was generated";
+		} else {
+			System.out.println("ERROR: more than 1 selected.");
+		}
+		return result;
 	}
 }

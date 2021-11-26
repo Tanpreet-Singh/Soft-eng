@@ -46,7 +46,8 @@ public class Test extends Application {
 		Parent root = (Parent)fxmlLoader.load();          
 		Controller controller = fxmlLoader.getController();
 		Scene scene = new Scene(root, 700, 500); 
-
+		stg.setMaximized(true);
+		
 		stg.setScene(scene);    
 
 		controller.setLevel(level);
@@ -59,6 +60,7 @@ public class Test extends Application {
 		Parent root = (Parent)fxmlLoader.load();          
 		MainController controller = fxmlLoader.getController();
 		Scene scene = new Scene(root, 700, 500); 
+		stg.setMaximized(true);
 
 		stg.setScene(scene);    
 
@@ -75,6 +77,7 @@ public class Test extends Application {
 		Parent root = (Parent)fxmlLoader.load();          
 		DetailsController controller = fxmlLoader.getController();
 		Scene scene = new Scene(root, 700, 500); 
+		stg.setMaximized(true);
 
 		stg.setScene(scene); 
 
