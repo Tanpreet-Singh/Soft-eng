@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-import drivers.GeneratePDF;
 
 import java.awt.FileDialog;
 import java.awt.Frame;
@@ -29,7 +28,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import main.GenPDF;
 
 public class MainController extends Controller {
 
@@ -321,17 +319,19 @@ public class MainController extends Controller {
 		return returnThreat;
 	}
 
-	public String genPdf() {
+	public String createReport() {
 		String result = "";
-		if (listViewPDF.getSelectionModel().getSelectedItems().size() >= 1) {
-			int size = listViewPDF.getSelectionModel().getSelectedItems().size();
+		if (listView.getSelectionModel().getSelectedItems().size() >= 1) {
+			int size = listView.getSelectionModel().getSelectedItems().size();
 			ArrayList<Threat> listOfThreats = new ArrayList<Threat>();
+			Threat t = new Threat();
 			for (int i = 0; i < size; i++) {
-				listOfThreats.add(getThreatFromString(listViewPDF.getSelectionModel().getSelectedItems().get(i)));
+				t = getThreatFromString(listView.getSelectionModel().getSelectedItems().get(i));
+				listOfThreats.add(t);
 			}
 			GenPDF newPDFReport = new GenPDF(listOfThreats);
 			newPDFReport.genReport();
-			result = "pdf was generated";
+			result = "pdf was generated ";
 		} else {
 			System.out.println("ERROR: select at least one item");
 		}
