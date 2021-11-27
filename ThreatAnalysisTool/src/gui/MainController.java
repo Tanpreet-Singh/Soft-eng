@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.function.Predicate;
+
+import drivers.GeneratePDF;
+
 import java.awt.FileDialog;
 import java.awt.Frame;
 
@@ -26,6 +29,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import main.GenPDF;
 
 public class MainController extends Controller {
 
@@ -319,11 +323,17 @@ public class MainController extends Controller {
 
 	public String genPdf() {
 		String result = "";
-		if (listView.getSelectionModel().getSelectedItems().size() == 1) {
-			Threat threat = getThreatFromString(listView.getSelectionModel().getSelectedItems().get(0));
+		if (listViewPDF.getSelectionModel().getSelectedItems().size() >= 1) {
+			int size = listViewPDF.getSelectionModel().getSelectedItems().size();
+			ArrayList<Threat> listOfThreats = new ArrayList<Threat>();
+			for (int i = 0; i < size; i++) {
+				listOfThreats.add(getThreatFromString(listViewPDF.getSelectionModel().getSelectedItems().get(i)));
+			}
+			GenPDF newPDFReport = new GenPDF(listOfThreats);
+			newPDFReport.genReport();
 			result = "pdf was generated";
 		} else {
-			System.out.println("ERROR: more than 1 selected.");
+			System.out.println("ERROR: select at least one item");
 		}
 		return result;
 	}

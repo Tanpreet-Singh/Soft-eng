@@ -12,10 +12,9 @@ public class GeneratePDF {
 
 	public static void main(String[] args) {
 		try {
-
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss");
+			String res = "";
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss-SSS");
 			LocalDateTime now = LocalDateTime.now();
-			System.out.println(dtf.format(now));
 
 			String file_name = "C:\\Users\\stnpr\\OneDrive\\Documents\\GitHub\\Soft-eng\\PDF reports\\" + dtf.format(now) + ".pdf";
 			Document document = new Document();
@@ -28,6 +27,7 @@ public class GeneratePDF {
 
 			document.close();
 
+			res = "Pdf has been generated";
 			System.out.println("Pdf has been generated");
 		}
 
