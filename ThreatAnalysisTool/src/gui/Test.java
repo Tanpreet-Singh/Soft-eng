@@ -27,10 +27,8 @@ public class Test extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			stg = primaryStage;
-			stg.setMinHeight(500);
-			stg.setMinWidth(700);
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
-			Scene scene = new Scene(root, 700, 500);
+			Scene scene = new Scene(root, 750, 600);
 			//stg.setMaximized(true);
 			stg.setScene(scene);
 			stg.setTitle("Threat Analysis Tool");
@@ -46,7 +44,6 @@ public class Test extends Application {
 		Parent root = (Parent)fxmlLoader.load();          
 		Controller controller = fxmlLoader.getController();
 		Scene scene = new Scene(root, 700, 500); 
-		stg.setMaximized(true);
 		
 		stg.setScene(scene);    
 
@@ -60,7 +57,6 @@ public class Test extends Application {
 		Parent root = (Parent)fxmlLoader.load();          
 		MainController controller = fxmlLoader.getController();
 		Scene scene = new Scene(root, 700, 500); 
-		stg.setMaximized(true);
 
 		stg.setScene(scene);    
 
@@ -69,15 +65,13 @@ public class Test extends Application {
 	}
 	
 	public void changeSceneToDetails(Threat threat) throws IOException {
-//		Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-//		stg.getScene().setRoot(pane);
+
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Details.fxml"));     
 
 		Parent root = (Parent)fxmlLoader.load();          
 		DetailsController controller = fxmlLoader.getController();
 		Scene scene = new Scene(root, 700, 500); 
-		stg.setMaximized(true);
 
 		stg.setScene(scene); 
 

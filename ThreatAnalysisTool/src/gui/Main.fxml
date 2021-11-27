@@ -27,7 +27,7 @@
                   <MenuItem fx:id="users" mnemonicParsing="false" onAction="#usersFunction" text="Users" />
                   <MenuItem fx:id="help" mnemonicParsing="false" onAction="#helpFunction" text="Help" />
                   <MenuItem fx:id="theme" mnemonicParsing="false" onAction="#darkModeFunction" text="Dark Theme" />
-                  <MenuItem fx:id="logout" mnemonicParsing="false" onAction="#logoutFunction" text="Logout" />
+                  <MenuItem fx:id="logout" mnemonicParsing="false" onAction="#logoutFunction" text="Log out" />
                </items></Menu>
       </menus>
     </MenuBar>
