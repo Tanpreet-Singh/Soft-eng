@@ -58,6 +58,7 @@ public class GenPDF {
 				Paragraph p1 = new Paragraph("Description: " + t.getDescription());
 				Paragraph p2 = new Paragraph("Created by: " + t.getCreated_by_ref());
 				Paragraph p3 = new Paragraph("Date Created: " + t.getDateCreated());
+				Paragraph p6 = new Paragraph("Date Modified: " + t.getDateModified());
 				Paragraph p4 = new Paragraph("Platforms: " + t.getPlatforms());
 				Paragraph p5 = new Paragraph("Kill chain: " + t.getKillChains());
 
@@ -67,6 +68,7 @@ public class GenPDF {
 				document.add(p3);
 				document.add(p4);
 				document.add(p5);
+				document.add(p6);
 			}
 	
 			document.close();

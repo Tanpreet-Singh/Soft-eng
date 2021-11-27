@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.awt.FileDialog;
 import java.awt.Frame;
@@ -256,4 +257,22 @@ public class ViewerController extends Controller{
 		return returnThreat;
 	}
 
+	public String createReport() {
+		String result = "";
+		if (listView.getSelectionModel().getSelectedItems().size() >= 1) {
+			int size = listView.getSelectionModel().getSelectedItems().size();
+			ArrayList<Threat> listOfThreats = new ArrayList<Threat>();
+			Threat t = new Threat();
+			for (int i = 0; i < size; i++) {
+				t = getThreatFromString(listView.getSelectionModel().getSelectedItems().get(i));
+				listOfThreats.add(t);
+			}
+			GenPDF newPDFReport = new GenPDF(listOfThreats);
+			newPDFReport.genReport();
+			result = "pdf was generated ";
+		} else {
+			System.out.println("ERROR: select at least one item");
+		}
+		return result;
+	}
 }
