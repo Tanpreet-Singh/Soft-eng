@@ -13,11 +13,11 @@ public class GeneratePDF {
 	public static void main(String[] args) {
 		try {
 
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss");
 			LocalDateTime now = LocalDateTime.now();
 			System.out.println(dtf.format(now));
 
-			String file_name = "C:\\Users\\stnpr\\OneDrive\\Documents\\GitHub\\Soft-eng\\PDF reports\\" + "test" + ".pdf";
+			String file_name = "C:\\Users\\stnpr\\OneDrive\\Documents\\GitHub\\Soft-eng\\PDF reports\\" + dtf.format(now) + ".pdf";
 			Document document = new Document();
 			PdfWriter.getInstance(document, new FileOutputStream(file_name));
 			document.open();
