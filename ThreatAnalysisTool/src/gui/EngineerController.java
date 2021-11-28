@@ -26,7 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class EngineerController extends Controller{
+public class EngineerController extends Controller {
 
 	@FXML
 	private Button add;
@@ -70,7 +70,7 @@ public class EngineerController extends Controller{
 
 	public EngineerController() throws IOException {
 		genPDFThreats = FXCollections.observableArrayList();
-		
+
 		darkMode = false;
 		parser = new ParseFunction();
 		threatBundle = parser.parseJSON();
@@ -147,29 +147,22 @@ public class EngineerController extends Controller{
 		Predicate<String> predicateMac = (s -> getThreatFromString(s).getPlatforms().contains("macOS"));
 		Predicate<String> predicateWin = (s -> getThreatFromString(s).getPlatforms().contains("Windows"));
 		Predicate<String> predicateLin = (s -> getThreatFromString(s).getPlatforms().contains("Linux"));
-		
-		if(macFilter && !winFilter && !linFilter) {
+
+		if (macFilter && !winFilter && !linFilter) {
 			threatList.setPredicate(predicateMac);
-		}
-		else if(!macFilter && winFilter && !linFilter) {
+		} else if (!macFilter && winFilter && !linFilter) {
 			threatList.setPredicate(predicateWin);
-		}
-		else if(!macFilter && !winFilter && linFilter) {
+		} else if (!macFilter && !winFilter && linFilter) {
 			threatList.setPredicate(predicateLin);
-		}
-		else if(macFilter && winFilter && !linFilter) {
+		} else if (macFilter && winFilter && !linFilter) {
 			threatList.setPredicate(predicateMac.and(predicateWin));
-		}
-		else if(macFilter && !winFilter && linFilter) {
+		} else if (macFilter && !winFilter && linFilter) {
 			threatList.setPredicate(predicateMac.and(predicateLin));
-		}
-		else if(!macFilter && winFilter && linFilter) {
+		} else if (!macFilter && winFilter && linFilter) {
 			threatList.setPredicate(predicateWin.and(predicateLin));
-		}
-		else if(macFilter && winFilter && linFilter) {
+		} else if (macFilter && winFilter && linFilter) {
 			threatList.setPredicate(predicateMac.and(predicateWin).and(predicateLin));
-		}
-		else {
+		} else {
 			threatList.setPredicate(null);
 		}
 	}
@@ -180,8 +173,8 @@ public class EngineerController extends Controller{
 		alert.setTitle("Logout");
 		alert.setHeaderText("You are about to logout");
 		alert.setContentText("Are you sure you want to logout?");
-		
-		if(alert.showAndWait().get() == ButtonType.OK) {
+
+		if (alert.showAndWait().get() == ButtonType.OK) {
 			Test m = new Test();
 			m.changeScene("login.fxml");
 		}
@@ -210,7 +203,7 @@ public class EngineerController extends Controller{
 		stg.setTitle("Help Page");
 		stg.show();
 	}
-	
+
 	@FXML
 	public void deleteThreat() {
 		if (listView.getSelectionModel().getSelectedItems().size() == 1) {
@@ -219,22 +212,22 @@ public class EngineerController extends Controller{
 			alert.setTitle("Delete Threat?");
 			alert.setHeaderText("This threat will be deleted from the database.");
 			alert.setContentText("Are you sure you want to delete?");
-			
-			if(alert.showAndWait().get() == ButtonType.OK) {
+
+			if (alert.showAndWait().get() == ButtonType.OK) {
 				threats.remove(selectedIndex);
 			}
-		}else {
+		} else {
 			System.out.println("ERROR: more than 1 selected.");
 		}
 	}
-	
+
 	@FXML
 	public void getThreatDetails() throws IOException {
 		if (listView.getSelectionModel().getSelectedItems().size() == 1) {
 			Threat threat = getThreatFromString(listView.getSelectionModel().getSelectedItems().get(0));
 			Test m = new Test();
 			m.changeSceneToDetails(threat);
-		}else {
+		} else {
 			System.out.println("ERROR: more than 1 selected.");
 		}
 	}
@@ -288,7 +281,7 @@ public class EngineerController extends Controller{
 		}
 		return returnThreat;
 	}
-	
+
 	public String createReport() {
 		String result = "";
 		if (listView.getSelectionModel().getSelectedItems().size() >= 1) {
@@ -304,6 +297,13 @@ public class EngineerController extends Controller{
 			result = "pdf was generated ";
 		} else {
 			System.out.println("ERROR: select at least one item");
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Select at least one item");
+
+			if (alert.showAndWait().get() == ButtonType.OK) {
+
+			}
 		}
 		return result;
 	}

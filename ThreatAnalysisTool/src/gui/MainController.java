@@ -334,6 +334,13 @@ public class MainController extends Controller {
 			result = "pdf was generated ";
 		} else {
 			System.out.println("ERROR: select at least one item");
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Select at least one item");
+
+			if (alert.showAndWait().get() == ButtonType.OK) {
+				
+			}
 		}
 		return result;
 	}

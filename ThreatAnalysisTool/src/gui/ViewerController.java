@@ -26,7 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class ViewerController extends Controller{
+public class ViewerController extends Controller {
 
 	@FXML
 	private Button add;
@@ -142,29 +142,22 @@ public class ViewerController extends Controller{
 		Predicate<String> predicateMac = (s -> getThreatFromString(s).getPlatforms().contains("macOS"));
 		Predicate<String> predicateWin = (s -> getThreatFromString(s).getPlatforms().contains("Windows"));
 		Predicate<String> predicateLin = (s -> getThreatFromString(s).getPlatforms().contains("Linux"));
-		
-		if(macFilter && !winFilter && !linFilter) {
+
+		if (macFilter && !winFilter && !linFilter) {
 			threatList.setPredicate(predicateMac);
-		}
-		else if(!macFilter && winFilter && !linFilter) {
+		} else if (!macFilter && winFilter && !linFilter) {
 			threatList.setPredicate(predicateWin);
-		}
-		else if(!macFilter && !winFilter && linFilter) {
+		} else if (!macFilter && !winFilter && linFilter) {
 			threatList.setPredicate(predicateLin);
-		}
-		else if(macFilter && winFilter && !linFilter) {
+		} else if (macFilter && winFilter && !linFilter) {
 			threatList.setPredicate(predicateMac.and(predicateWin));
-		}
-		else if(macFilter && !winFilter && linFilter) {
+		} else if (macFilter && !winFilter && linFilter) {
 			threatList.setPredicate(predicateMac.and(predicateLin));
-		}
-		else if(!macFilter && winFilter && linFilter) {
+		} else if (!macFilter && winFilter && linFilter) {
 			threatList.setPredicate(predicateWin.and(predicateLin));
-		}
-		else if(macFilter && winFilter && linFilter) {
+		} else if (macFilter && winFilter && linFilter) {
 			threatList.setPredicate(predicateMac.and(predicateWin).and(predicateLin));
-		}
-		else {
+		} else {
 			threatList.setPredicate(null);
 		}
 	}
@@ -175,8 +168,8 @@ public class ViewerController extends Controller{
 		alert.setTitle("Logout");
 		alert.setHeaderText("You are about to logout");
 		alert.setContentText("Are you sure you want to logout?");
-		
-		if(alert.showAndWait().get() == ButtonType.OK) {
+
+		if (alert.showAndWait().get() == ButtonType.OK) {
 			Test m = new Test();
 			m.changeScene("login.fxml");
 		}
@@ -194,7 +187,6 @@ public class ViewerController extends Controller{
 
 		}
 	}
-
 
 	@FXML
 	public void helpFunction(ActionEvent event) throws IOException {
@@ -272,6 +264,13 @@ public class ViewerController extends Controller{
 			result = "pdf was generated ";
 		} else {
 			System.out.println("ERROR: select at least one item");
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Select at least one item");
+
+			if (alert.showAndWait().get() == ButtonType.OK) {
+
+			}
 		}
 		return result;
 	}

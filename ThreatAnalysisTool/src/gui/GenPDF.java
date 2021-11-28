@@ -53,15 +53,17 @@ public class GenPDF {
 
 			while (it.hasNext()) {
 				Threat t = it.next();
-				
-				Paragraph para = new Paragraph("ID: " + t.getID());
+				Paragraph para1 = new Paragraph("Threat Name: " + t.getName());
+				Paragraph para = new Paragraph("Threat ID: " + t.getID());
 				Paragraph p1 = new Paragraph("Description: " + t.getDescription());
 				Paragraph p2 = new Paragraph("Created by: " + t.getCreated_by_ref());
 				Paragraph p3 = new Paragraph("Date Created: " + t.getDateCreated());
-				Paragraph p6 = new Paragraph("Date Modified: " + t.getDateModified());
-				Paragraph p4 = new Paragraph("Platforms: " + t.getPlatforms());
-				Paragraph p5 = new Paragraph("Kill chain: " + t.getKillChains());
-
+				Paragraph p4 = new Paragraph("Date Modified: " + t.getDateModified());
+				Paragraph p5 = new Paragraph("Platforms: " + t.getPlatforms());
+				Paragraph p6 = new Paragraph("Spec version: " + t.getSpecVersion());
+				Paragraph p7 = new Paragraph("Kill chain: " + t.getKillChains());
+				
+				document.add(para1);
 				document.add(para);
 				document.add(p1);
 				document.add(p2);
@@ -69,6 +71,7 @@ public class GenPDF {
 				document.add(p4);
 				document.add(p5);
 				document.add(p6);
+				document.add(p7);
 			}
 	
 			document.close();

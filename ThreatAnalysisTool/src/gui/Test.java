@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class Test extends Application {
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 750, 600);
 			//stg.setMaximized(true);
+			
 			stg.setScene(scene);
 			stg.setTitle("Threat Analysis Tool");
 			stg.show();
@@ -57,7 +59,6 @@ public class Test extends Application {
 		Parent root = (Parent)fxmlLoader.load();          
 		MainController controller = fxmlLoader.getController();
 		Scene scene = new Scene(root, 700, 500); 
-
 		stg.setScene(scene);    
 
 		controller.initData(new ArrayList<Threat>());
