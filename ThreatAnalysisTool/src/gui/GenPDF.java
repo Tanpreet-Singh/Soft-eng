@@ -12,6 +12,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.LineSeparator;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.*;
@@ -97,6 +98,10 @@ public class GenPDF {
 				document.add(p4);
 				document.add(p5);
 				document.add(p6);
+				
+				LineSeparator ls = new LineSeparator();
+				document.add(new Chunk(ls));
+				
 			}
 
 			document.close();
