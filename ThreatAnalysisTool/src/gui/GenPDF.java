@@ -8,10 +8,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.*;
+//import com.itextpdf.layout.element.Text;
 
 public class GenPDF {
 
@@ -53,16 +57,38 @@ public class GenPDF {
 
 			while (it.hasNext()) {
 				Threat t = it.next();
-				Paragraph para1 = new Paragraph("Threat Name: " + t.getName());
-				Paragraph para = new Paragraph("Threat ID: " + t.getID());
-				Paragraph p1 = new Paragraph("Description: " + t.getDescription());
-				Paragraph p2 = new Paragraph("Created by: " + t.getCreated_by_ref());
-				Paragraph p3 = new Paragraph("Date Created: " + t.getDateCreated());
-				Paragraph p4 = new Paragraph("Date Modified: " + t.getDateModified());
-				Paragraph p5 = new Paragraph("Platforms: " + t.getPlatforms());
-				Paragraph p6 = new Paragraph("Spec version: " + t.getSpecVersion());
-				Paragraph p7 = new Paragraph("Kill chain: " + t.getKillChains());
+
+				Font regular = new Font(FontFamily.HELVETICA, 12);
+				Font bold = new Font(FontFamily.HELVETICA, 12, Font.BOLD);
+				Paragraph para1 = new Paragraph();
+				para1.add(new Chunk("Threat Name: ", bold));
+				para1.add(new Chunk(t.getName(), regular));
 				
+				para1.setMultipliedLeading(3); // adds spacing at top of each threat
+				
+				Paragraph para = new Paragraph();
+				para.add(new Chunk("Threat ID: ", bold));
+				para.add(new Chunk(t.getID(), regular));
+				Paragraph p1 = new Paragraph();
+				p1.add(new Chunk("Description: ", bold));
+				p1.add(new Chunk(t.getDescription(), regular));
+				Paragraph p2 = new Paragraph();
+				p2.add(new Chunk("Created by: ", bold));
+				p2.add(new Chunk(t.getCreated_by_ref(), regular));
+				Paragraph p3 = new Paragraph();
+				p3.add(new Chunk("Date Created: ", bold));
+				p3.add(new Chunk(t.getDateCreated(), regular));
+				Paragraph p4 = new Paragraph();
+				p4.add(new Chunk("Date Modified: ", bold));
+				p4.add(new Chunk(t.getDateModified()));
+				Paragraph p5 = new Paragraph();
+				p5.add(new Chunk("Platforms: ", bold));
+				p5.add(new Chunk(t.getPlatforms()));
+				Paragraph p6 = new Paragraph();
+				p6.add(new Chunk("Spec version: ", bold));
+				p6.add(new Chunk(t.getSpecVersion(), regular));
+		
+
 				document.add(para1);
 				document.add(para);
 				document.add(p1);
@@ -71,9 +97,8 @@ public class GenPDF {
 				document.add(p4);
 				document.add(p5);
 				document.add(p6);
-				document.add(p7);
 			}
-	
+
 			document.close();
 
 		} catch (Exception e) {
