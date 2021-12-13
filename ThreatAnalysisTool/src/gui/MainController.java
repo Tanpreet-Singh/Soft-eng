@@ -297,7 +297,9 @@ public class MainController extends Controller {
 			alert.setContentText("Are you sure you want to delete?");
 
 			if (alert.showAndWait().get() == ButtonType.OK) {
-				System.out.println(getThreatFromString(threats.remove(selectedIndex)));
+				String id = getThreatFromString(threats.remove(selectedIndex)).getID();
+				DatabaseTest database = new DatabaseTest();
+				database.removeThreatByID(id);
 			}
 		} else {
 			System.out.println("ERROR: more than 1 selected.");
@@ -309,7 +311,7 @@ public class MainController extends Controller {
 		Threat returnThreat = null;
 		for (String string : threatString.split("\\r?\\n")) {
 			if (string.contains("   ID:               ")) {
-				threatID = string.substring(17);
+				threatID = string.substring(21);
 			}
 		}
 
