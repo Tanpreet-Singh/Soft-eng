@@ -87,12 +87,8 @@ public class MainController extends Controller {
 		threatList = new FilteredList<>(threats);
 	}
 
-	public void initData(ArrayList<Threat> dbThreats) throws IOException {
-		genPDFThreats = FXCollections.observableArrayList();
-
-		darkMode = false;
-		parser = new ParseFunction();
-		threatBundle = parser.parseJSON();
+	public void initData(ArrayList<Threat> dbThreats, int level) throws IOException {
+		this.setLevel(level);
 		threats = FXCollections.observableArrayList();
 		for (Threat threat : dbThreats) {
 			threats.add(threat.toString());
@@ -220,21 +216,27 @@ public class MainController extends Controller {
 //		m.changeScene("Users.fxml");
 
 		Parent root = FXMLLoader.load(getClass().getResource("Users.fxml"));
-		Scene scene = new Scene(root, 700, 500);
+		Scene scene = new Scene(root, 750, 600);
+		
 
 		Stage stg = new Stage();
+		stg.setMinWidth(750);
+		stg.setMinHeight(600);
 		stg.setScene(scene);
 		stg.setTitle("Users Page");
 		stg.show();
+		
 	}
 
 	@FXML
 	public void helpFunction(ActionEvent event) throws IOException {
 
 		Parent root = FXMLLoader.load(getClass().getResource("Help.fxml"));
-		Scene scene = new Scene(root, 700, 500);
+		Scene scene = new Scene(root, 750, 500);
 
 		Stage stg = new Stage();
+		stg.setMinWidth(750);
+		stg.setMinHeight(600);
 		stg.setScene(scene);
 		stg.setTitle("Help Page");
 		stg.show();
@@ -245,10 +247,10 @@ public class MainController extends Controller {
 	public void darkModeFunction(ActionEvent event) throws IOException {
 		if (!darkMode) {
 			theme.setText("Light Mode");
-			add.getScene().getStylesheets().add(getClass().getResource("/darkmode.css").toExternalForm());
+			addToPDF.getScene().getStylesheets().add(getClass().getResource("darkmode.css").toExternalForm());
 		} else {
 			theme.setText("Dark Mode");
-			add.getScene().getStylesheets().remove(getClass().getResource("/darkmode.css").toExternalForm());
+			addToPDF.getScene().getStylesheets().remove(getClass().getResource("darkmode.css").toExternalForm());
 		}
 
 		darkMode = !darkMode;
@@ -278,7 +280,7 @@ public class MainController extends Controller {
 	public void getThreatDetails() throws IOException {
 		if (listView.getSelectionModel().getSelectedItems().size() == 1) {
 			Threat threat = getThreatFromString(listView.getSelectionModel().getSelectedItems().get(0));
-			Test m = new Test();
+			Test m = new Test(level);
 			m.changeSceneToDetails(threat);
 		} else {
 			System.out.println("ERROR: more than 1 selected.");
@@ -295,7 +297,7 @@ public class MainController extends Controller {
 			alert.setContentText("Are you sure you want to delete?");
 
 			if (alert.showAndWait().get() == ButtonType.OK) {
-				threats.remove(selectedIndex);
+				System.out.println(getThreatFromString(threats.remove(selectedIndex)));
 			}
 		} else {
 			System.out.println("ERROR: more than 1 selected.");
@@ -306,7 +308,7 @@ public class MainController extends Controller {
 		String threatID = "";
 		Threat returnThreat = null;
 		for (String string : threatString.split("\\r?\\n")) {
-			if (string.contains("   ID:           ")) {
+			if (string.contains("   ID:               ")) {
 				threatID = string.substring(17);
 			}
 		}

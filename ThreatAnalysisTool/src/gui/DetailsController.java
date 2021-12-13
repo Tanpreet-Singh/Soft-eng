@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -38,11 +39,15 @@ public class DetailsController extends Controller {
 	@FXML
 	private TextField name;
 	@FXML
+	private TextField tags;
+	@FXML
 	private TextField platforms;
 	@FXML
 	private DatePicker created;
 	@FXML
 	private DatePicker modified;
+	@FXML
+	private TextArea comments;
 	@FXML
 	private TextArea description;
 	@FXML
@@ -76,15 +81,34 @@ public class DetailsController extends Controller {
 			created.setPromptText(threat.getDateCreated());
 			modified.setPromptText(threat.getDateModified());
 			description.setText(threat.getDescription());
+			tags.setText(threat.getTags());
+			comments.setText(threat.getComments());
 
 			externalRefList.setItems(externalRefs);
 			killChainList.setItems(killChainPhases);
 
 			save.setDisable(true);
+			
+			type.textProperty().addListener((observable, oldValue, newValue) -> {
+			    save.setDisable(false);
+			});
+			name.textProperty().addListener((observable, oldValue, newValue) -> {
+				save.setDisable(false);
+			});
+			platforms.textProperty().addListener((observable, oldValue, newValue) -> {
+				save.setDisable(false);
+			});
+			tags.textProperty().addListener((observable, oldValue, newValue) -> {
+				save.setDisable(false);
+			});
+			comments.textProperty().addListener((observable, oldValue, newValue) -> {
+				save.setDisable(false);
+			});
 		});
 	}
 
-	public void initData(Threat threat) {
+	public void initData(Threat threat, int level) {
+		this.setLevel(level);
 		setThreat(threat);
 		externalRefs = FXCollections.observableArrayList();
 		killChainPhases = FXCollections.observableArrayList();
@@ -123,9 +147,11 @@ public class DetailsController extends Controller {
 	public void helpFunction(ActionEvent event) throws IOException {
 
 		Parent root = FXMLLoader.load(getClass().getResource("Help.fxml"));
-		Scene scene = new Scene(root, 700, 500);
+		Scene scene = new Scene(root, 750, 600);
 
 		Stage stg = new Stage();
+		stg.setMinWidth(750);
+		stg.setMinHeight(600);
 		stg.setScene(scene);
 		stg.setTitle("Help Page");
 		stg.show();
@@ -154,6 +180,26 @@ public class DetailsController extends Controller {
 	@FXML
 	public void returnFunction(ActionEvent event) throws IOException {
 		Test m = new Test(level);
-		m.changeScene("Main.fxml");
+		if (level == 1) {
+			m.changeSceneToMain();
+		} else if (level == 2) {
+			m.changeSceneToEngineer();
+		} else if (level == 3) {
+			m.changeSceneToViewer();
+		}
+	}
+	
+	@FXML
+	public void saveThreatEdits(ActionEvent event) {
+		ArrayList<String> editedThreatInfo = new ArrayList<String>();
+		editedThreatInfo.add(type.getText());
+		editedThreatInfo.add(name.getText());
+		editedThreatInfo.add(platforms.getText());
+		editedThreatInfo.add(tags.getText());
+		editedThreatInfo.add(comments.getText());
+		editedThreatInfo.add(description.getText());
+		
+		DatabaseTest database = new DatabaseTest();
+		database.updateThreat(editedThreatInfo, id.getText());
 	}
 }

@@ -331,14 +331,84 @@ public class DatabaseTest {
 				threat.setID(rs.getString("threat_id"));
 				threat.setCreatedBy(rs.getString("created_by_ref"));
 				threat.setSpecVersion(rs.getString("spec_version"));
-				//externalRefs
-				//killChains
-				//platforms
+				threat.setExernalRef(getThreatExternalRefs(threat.getID()));
+				threat.setKillChainPhase(getThreatKillChains(threat.getID()));
+				threat.setTags(rs.getString("tag"));
+				threat.setComments(rs.getString("comments"));
+				ArrayList<String> platforms = new ArrayList<String>();
+				platforms.add(rs.getString("x_mitre_platforms"));
+				threat.setPlatforms(platforms);
 				threats.add(threat);
 			}
 		} catch (Exception e) {
 		}
 		
 		return threats;
+	}
+	
+	public ArrayList<KillChainPhase> getThreatKillChains(String threatID) {
+		ArrayList<KillChainPhase> killChainList = new ArrayList<KillChainPhase>();
+		if (threatID != null) {
+			String databaseQuery = "select * from kill_chain_phases where threat_id=\"" + threatID + "\"";
+			
+			try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+					Statement statement = connection.createStatement();
+					ResultSet rs = statement.executeQuery(databaseQuery);) {
+
+				while (rs.next()) {
+					KillChainPhase killChain = new KillChainPhase(rs.getString("kill_chain_name"), rs.getString("phase_name"));
+					killChainList.add(killChain);
+				}
+			} catch (Exception e) {
+			}
+		}
+		return killChainList;
+	}
+	
+	public ArrayList<ExternalRef> getThreatExternalRefs(String threatID) {
+		ArrayList<ExternalRef> externalRefList = new ArrayList<ExternalRef>();
+		if (threatID != null) {
+			String databaseQuery = "select * from external_refs where threat_id=\"" + threatID + "\"";
+			
+			try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+					Statement statement = connection.createStatement();
+					ResultSet rs = statement.executeQuery(databaseQuery);) {
+
+				while (rs.next()) {
+					ExternalRef externalRef = new ExternalRef(rs.getString("source_name"), rs.getString("external_id"), rs.getString("url"), rs.getString("description"));
+					externalRefList.add(externalRef);
+				}
+			} catch (Exception e) {
+			}
+		}
+		return externalRefList;
+	}
+	
+	public void removeThreatByID(String ID) {
+		String databaseQuery = "DELETE from threats where threat_id=?";
+		
+		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+				PreparedStatement statement = connection.prepareStatement(databaseQuery);) {
+			statement.setString(1, ID);
+			statement.executeUpdate();
+		} catch (Exception e) {
+		}
+	}
+	
+	public void updateThreat(ArrayList<String> editedThreatInfo, String ID) {
+		String databaseQuery = "UPDATE threats set type=?, name=?, x_mitre_platforms=?, tag=?, comments=?, description=? where threat_id=?";
+		
+		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+				PreparedStatement statement = connection.prepareStatement(databaseQuery);) {
+			statement.setString(1, editedThreatInfo.get(0));
+			statement.setString(2, editedThreatInfo.get(1));
+			statement.setString(3, editedThreatInfo.get(2));
+			statement.setString(4, editedThreatInfo.get(3));
+			statement.setString(5, editedThreatInfo.get(4));
+			statement.setString(6, editedThreatInfo.get(5));
+			statement.setString(7, ID);
+			statement.executeUpdate();
+		} catch (Exception e) {
+		}
 	}
 }

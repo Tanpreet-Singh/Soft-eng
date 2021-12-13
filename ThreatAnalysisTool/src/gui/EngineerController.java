@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import java.awt.FileDialog;
 import java.awt.Frame;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -81,20 +82,32 @@ public class EngineerController extends Controller {
 
 		threatList = new FilteredList<>(threats);
 	}
+	
+	public void initData(ArrayList<Threat> dbThreats, int level) throws IOException {
+		this.setLevel(level);
+		threats = FXCollections.observableArrayList();
+		for (Threat threat : dbThreats) {
+			threats.add(threat.toString());
+		}
+
+		threatList = new FilteredList<>(threats);
+	}
 
 	@FXML
 	public void initialize() throws IOException {
-		// initialize listView, items and click event
-		listView.setItems(threatList);
-		listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		Platform.runLater(() -> {
+			// initialize listView, items and click event
+			listView.setItems(threatList);
+			listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue.isEmpty()) {
-				threatList.setPredicate(null);
-			} else {
-				final String searchString = newValue.toUpperCase();
-				threatList.setPredicate(s -> s.toUpperCase().contains(searchString));
-			}
+			searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+				if (newValue.isEmpty()) {
+					threatList.setPredicate(null);
+				} else {
+					final String searchString = newValue.toUpperCase();
+					threatList.setPredicate(s -> s.toUpperCase().contains(searchString));
+				}
+			});
 		});
 
 	}
@@ -225,7 +238,7 @@ public class EngineerController extends Controller {
 	public void getThreatDetails() throws IOException {
 		if (listView.getSelectionModel().getSelectedItems().size() == 1) {
 			Threat threat = getThreatFromString(listView.getSelectionModel().getSelectedItems().get(0));
-			Test m = new Test();
+			Test m = new Test(level);
 			m.changeSceneToDetails(threat);
 		} else {
 			System.out.println("ERROR: more than 1 selected.");

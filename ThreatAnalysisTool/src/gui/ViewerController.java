@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import java.awt.FileDialog;
 import java.awt.Frame;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -76,20 +77,32 @@ public class ViewerController extends Controller {
 
 		threatList = new FilteredList<>(threats);
 	}
+	
+	public void initData(ArrayList<Threat> dbThreats, int level) throws IOException {
+		this.setLevel(level);
+		threats = FXCollections.observableArrayList();
+		for (Threat threat : dbThreats) {
+			threats.add(threat.toString());
+		}
+
+		threatList = new FilteredList<>(threats);
+	}
 
 	@FXML
 	public void initialize() throws IOException {
-		// initialize listView, items and click event
-		listView.setItems(threatList);
-		listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		Platform.runLater(() -> {
+			// initialize listView, items and click event
+			listView.setItems(threatList);
+			listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue.isEmpty()) {
-				threatList.setPredicate(null);
-			} else {
-				final String searchString = newValue.toUpperCase();
-				threatList.setPredicate(s -> s.toUpperCase().contains(searchString));
-			}
+			searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+				if (newValue.isEmpty()) {
+					threatList.setPredicate(null);
+				} else {
+					final String searchString = newValue.toUpperCase();
+					threatList.setPredicate(s -> s.toUpperCase().contains(searchString));
+				}
+			});
 		});
 
 	}
@@ -191,9 +204,11 @@ public class ViewerController extends Controller {
 	@FXML
 	public void helpFunction(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("Help.fxml"));
-		Scene scene = new Scene(root, 700, 500);
+		Scene scene = new Scene(root, 750, 600);
 
 		Stage stg = new Stage();
+		stg.setMinWidth(750);
+		stg.setMinHeight(600);
 		stg.setScene(scene);
 		stg.setTitle("Help Page");
 		stg.show();

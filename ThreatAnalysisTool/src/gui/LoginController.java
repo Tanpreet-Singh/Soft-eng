@@ -34,19 +34,19 @@ public class LoginController extends Controller{
 		if (level == 1) {
 			wrongLogin.setText("success");
 			Test m = new Test(level);
-			m.changeScene("Main.fxml");
+			m.changeSceneToMain();
 		}
 		
 		if (level == 2) {
 			wrongLogin.setText("success");
 			Test m = new Test(level);
-			m.changeScene("Engineer.fxml");
+			m.changeSceneToEngineer();
 		}
 		
 		if (level == 3) {
 			wrongLogin.setText("success");
 			Test m = new Test(level);
-			m.changeScene("Viewer.fxml");
+			m.changeSceneToViewer();
 		}
 
 		else if (level == -2) {

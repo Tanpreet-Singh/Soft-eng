@@ -37,12 +37,33 @@ public class Threat {
 	private String spec_version;
 	@JsonProperty("x_mitre_platforms")
 	private ArrayList<String> x_mitre_platforms;
+	
+	private String tags;
+	private String comments;
 
 	public Threat() {
 		type = "Not specified";
 		modified = "Not specified";
 		created = "Not specified";
 		spec_version = "Not specified";
+		tags = "NONE";
+		comments = "NONE";
+	}
+	
+	public String getTags() {
+		return tags;
+	}
+	
+	public String getComments() {
+		return comments;
+	}
+	
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+	
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 	/**
@@ -300,13 +321,14 @@ public class Threat {
 
 	@Override
 	public String toString() {
-		String outputString = getType() + "\n" + "   Name:    " + getName() + "\n" + "   ID:           " + getID()
-				+ "\n";
+		String outputString = getType() + "\n" + "   Name:         " + getName() + "\n" + "   ID:               " + getID()
+				+ "\n" + "   Tags:           " + getTags() + "\n";
 		if (!getPlatforms().equals("")) {
 			outputString += "   Platforms:    " + getPlatforms() + "\n\n";
 		} else {
 			outputString += "\n";
 		}
+		
 		return outputString;
 
 	}

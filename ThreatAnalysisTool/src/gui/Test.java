@@ -30,6 +30,8 @@ public class Test extends Application {
 			stg = primaryStage;
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 750, 600);
+			stg.setMinWidth(750);
+			stg.setMinHeight(600);
 			//stg.setMaximized(true);
 			
 			stg.setScene(scene);
@@ -45,11 +47,12 @@ public class Test extends Application {
 
 		Parent root = (Parent)fxmlLoader.load();          
 		Controller controller = fxmlLoader.getController();
-		Scene scene = new Scene(root, 700, 500); 
+		Scene scene = new Scene(root, 750, 600); 
+		stg.setMinWidth(750);
+		stg.setMinHeight(600);
 		
-		stg.setScene(scene);    
-
-		controller.setLevel(level);
+		stg.setScene(scene);
+		
 		stg.show();
 	}
 	
@@ -58,10 +61,43 @@ public class Test extends Application {
 
 		Parent root = (Parent)fxmlLoader.load();          
 		MainController controller = fxmlLoader.getController();
-		Scene scene = new Scene(root, 700, 500); 
+		Scene scene = new Scene(root, 750, 600);
+		stg.setMinWidth(750);
+		stg.setMinHeight(600);
+		
 		stg.setScene(scene);    
 
-		controller.initData(new ArrayList<Threat>());
+		controller.initData(new DatabaseTest().getUserLevelThreats(level), level);
+		stg.show();
+	}
+	
+	public void changeSceneToEngineer() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Engineer.fxml"));     
+
+		Parent root = (Parent)fxmlLoader.load();          
+		EngineerController controller = fxmlLoader.getController();
+		Scene scene = new Scene(root, 750, 600);
+		stg.setMinWidth(750);
+		stg.setMinHeight(600);
+		
+		stg.setScene(scene);    
+
+		controller.initData(new DatabaseTest().getUserLevelThreats(level), level);
+		stg.show();
+	}
+	
+	public void changeSceneToViewer() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Viewer.fxml"));     
+
+		Parent root = (Parent)fxmlLoader.load();          
+		ViewerController controller = fxmlLoader.getController();
+		Scene scene = new Scene(root, 750, 600);
+		stg.setMinWidth(750);
+		stg.setMinHeight(600);
+		
+		stg.setScene(scene);    
+
+		controller.initData(new DatabaseTest().getUserLevelThreats(level), level);
 		stg.show();
 	}
 	
@@ -72,11 +108,13 @@ public class Test extends Application {
 
 		Parent root = (Parent)fxmlLoader.load();          
 		DetailsController controller = fxmlLoader.getController();
-		Scene scene = new Scene(root, 700, 500); 
+		Scene scene = new Scene(root, 750, 600);
+		stg.setMinWidth(750);
+		stg.setMinHeight(600);
 
 		stg.setScene(scene); 
 
-		controller.initData(threat);
+		controller.initData(threat, level);
 		stg.show();
 	}
 

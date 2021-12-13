@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DetailsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DetailsController">
    <children>
       <MenuBar>
          <menus>
@@ -27,7 +27,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <AnchorPane prefHeight="375.0" prefWidth="600.0">
+      <AnchorPane prefHeight="566.0" prefWidth="750.0">
          <children>
             <AnchorPane layoutX="14.0" layoutY="7.0" prefHeight="358.0" prefWidth="342.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="244.0" AnchorPane.topAnchor="7.0">
                <children>
@@ -37,34 +37,38 @@
                   <Text layoutX="10.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Platforms:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="95.0" />
                   <Text layoutX="17.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="122.0" />
                   <Text layoutX="17.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modified:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="149.0" />
-                  <Text layoutX="17.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" AnchorPane.bottomAnchor="148.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="176.0" />
-                  <TextArea fx:id="description" layoutX="14.0" layoutY="196.0" prefHeight="136.0" prefWidth="314.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="192.0" />
-                  <DatePicker fx:id="modified" layoutX="158.0" layoutY="144.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="14.0" />
-                  <DatePicker fx:id="created" layoutX="158.0" layoutY="118.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="14.0" />
-                  <TextField fx:id="platforms" layoutX="158.0" layoutY="91.0" prefHeight="25.0" prefWidth="174.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="14.0" />
-                  <TextField fx:id="name" layoutX="158.0" layoutY="63.0" prefHeight="25.0" prefWidth="174.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="14.0" />
-                  <TextField fx:id="type" layoutX="158.0" layoutY="36.0" prefHeight="25.0" prefWidth="174.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="14.0" />
+                  <Text layoutX="17.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" AnchorPane.bottomAnchor="222.0" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="312.0" />
+                  <TextArea fx:id="description" layoutX="14.0" layoutY="330.0" prefHeight="188.0" prefWidth="414.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="330.0" />
+                  <DatePicker fx:id="modified" layoutX="158.0" layoutY="144.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
+                  <DatePicker fx:id="created" layoutX="158.0" layoutY="118.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
+                  <TextField fx:id="platforms" layoutX="158.0" layoutY="91.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
+                  <TextField fx:id="name" layoutX="158.0" layoutY="63.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
+                  <TextField fx:id="type" layoutX="158.0" layoutY="36.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
                   <Text fx:id="id" layoutX="158.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="attack-pattern-1935935jg" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="13.0" />
-                  <Button fx:id="save" layoutX="11.0" layoutY="337.0" mnemonicParsing="false" text="Save" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0" />
+                  <Button fx:id="save" layoutX="11.0" layoutY="337.0" mnemonicParsing="false" onAction="#saveThreatEdits" text="Save" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0" />
+                  <Text layoutX="15.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="176.0" />
+                  <TextField fx:id="tags" layoutX="130.0" layoutY="171.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
+                  <Text layoutX="17.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="203.0" />
+                  <TextArea fx:id="comments" layoutX="14.0" layoutY="220.0" prefHeight="86.0" prefWidth="414.0" AnchorPane.bottomAnchor="244.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="220.0" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="350.0" layoutY="24.0" prefHeight="346.0" prefWidth="212.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="24.0">
+            <AnchorPane layoutX="350.0" layoutY="-1.0" prefHeight="468.0" prefWidth="245.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="447.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="-1.0">
                <children>
-                  <ListView fx:id="externalRefList" layoutY="-2.0" prefHeight="148.0" prefWidth="212.0" AnchorPane.bottomAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Text layoutX="54.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kill Chain Phases">
+                  <ListView fx:id="externalRefList" layoutY="42.0" prefHeight="229.0" prefWidth="289.0" AnchorPane.bottomAnchor="287.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
+                  <Text layoutX="96.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kill Chain Phases" AnchorPane.leftAnchor="96.0" AnchorPane.rightAnchor="95.9208984375">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <ListView fx:id="killChainList" layoutY="180.0" prefHeight="136.0" prefWidth="212.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="175.0" />
+                  <ListView fx:id="killChainList" layoutY="299.0" prefHeight="229.0" prefWidth="289.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="299.0" />
                   <Button fx:id="returnToMain" layoutX="183.0" layoutY="321.0" mnemonicParsing="false" onAction="#returnFunction" text="Return" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="0.0" />
+                  <Text layoutX="88.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="External References" AnchorPane.leftAnchor="88.0" AnchorPane.rightAnchor="87.0498046875">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
-            <Text layoutX="406.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="External References" AnchorPane.rightAnchor="74.0498046875" AnchorPane.topAnchor="3.892578125">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
          </children>
       </AnchorPane>
    </children>
