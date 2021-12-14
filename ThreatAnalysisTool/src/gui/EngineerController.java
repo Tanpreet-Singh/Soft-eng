@@ -249,10 +249,10 @@ public class EngineerController extends Controller {
 	public void darkModeFunction(ActionEvent event) throws IOException {
 		if (!darkMode) {
 			theme.setText("Light Mode");
-			add.getScene().getStylesheets().add(getClass().getResource("darkmode.css").toExternalForm());
+			addToPDF.getScene().getStylesheets().add(getClass().getResource("darkmode.css").toExternalForm());
 		} else {
 			theme.setText("Dark Mode");
-			add.getScene().getStylesheets().remove(getClass().getResource("darkmode.css").toExternalForm());
+			addToPDF.getScene().getStylesheets().remove(getClass().getResource("darkmode.css").toExternalForm());
 		}
 
 		darkMode = !darkMode;
