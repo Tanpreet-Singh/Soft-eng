@@ -36,17 +36,26 @@
                                 <panes>
                                   <TitledPane animated="false" prefHeight="206.0" prefWidth="671.0" text="Importing Threats">
                                     <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="367.0" />
+									<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="367.0" />
+									<children>
+									<Text layoutX="14.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The application takes data in the Mitre STIX 2.0 format. If the data is in the appropriate format, click 'Import' and choose the JSON file in the file dialog menu." wrappingWidth="543.7109375" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
+									</children>
                                     </content>
                                   </TitledPane>
                                   <TitledPane animated="false" text="Generating PDF Report">
                                     <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+									<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+									<children>
+									<Text layoutX="14.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A PDF report prints all the selected Threats and their information in document format. To do so, select the Threat (highlighted in blue) and then click 'Add Selected to PDF'. The object will be copied over in the 'Threats Added To PDF Report'. You can select multiple objects by holding the Ctrl key and clicking on the the objects. If you want to remove an object from the list, select the object and click 'Remove'. Once you're ready to generate a report, click 'Gen PDF' and a file dialog menu will open. Type in the name and confirm." wrappingWidth="543.7109375" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
+									</children>
                                     </content>
                                   </TitledPane>
                                   <TitledPane animated="false" text="Detailed Threat Information">
                                     <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+									<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+									<children>
+									<Text layoutX="14.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click on a particular Threat you want to edit/view and then click on 'Get Detailed Info'. All the fields of the object will be displayed and are editable. Click 'Save' when you are done. Otherwise, click 'Return'." wrappingWidth="543.7109375" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
+									</children>
                                     </content>
                                   </TitledPane>
                                 </panes>

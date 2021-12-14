@@ -1,0 +1,8 @@
+Importing Threats:
+The application takes data in the Mitre STIX 2.0 format. If the data is in the appropriate format, click "Import" and choose the JSON file in the file dialog menu.
+
+Generating PDF Report:
+A PDF report prints all the selected Threats and their information in document format. To do so, select the Threat (highlighted in blue) and then click "Add Selected to PDF". The object will be copied over in the "Threats Added To PDF Report". You can select multiple objects by holding the Ctrl key and clicking on the the objects. If you want to remove an object from the list, select the object and click "Remove". Once you're ready to generate a report, click "Gen PDF" and a file dialog menu will open. Type in the name and and confirm where the report should be generated.
+
+Detailed Threat Information:
+Click on a particular Threat you want to edit/view and then click on "Get Detailed Info". All the fields of the object will be displayed and are editable. Click "Save" when you are done. Otherwise, click "Return".
