@@ -59,6 +59,7 @@ public class ViewerController extends Controller {
 	private boolean darkMode;
 	private ParseFunction parser;
 	private JSONBundle threatBundle;
+	private ArrayList<Threat> dbThreats;
 	private ObservableList<String> threats;
 	private FilteredList<String> threatList;
 
@@ -81,6 +82,7 @@ public class ViewerController extends Controller {
 	public void initData(ArrayList<Threat> dbThreats, int level) throws IOException {
 		this.setLevel(level);
 		threats = FXCollections.observableArrayList();
+		this.dbThreats = dbThreats;
 		for (Threat threat : dbThreats) {
 			threats.add(threat.toString());
 		}
@@ -251,12 +253,12 @@ public class ViewerController extends Controller {
 		String threatID = "";
 		Threat returnThreat = null;
 		for (String string : threatString.split("\\r?\\n")) {
-			if (string.contains("   ID:           ")) {
-				threatID = string.substring(17);
+			if (string.contains("   ID:               ")) {
+				threatID = string.substring(21);
 			}
 		}
 
-		for (Threat threat : threatBundle.getObjects()) {
+		for (Threat threat : dbThreats) {
 			if (threat.getID().equals(threatID)) {
 				returnThreat = threat;
 			}
