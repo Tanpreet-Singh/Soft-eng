@@ -17,8 +17,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -43,6 +45,14 @@ public class DetailsController extends Controller {
 	@FXML
 	private TextField platforms;
 	@FXML
+	private RadioButton adminLevel;
+	@FXML
+	private RadioButton engineerLevel;
+	@FXML
+	private RadioButton viewerLevel;
+	@FXML
+	private ToggleGroup toggle1;
+	@FXML
 	private DatePicker created;
 	@FXML
 	private DatePicker modified;
@@ -62,6 +72,7 @@ public class DetailsController extends Controller {
 	private Button returnToMain;
 
 	private boolean darkMode;
+	
 
 	// object that is used to populate GUI components
 	private ObservableList<String> externalRefs;
@@ -83,7 +94,16 @@ public class DetailsController extends Controller {
 			description.setText(threat.getDescription());
 			tags.setText(threat.getTags());
 			comments.setText(threat.getComments());
-
+			int access_level = threat.getAccessLevel();
+			if (access_level == 1) {
+				adminLevel.setSelected(true);
+			} else if (access_level == 2) {
+				engineerLevel.setSelected(true);
+			} else if (access_level == 3) {
+				viewerLevel.setSelected(true);
+			} else {
+				
+			}
 			externalRefList.setItems(externalRefs);
 			killChainList.setItems(killChainPhases);
 
@@ -102,6 +122,9 @@ public class DetailsController extends Controller {
 				save.setDisable(false);
 			});
 			comments.textProperty().addListener((observable, oldValue, newValue) -> {
+				save.setDisable(false);
+			});
+			toggle1.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
 				save.setDisable(false);
 			});
 		});
@@ -199,7 +222,18 @@ public class DetailsController extends Controller {
 		editedThreatInfo.add(comments.getText());
 		editedThreatInfo.add(description.getText());
 		
+		int level = 3;
+		RadioButton radioSelected = (RadioButton) toggle1.getSelectedToggle();
+		String radioSelectedText = radioSelected.getText();
+		if (radioSelectedText.equals("Admin (1)")) {
+			level = 1;
+		} else if (radioSelectedText.equals("Engineer (2)")) {
+			level = 2;
+		}
+		
 		DatabaseTest database = new DatabaseTest();
-		database.updateThreat(editedThreatInfo, id.getText());
+		database.updateThreat(editedThreatInfo, id.getText(), level);
 	}
+	
+	
 }

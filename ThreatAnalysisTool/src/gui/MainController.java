@@ -68,6 +68,7 @@ public class MainController extends Controller {
 	private boolean darkMode;
 	private ParseFunction parser;
 	private JSONBundle threatBundle;
+	private ArrayList<Threat> dbThreats;
 	private ObservableList<String> threats;
 	private FilteredList<String> threatList;
 
@@ -90,6 +91,7 @@ public class MainController extends Controller {
 	public void initData(ArrayList<Threat> dbThreats, int level) throws IOException {
 		this.setLevel(level);
 		threats = FXCollections.observableArrayList();
+		this.dbThreats = dbThreats;
 		for (Threat threat : dbThreats) {
 			threats.add(threat.toString());
 		}
@@ -315,7 +317,7 @@ public class MainController extends Controller {
 			}
 		}
 
-		for (Threat threat : threatBundle.getObjects()) {
+		for (Threat threat : dbThreats) {
 			if (threat.getID().equals(threatID)) {
 				returnThreat = threat;
 			}

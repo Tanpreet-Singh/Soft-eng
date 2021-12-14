@@ -6,8 +6,10 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -31,25 +33,38 @@
          <children>
             <AnchorPane layoutX="14.0" layoutY="7.0" prefHeight="358.0" prefWidth="342.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="244.0" AnchorPane.topAnchor="7.0">
                <children>
-                  <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
-                  <Text layoutX="14.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="41.0" />
-                  <Text layoutX="14.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="68.0" />
-                  <Text layoutX="10.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Platforms:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="95.0" />
-                  <Text layoutX="17.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="122.0" />
-                  <Text layoutX="17.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modified:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="149.0" />
-                  <Text layoutX="17.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" AnchorPane.bottomAnchor="222.0" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="312.0" />
-                  <TextArea fx:id="description" layoutX="14.0" layoutY="330.0" prefHeight="188.0" prefWidth="414.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="330.0" />
-                  <DatePicker fx:id="modified" layoutX="158.0" layoutY="144.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
-                  <DatePicker fx:id="created" layoutX="158.0" layoutY="118.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
-                  <TextField fx:id="platforms" layoutX="158.0" layoutY="91.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
-                  <TextField fx:id="name" layoutX="158.0" layoutY="63.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
-                  <TextField fx:id="type" layoutX="158.0" layoutY="36.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
-                  <Text fx:id="id" layoutX="158.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="attack-pattern-1935935jg" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="13.0" />
+                  <Text layoutX="155.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Threat Details">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="54.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="42.0" />
+                  <Text layoutX="14.0" layoutY="81.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="69.0" />
+                  <Text layoutX="14.0" layoutY="108.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="96.0" />
+                  <Text layoutX="14.0" layoutY="135.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="Platforms:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="123.0" />
+                  <Text layoutX="14.0" layoutY="162.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="Created:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="150.0" />
+                  <Text layoutX="14.0" layoutY="189.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="Modified:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="177.0" />
+                  <Text layoutX="17.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" AnchorPane.bottomAnchor="136.98828125" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="397.05078125" />
+                  <TextArea fx:id="description" layoutX="14.0" layoutY="414.0" prefHeight="105.0" prefWidth="414.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="414.0" />
+                  <DatePicker fx:id="modified" layoutX="130.0" layoutY="172.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
+                  <DatePicker fx:id="created" layoutX="130.0" layoutY="146.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
+                  <TextField fx:id="platforms" layoutX="130.0" layoutY="119.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
+                  <TextField fx:id="name" layoutX="130.0" layoutY="91.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
+                  <TextField fx:id="type" layoutX="130.0" layoutY="64.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
+                  <Text fx:id="id" layoutX="130.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="attack-pattern-1935935jg" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="41.0" />
                   <Button fx:id="save" layoutX="11.0" layoutY="337.0" mnemonicParsing="false" onAction="#saveThreatEdits" text="Save" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0" />
-                  <Text layoutX="15.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="176.0" />
-                  <TextField fx:id="tags" layoutX="130.0" layoutY="171.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
-                  <Text layoutX="17.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="203.0" />
-                  <TextArea fx:id="comments" layoutX="14.0" layoutY="220.0" prefHeight="86.0" prefWidth="414.0" AnchorPane.bottomAnchor="244.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="220.0" />
+                  <Text layoutX="14.0" layoutY="216.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="204.0" />
+                  <TextField fx:id="tags" layoutX="130.0" layoutY="199.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="130.0" />
+                  <Text layoutX="18.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments:" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="275.05078125" />
+                  <TextArea fx:id="comments" layoutX="14.0" layoutY="292.0" prefHeight="98.0" prefWidth="414.0" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="292.0" />
+                  <Text layoutX="14.0" layoutY="243.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="Access Level:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="231.0" />
+                  <RadioButton fx:id="adminLevel" layoutX="130.0" layoutY="231.0" mnemonicParsing="false" text="Admin (1)" AnchorPane.leftAnchor="130.0">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="toggle1" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="engineerLevel" layoutX="222.0" layoutY="231.0" mnemonicParsing="false" text="Engineer (2)" toggleGroup="$toggle1" AnchorPane.leftAnchor="222.0" />
+                  <RadioButton fx:id="viewerLevel" layoutX="325.0" layoutY="231.0" mnemonicParsing="false" text="Viewer (3)" toggleGroup="$toggle1" AnchorPane.leftAnchor="325.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="350.0" layoutY="-1.0" prefHeight="468.0" prefWidth="245.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="447.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="-1.0">

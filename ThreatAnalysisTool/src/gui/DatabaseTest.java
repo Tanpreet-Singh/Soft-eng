@@ -338,6 +338,7 @@ public class DatabaseTest {
 				ArrayList<String> platforms = new ArrayList<String>();
 				platforms.add(rs.getString("x_mitre_platforms"));
 				threat.setPlatforms(platforms);
+				threat.setAccessLevel(rs.getInt("access_level"));
 				threats.add(threat);
 			}
 		} catch (Exception e) {
@@ -395,8 +396,8 @@ public class DatabaseTest {
 		}
 	}
 	
-	public void updateThreat(ArrayList<String> editedThreatInfo, String ID) {
-		String databaseQuery = "UPDATE threats set type=?, name=?, x_mitre_platforms=?, tag=?, comments=?, description=? where threat_id=?";
+	public void updateThreat(ArrayList<String> editedThreatInfo, String ID, int level) {
+		String databaseQuery = "UPDATE threats set type=?, name=?, x_mitre_platforms=?, tag=?, comments=?, description=?, access_level=? where threat_id=?";
 		
 		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 				PreparedStatement statement = connection.prepareStatement(databaseQuery);) {
@@ -406,7 +407,8 @@ public class DatabaseTest {
 			statement.setString(4, editedThreatInfo.get(3));
 			statement.setString(5, editedThreatInfo.get(4));
 			statement.setString(6, editedThreatInfo.get(5));
-			statement.setString(7, ID);
+			statement.setInt(7, level);
+			statement.setString(8, ID);
 			statement.executeUpdate();
 		} catch (Exception e) {
 		}

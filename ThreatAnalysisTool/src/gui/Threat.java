@@ -40,6 +40,7 @@ public class Threat {
 	
 	private String tags;
 	private String comments;
+	private int accessLevel;
 
 	public Threat() {
 		type = "Not specified";
@@ -50,12 +51,20 @@ public class Threat {
 		comments = "NONE";
 	}
 	
+	public int getAccessLevel() {
+		return accessLevel;
+	}
+	
 	public String getTags() {
 		return tags;
 	}
 	
 	public String getComments() {
 		return comments;
+	}
+	
+	public void setAccessLevel(int accessLevel) {
+		this.accessLevel = accessLevel;
 	}
 	
 	public void setTags(String tags) {
